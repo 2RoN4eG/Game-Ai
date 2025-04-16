@@ -54,6 +54,11 @@ public:
         return std::min(temporary, _maximum);
     }
 
+    const bool is_in_range(const t_value value) const
+    {
+        return value >= _minimum && value <= _maximum;
+    }
+
     const bool is_minimum(const t_value value) const
     {
         return std::abs(_minimum - value) < std::numeric_limits<t_value>::epsilon();
