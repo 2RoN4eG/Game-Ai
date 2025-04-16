@@ -43,10 +43,10 @@ namespace ai::gob
         return _goal->priority();
     }
 
-    t_transition::t_pointer t_transition::make_transition(const t_transition_identifier identifier,
-                                                          const t_node_identifier from,
-                                                          const t_node_identifier to,
-                                                          std::unique_ptr<interfaces::t_goal_interface>&& goal)
+    t_transition_pointer make_transition(const t_transition_identifier identifier,
+                                         const t_node_identifier from,
+                                         const t_node_identifier to,
+                                         std::unique_ptr<interfaces::t_goal_interface>&& goal)
     {
         return std::make_shared<t_transition>(identifier, from, to, std::move(goal));
     }

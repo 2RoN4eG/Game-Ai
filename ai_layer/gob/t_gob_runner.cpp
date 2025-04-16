@@ -16,7 +16,7 @@ namespace ai::gob
     {
         struct t_by_priority_sorter
         {
-            bool operator()(const t_transition::t_pointer& lhs, const t_transition::t_pointer& rhs) const
+            bool operator()(const t_transition_pointer& lhs, const t_transition_pointer& rhs) const
             {
                 return lhs->get_from_node_identifier() < rhs->get_from_node_identifier();
             }
@@ -24,7 +24,7 @@ namespace ai::gob
 
         struct t_by_transition_sorter
         {
-            bool operator()(const t_transition::t_pointer& lhs, const t_transition::t_pointer& rhs) const
+            bool operator()(const t_transition_pointer& lhs, const t_transition_pointer& rhs) const
             {
                 return lhs->get_from_node_identifier() < rhs->get_from_node_identifier();
             }
@@ -34,15 +34,15 @@ namespace ai::gob
         {
             ai::t_node_identifier _node_identifier {};
 
-            bool operator ()(const t_transition::t_pointer& transition) const
+            bool operator ()(const t_transition_pointer& transition) const
             {
                 return transition->get_from_node_identifier() == _node_identifier;
             }
         };
 
-        inline t_node::t_pointer get_node(const std::vector<t_node::t_pointer>& node_holder, const ai::t_node_identifier node_identifier)
+        inline t_node_pointer get_node(const std::vector<t_node_pointer>& node_holder, const ai::t_node_identifier node_identifier)
         {
-            for (const t_node::t_pointer& node : node_holder)
+            for (const t_node_pointer& node : node_holder)
             {
                 if (node->get_identifier() == node_identifier)
                 {
@@ -53,9 +53,9 @@ namespace ai::gob
             return {};
         }
 
-        inline std::vector<t_transition::t_pointer> get_transitions(const std::vector<t_transition::t_pointer>& transitions, const ai::t_node_identifier node_identifier)
+        inline std::vector<t_transition_pointer> get_transitions(const std::vector<t_transition_pointer>& transitions, const ai::t_node_identifier node_identifier)
         {
-            std::vector<t_transition::t_pointer> result;
+            std::vector<t_transition_pointer> result;
 
             std::ranges::copy_if(transitions, std::back_inserter(result), t_by_from_node_copier { node_identifier });
 
@@ -72,7 +72,7 @@ namespace ai::gob
     {
         const t_node_identifier identifier = _node_identifier_generator.get_identifier();
 
-        t_node::t_pointer&& node = t_node::make_transition(identifier, std::move(behavior));
+        t_node_pointer&& node = make_transition(identifier, std::move(behavior));
 
         _node_holder.emplace_back(std::move(node));
 
@@ -85,7 +85,7 @@ namespace ai::gob
     {
         const t_transition_identifier identifier = _transition_identifier_generator.get_identifier();
 
-        t_transition::t_pointer&& transition = t_transition::make_transition(identifier, from_node_identifier, to_node_identifier, std::move(goal));
+        t_transition_pointer&& transition = make_transition(identifier, from_node_identifier, to_node_identifier, std::move(goal));
 
         _transition_holder.emplace_back(std::move(transition));
 
@@ -108,14 +108,14 @@ namespace ai::gob
             return;
         }
 
-        _root->behave(delta_time);
-
         if (_transitions.empty())
         {
             return;
         }
 
-        for (const t_transition::t_pointer& transition : _transitions)
+        _root->behave(delta_time);
+
+        for (const t_transition_pointer& transition : _transitions)
         {
             if (!transition->is_goal_reached())
             {
@@ -127,6 +127,8 @@ namespace ai::gob
             _root = get_node(_node_holder, node_identifier);
 
             _transitions = get_transitions(_transition_holder, node_identifier);
+
+            break;
         }
     }
 }

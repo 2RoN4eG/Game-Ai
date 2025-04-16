@@ -37,13 +37,13 @@ t_2d_vector operator/(const t_2d_vector& vector, const t_2d_vector_axis_value& v
 t_2d_vector operator*(const t_2d_vector& vector, const t_2d_vector_axis_value& value);
 
 
-using t_position_2d_vector          = t_2d_vector;
+using t_2d_position          = t_2d_vector;
 
-using t_heading_2d_vector           = t_2d_vector;
+using t_2d_heading           = t_2d_vector;
 
-using t_course_2d_vector            = t_2d_vector;
+using t_2d_course            = t_2d_vector;
 
-using t_angular_velocity_2d_vector  = t_2d_vector;
+using t_2d_angular_velocity  = t_2d_vector;
 
 
 ///

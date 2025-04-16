@@ -12,10 +12,6 @@ t_demo_keyboard_event::t_demo_keyboard_event(const t_input_device& input_device,
 {
 }
 
-t_demo_keyboard_event::~t_demo_keyboard_event()
-{
-}
-
 t_range_value t_demo_keyboard_event::get_deviation_value() const
 {
     return 1.;

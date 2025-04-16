@@ -11,7 +11,6 @@ namespace ai::gob
         class t_behavior_interface;
     }
 
-
     class t_node
     {
     public:
@@ -24,17 +23,16 @@ namespace ai::gob
 
         void behave(const t_delta_time delta);
 
-    public:
-        using t_pointer = std::shared_ptr<t_node>;
-
-        static t_node::t_pointer make_transition(const t_node_identifier identifier,
-                                                 std::unique_ptr<interfaces::t_behavior_interface>&& goal);
-
     protected:
         t_node_identifier _identifier {};
 
         std::unique_ptr<interfaces::t_behavior_interface> _behavior;
     };
+
+    using t_node_pointer = std::shared_ptr<t_node>;
+
+    t_node_pointer make_transition(const t_node_identifier identifier,
+                                   std::unique_ptr<interfaces::t_behavior_interface>&& goal);
 }
 
 #endif // T_GOB_NODE_H

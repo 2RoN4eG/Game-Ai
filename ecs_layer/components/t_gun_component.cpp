@@ -12,3 +12,8 @@ const t_elevation_radians_value t_gun_component::get_elevation() const
 {
     return _elevation_radians;
 }
+
+const t_weight_value t_gun_component::get_weight() const
+{
+    return t_weight_value {};
+}

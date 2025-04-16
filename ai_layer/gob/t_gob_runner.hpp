@@ -19,7 +19,6 @@ namespace ai::gob
         class t_goal_interface;
     }
 
-
     // Ответсвенность данного класса:
     // Хранить все узлы
     // Хранить все переходы на узлы
@@ -27,12 +26,11 @@ namespace ai::gob
     {
     public:
         t_runner();
-
         ~t_runner() = default;
 
         const t_node_identifier hold_behavior(std::unique_ptr<interfaces::t_behavior_interface>&& behaviour);
 
-        const t_transition_identifier hold_transition(const ai::t_node_identifier from_node_identifier,
+        const t_transition_identifier hold_transition(const t_node_identifier from_node_identifier,
                                                       const t_node_identifier to_node_identifier,
                                                       std::unique_ptr<interfaces::t_goal_interface>&& goal);
 
@@ -41,17 +39,17 @@ namespace ai::gob
         void update(const t_delta_time delta);
 
     protected:
-        t_node::t_pointer _root;
+        t_node_pointer                          _root;
 
-        std::vector<t_transition::t_pointer> _transitions;
+        std::vector<t_transition_pointer>       _transitions;
 
-        t_identifier_creator<t_node_identifier> _node_identifier_generator;
+        t_node_identifier_creator               _node_identifier_generator;
 
-        std::vector<t_node::t_pointer> _node_holder;
+        std::vector<t_node_pointer>             _node_holder;
 
-        t_identifier_creator<t_transition_identifier> _transition_identifier_generator;
+        t_transition_identifier_creator         _transition_identifier_generator;
 
-        std::vector<t_transition::t_pointer> _transition_holder;
+        std::vector<t_transition_pointer>       _transition_holder;
 
         friend class t_runner_maker;
     };

@@ -1,7 +1,11 @@
-#ifndef T_GUN_COMPONENT_HPP
-#define T_GUN_COMPONENT_HPP
+#pragma once
 
 #include "../t_component_defines.hpp"
+
+
+using t_amount          = int;
+
+using t_cooldown_time   = int;
 
 
 class t_gun_component
@@ -11,8 +15,24 @@ public:
 
     const t_elevation_radians_value get_elevation() const;
 
-protected:
-    t_elevation_radians_value _elevation_radians;
-};
+    bool single() const
+    {
+        return _amount == 1;
+    }
 
-#endif // T_GUN_COMPONENT_HPP
+    bool dual() const
+    {
+        return _amount == 2;
+    }
+
+    const t_weight_value get_weight() const;
+
+protected:
+    const t_go_identifier_value _go_identifier {};
+
+    t_elevation_radians_value   _elevation_radians;
+
+    t_amount                    _amount { 1 };
+
+    t_cooldown_time             _cooldown_time {};
+};

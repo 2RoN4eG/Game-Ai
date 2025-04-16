@@ -1,5 +1,4 @@
-#ifndef T_SYSTEM_MANAGER_H
-#define T_SYSTEM_MANAGER_H
+#pragma once
 
 #include "components/t_vehicle_component.hpp"
 #include "systems/t_ramping_vehicle_speed_system.hpp"
@@ -18,11 +17,13 @@ public:
     void update(const t_frame_delta_time_value delta_time);
 
 private:
+    t_engine_component _engine;
+
+    t_chassis_component _chassis;
+
     t_vehicle_component _vehicle;
 
     t_ramping_vehicle_speed_system _chassis_speed_system;
 
     t_chassis_turn_system _chassis_turn_system;
 };
-
-#endif // T_SYSTEM_MANAGER_H

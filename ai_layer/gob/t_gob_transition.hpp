@@ -11,7 +11,6 @@ namespace ai::gob
         class t_goal_interface;
     }
 
-
     class t_transition
     {
     public:
@@ -32,14 +31,6 @@ namespace ai::gob
 
         t_node_identifier get_to_node_identifier() const;
 
-    public:
-        using t_pointer = std::shared_ptr<t_transition>;
-
-        static t_pointer make_transition(const t_transition_identifier identifier,
-                                         const t_node_identifier from,
-                                         const t_node_identifier to,
-                                         std::unique_ptr<interfaces::t_goal_interface>&& goal);
-
     protected:
         t_transition_identifier _identifier {};
 
@@ -49,6 +40,13 @@ namespace ai::gob
 
         std::unique_ptr<interfaces::t_goal_interface> _goal;
     };
+
+    using t_transition_pointer = std::shared_ptr<t_transition>;
+
+    t_transition_pointer make_transition(const t_transition_identifier identifier,
+                                         const t_node_identifier from,
+                                         const t_node_identifier to,
+                                         std::unique_ptr<interfaces::t_goal_interface>&& goal);
 }
 
 #endif // T_GOB_TRANSITION_H
