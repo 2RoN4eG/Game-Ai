@@ -27,7 +27,7 @@ namespace ai::gob
 
     protected:
         const t_ai_demo_movable_component& _movable_component;
-        
+
         const t_1d_position_value _goal_position {};
 
         std::string _description {};

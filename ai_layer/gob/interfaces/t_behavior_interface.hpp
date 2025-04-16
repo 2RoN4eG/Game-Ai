@@ -14,13 +14,17 @@ namespace ai::gob::interfaces
     public:
         virtual ~t_behavior_interface() = 0;
 
-        virtual std::string_view description() const = 0;
-
         virtual void behave(const t_delta_time) = 0;
+
+        virtual std::string_view description() const = 0;
 
         virtual bool is_successful() const;
 
         virtual bool is_failed() const;
+
+        virtual bool is_possible() const;
+
+        virtual bool is_reachable() const;
     };
 }
 

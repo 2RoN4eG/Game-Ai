@@ -4,6 +4,8 @@
 #include "../../components/t_chassis_component.hpp"
 #include "../../components/t_vehicle_component.hpp"
 
+#include <iostream>
+
 
 namespace
 {
@@ -33,11 +35,6 @@ void t_ramping_down_vehicle_speed_subsystem::update(const t_frame_delta_time_val
     // speed scale is range [0 ... 1]
 
     const t_speed_value speed = _engine.get_speed();
-
-    if (speed == _speed_limit)
-    {
-        return;
-    }
 
     const t_speed_scale_value speed_scale { speed / _speed_limit };
 

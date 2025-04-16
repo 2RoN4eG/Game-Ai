@@ -1,0 +1,36 @@
+name: CMake Build & Test
+
+on:
+  push:
+      branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
+
+    - name: Create build folder
+      run: mkdir build
+
+    - name: Configure cmake
+      run: |
+        cd build
+        cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
+
+    - name: Build project
+      run: |
+        cd build
+        cmake --build . -j$nproc
+
+    - name: Run tests
+      run: |
+        cd build/test_case_layer/
+        ctest --output-on-failure
+        # continue-on-error: true
+

@@ -1,7 +1,7 @@
 #ifndef T_INPUT_DEVICE_UPDATABLE_INTERFACE_HPP
 #define T_INPUT_DEVICE_UPDATABLE_INTERFACE_HPP
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 /**

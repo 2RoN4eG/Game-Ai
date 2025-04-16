@@ -1,7 +1,6 @@
-#ifndef T_UPDATABLE_INTERFACE_HPP
-#define T_UPDATABLE_INTERFACE_HPP
+#pragma once
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 /**
@@ -14,5 +13,3 @@ public:
 
     virtual void update(const t_frame_delta_time_value delta_time) = 0;
 };
-
-#endif // T_UPDATABLE_INTERFACE_HPP

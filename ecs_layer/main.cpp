@@ -1,4 +1,4 @@
-#include "ai/gob/t_runner.hpp"
+#include "ai/gob/t_brain.hpp"
 
 #include "ai/gob/behaviors/t_linear_moving_behavior.hpp"
 #include "ai/gob/behaviors/t_idle_behavior.hpp"
@@ -14,7 +14,7 @@
 
 int main()
 {
-    ai::gob::t_runner ai_runner {};
+    ai::gob::t_brain ai_runner {};
 
     t_movable_component movable {};
     const t_position_value destination { 100. };

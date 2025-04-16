@@ -27,8 +27,8 @@ namespace ai::gob
         _behavior->behave(delta_time);
     }
 
-    t_node::t_pointer t_node::make_transition(const t_node_identifier identifier,
-                                              std::unique_ptr<interfaces::t_behavior_interface>&& goal)
+    t_node_pointer make_node(const t_node_identifier identifier,
+                             std::unique_ptr<interfaces::t_behavior_interface>&& goal)
     {
         return std::make_shared<t_node>(identifier, std::move(goal));
     }

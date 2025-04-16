@@ -1,7 +1,7 @@
 #ifndef T_RAMPING_DOWN_VEHICLE_SPEED_SUBSYSTEM_H
 #define T_RAMPING_DOWN_VEHICLE_SPEED_SUBSYSTEM_H
 
-#include "../../t_component_defines.hpp"
+#include "../../tools/t_2d_vector.hpp"
 #include "../../interfaces/t_updatable_interface.hpp"
 
 

@@ -1,19 +1,20 @@
 #include "t_rotating_vehicle_to_course_system.hpp"
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 #include "../tools/t_2d_vector.hpp"
 
 #include <cmath>
+#include <iostream>
 
 
 namespace
 {
-    inline t_radians_value t_get_radians(const t_2d_vector& vector)
+    inline t_radians_value t_get_radians(const t_2d_vector_value vector)
     {
         return atan2(vector.y(), vector.x());
     }
 
-    inline t_degrees_value t_get_degrees(const t_2d_vector& vector)
+    inline t_degrees_value t_get_degrees(const t_2d_vector_value vector)
     {
         const t_radians_value radians = t_get_radians(vector);
 
@@ -22,11 +23,15 @@ namespace
 }
 
 
-void update_rotating_to_course_data(const t_frame_delta_time_value delta_time,
-                                    t_heading_radians_value& heading,
-                                    t_course_radians_value& course,
-                                    t_heading_speed_radians_per_second_value& heading_speed)
+void update_rotating_to_course(t_heading_radians_value& heading,
+                               const t_heading_speed_radians_per_second_value heading_speed,
+                               const t_course_radians_value course,
+                               const t_frame_delta_time_value delta_time)
 {
+    // TODO: Check heading is in range [0 ... 360) degrees
+
+    // TODO: Check course is in range [0 ... 360) degrees
+
     // TODO: Replace operator == to compare function.
 
     if (course == heading)
@@ -35,6 +40,8 @@ void update_rotating_to_course_data(const t_frame_delta_time_value delta_time,
     }
 
     const t_angle_radians_value difference { course - heading };
+
+    std::cout << "difference between course and heading, radians " << difference << std::endl;
 
     const t_angle_radians_value heading_step_radians { heading_speed * delta_time };
 
@@ -56,11 +63,11 @@ void update_rotating_to_course_data(const t_frame_delta_time_value delta_time,
  * @param heading_speed
  */
 t_rotating_vehicle_to_course_system::t_rotating_vehicle_to_course_system(const t_heading_degrees_value heading,
-                                                                         const t_course_degrees_value course,
-                                                                         const t_heading_speed_degrees_per_second_value heading_speed)
+                                                                         const t_heading_speed_degrees_per_second_value heading_speed,
+                                                                         const t_course_degrees_value course)
     : _heading { t_convert_degrees_to_radians(heading) }
-    , _course { t_convert_degrees_to_radians(course) }
     , _heading_speed { t_convert_degrees_to_radians(heading_speed) }
+    , _course { t_convert_degrees_to_radians(course) }
 {
 }
 
@@ -71,11 +78,11 @@ t_rotating_vehicle_to_course_system::t_rotating_vehicle_to_course_system(const t
  * @param heading_speed
  */
 t_rotating_vehicle_to_course_system::t_rotating_vehicle_to_course_system(const t_heading_degrees_value heading,
-                                                                         const t_course_2d_vector& course,
-                                                                         const t_heading_speed_degrees_per_second_value heading_speed)
+                                                                         const t_heading_speed_degrees_per_second_value heading_speed,
+                                                                         const t_2d_course& course)
     : _heading { t_convert_degrees_to_radians(heading) }
-    , _course { t_get_radians(course) }
     , _heading_speed { t_convert_degrees_to_radians(heading_speed) }
+    , _course { t_get_radians(course) }
 {
 }
 
@@ -85,7 +92,7 @@ t_rotating_vehicle_to_course_system::t_rotating_vehicle_to_course_system(const t
  */
 void t_rotating_vehicle_to_course_system::update(const t_frame_delta_time_value delta_time)
 {
-    update_rotating_to_course_data(delta_time, _heading, _course, _heading_speed);
+    update_rotating_to_course(_heading, _heading_speed, _course, delta_time);
 }
 
 
@@ -96,9 +103,9 @@ void t_rotating_vehicle_to_course_system::update(const t_frame_delta_time_value 
  * @param heading_speed
  */
 t_extended_rotating_vehicle_to_course_system::t_extended_rotating_vehicle_to_course_system(const t_heading_degrees_value heading,
-                                                                                           const t_course_degrees_value course,
-                                                                                           const t_heading_speed_degrees_per_second_value heading_speed)
-    : t_rotating_vehicle_to_course_system { heading, course, heading_speed }
+                                                                                           const t_heading_speed_degrees_per_second_value heading_speed,
+                                                                                           const t_course_degrees_value course)
+    : t_rotating_vehicle_to_course_system { heading, heading_speed, course }
 {
 }
 

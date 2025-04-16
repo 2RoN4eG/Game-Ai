@@ -1,0 +1,5 @@
+
+drawing_layer/*build*
+drawing_layer/build-*
+build*
+*.txt.user

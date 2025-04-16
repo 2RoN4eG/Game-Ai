@@ -1,5 +1,5 @@
-#ifndef T_DEFINES_HPP
-#define T_DEFINES_HPP
+#pragma once
+
 
 #include <memory>
 #include <string>
@@ -7,51 +7,37 @@
 #include "../ecs_layer/t_component_defines.hpp"
 
 
+using t_ai_floating = t_floating_value;
+
+using t_ai_integer_value = int;
+
+
 namespace ai
 {
-    using t_node_identifier = std::size_t;
-
-    using t_transition_identifier = std::size_t;
-
-    template <typename t_identifier>
-    class t_identifier_creator
+    template <typename t_identifier_value>
+    class t_ai_identifier_maker : public t_identifier_maker <t_identifier_value>
     {
     public:
-        t_identifier_creator(t_identifier identifier = 0)
-            : _identifier { identifier }
+        inline const t_identifier_value operator()()
         {
+            return t_identifier_maker <t_identifier_value>::increase();
         }
-
-        inline const t_identifier increase()
-        {
-            return (++ _identifier);
-        }
-
-        inline const t_identifier decrease()
-        {
-            return (-- _identifier);
-        }
-
-        const t_identifier get_identifier()
-        {
-            return increase();
-        }
-
-    private:
-        t_identifier _identifier {};
     };
 
-    using t_floating = ::t_floating;
+    using t_node_identifier             = std::size_t;
 
-    using t_integer = int;
+    using t_transition_identifier       = std::size_t;
 
-    using t_delta_time = t_frame_delta_time_value;
+    using t_node_identifier_maker       = t_ai_identifier_maker <t_node_identifier>;
 
-    using t_priority = t_floating;
+    using t_transition_identifier_maker = t_ai_identifier_maker <t_transition_identifier>;
+
+    using t_delta_time                  = t_frame_delta_time_value;
+
+    using t_priority                    = t_ai_floating;
+
+    using t_description_view            = std::string_view;
+
 
     constexpr t_priority t_default_priority { 1.f };
-
-    using t_description_view = std::string_view;
 }
-
-#endif // T_DEFINES_HPP

@@ -1,16 +1,16 @@
 #ifndef T_ROTATING_VEHICLE_TO_COURSE_SYSTEM_H
 #define T_ROTATING_VEHICLE_TO_COURSE_SYSTEM_H
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 #include "../interfaces/t_updatable_interface.hpp"
 
 #include "../tools/t_2d_vector.hpp"
 
 
-void update_rotating_to_course_data(const t_frame_delta_time_value delta_time,
-                                    t_heading_radians_value& heading,
-                                    t_course_radians_value& course,
-                                    t_heading_speed_radians_per_second_value& heading_speed);
+void update_rotating_to_course(t_heading_radians_value& heading,
+                               const t_course_radians_value course,
+                               const t_heading_speed_radians_per_second_value heading_speed,
+                               const t_frame_delta_time_value delta_time);
 
 
 /**
@@ -20,12 +20,12 @@ class t_rotating_vehicle_to_course_system : public t_updatable_interface
 {
 public:
     t_rotating_vehicle_to_course_system(const t_heading_degrees_value heading,
-                                        const t_course_degrees_value course,
-                                        const t_heading_speed_degrees_per_second_value heading_speed);
+                                        const t_heading_speed_degrees_per_second_value heading_speed,
+                                        const t_course_degrees_value course);
 
     t_rotating_vehicle_to_course_system(const t_heading_degrees_value heading,
-                                        const t_course_2d_vector& course,
-                                        const t_heading_speed_degrees_per_second_value heading_speed);
+                                        const t_heading_speed_degrees_per_second_value heading_speed,
+                                        const t_2d_course& course);
 
     ~t_rotating_vehicle_to_course_system() override = default;
 
@@ -34,9 +34,9 @@ public:
 protected:
     t_heading_radians_value _heading;
 
-    t_course_radians_value _course;
-
     t_heading_speed_radians_per_second_value _heading_speed;
+
+    t_course_radians_value _course;
 };
 
 

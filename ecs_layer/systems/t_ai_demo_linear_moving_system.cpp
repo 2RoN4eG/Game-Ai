@@ -1,7 +1,7 @@
 #include "t_ai_demo_linear_moving_system.hpp"
 
 #include "../components/t_ai_demo_movable_component.hpp"
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 t_ai_demo_linear_moving_system::t_ai_demo_linear_moving_system(t_ai_demo_movable_component& movable_component)
