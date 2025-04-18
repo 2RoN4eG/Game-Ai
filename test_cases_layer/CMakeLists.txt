@@ -17,6 +17,7 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(test_cases_layer
     test_ramping_up_vehicle_speed_subsystem.cpp
+    test_ramping_down_vehicle_speed_subsystem.cpp
 )
 target_link_libraries(test_cases_layer PRIVATE Catch2::Catch2WithMain)
 

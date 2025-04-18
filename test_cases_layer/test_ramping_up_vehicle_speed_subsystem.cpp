@@ -6,12 +6,12 @@
 #include "systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp"
 
 
-using t_step_value = int;
+using t_step_amount_value = int;
 
 
 TEST_CASE( "ramping up vehicle speed subsystem" )
 {
-    const t_step_value steps { 20 };
+    const t_step_amount_value steps { 20 };
 
     const t_frame_delta_time_value frame_delta_time { 500 };
 
@@ -27,11 +27,13 @@ TEST_CASE( "ramping up vehicle speed subsystem" )
 
     const t_engine_component& engine { vehicle.get_mutable_engine() };
 
-    for (t_step_value step = 1; step <= steps; ++ step)
+    for (t_step_amount_value step = 1; step <= steps; ++ step)
     {
         subsystem.update(frame_delta_time);
 
         const t_speed_value must_be_value = speed_limit * step / steps;
+
+        
 
         REQUIRE(engine.get_speed() == must_be_value);
     }
