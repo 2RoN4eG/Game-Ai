@@ -2,24 +2,39 @@
 
 #include <stdexcept>
 #include <vector>
+#include <iostream>
+#include <functional>
+
+
+using t_holder_information_printers = std::vector<std::function<void ()>>;
+
+
+t_holder_information_printers g_holder_information_printers {};
 
 
 template <typename t_component>
 class t_component_holder
 {
+public:
     using t_component_container = std::vector<t_component>;
 
-    using t_component_container_iterator = t_component_container::iterator; 
+    using t_component_container_iterator = t_component_container::iterator;
 
 public:
-    t_component_holder() = default;
+    t_component_holder()
+    {
+        g_holder_information_printers.emplace_back([this]()
+        {
+            std::cout << "component holder contains " << this->_container.size() << " components" << std::endl;
+        });
+
+        std::cout << "global holder information printers contains " << g_holder_information_printers.size() << " printers" << std::endl;
+    }
 
     template <typename... t_arguments>
     void create_component(const t_go_identifier_value identifier, t_arguments... arguments)
     {
-        t_component game_object { identifier, arguments ... };
-
-        _container.emplace_back(std::move(game_object));
+        _container.emplace_back(identifier, arguments ...);
     }
 
     t_component& get_component(const t_go_identifier_value identifier)

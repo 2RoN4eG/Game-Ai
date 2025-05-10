@@ -3,8 +3,14 @@
 #include "../tools/t_2d_vector.hpp"
 
 
+t_gun_component::t_gun_component(const t_go_identifier_value identifier, const t_elevation_degrees_value elevation_degrees)
+    : _go_identifier { identifier }
+    , _elevation_radians { t_convert_degrees_to_radians(elevation_degrees) }
+{
+}
+
 t_gun_component::t_gun_component(const t_elevation_degrees_value elevation_degrees)
-    : _elevation_radians { t_convert_degrees_to_radians(elevation_degrees) }
+    : t_gun_component { {}, t_convert_degrees_to_radians(elevation_degrees) }
 {
 }
 

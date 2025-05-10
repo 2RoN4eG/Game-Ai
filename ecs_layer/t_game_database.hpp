@@ -19,5 +19,20 @@ class t_component_database
 public:
     t_component_database() = default;
 
-    template <typename t_component> t_component_holder<t_component>& get_component_holder() { return *this; }
+    template <typename t_component>
+    t_component_holder<t_component>& get_component_holder()
+    {
+        return *this;
+    }
 };
+
+
+t_component_database& create_engine_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+
+t_component_database& create_chassis_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+
+t_component_database& create_gun_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+
+t_component_database& create_turret_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+
+t_component_database& create_radio_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);

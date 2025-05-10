@@ -11,6 +11,7 @@ using t_cooldown_time   = int;
 class t_gun_component
 {
 public:
+    t_gun_component(const t_go_identifier_value identifier, const t_elevation_degrees_value elevation_degrees);
     t_gun_component(const t_elevation_degrees_value elevation_degrees);
 
     const t_elevation_radians_value get_elevation() const;
