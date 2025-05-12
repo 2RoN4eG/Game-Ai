@@ -14,7 +14,7 @@ constexpr QSize t_turret_size { 20, 50 };
 constexpr QSize t_chassis_size { 20, 50 };
 
 
-using t_game_scene = int;
+using t_game_scene = std::vector<int>;
 
 
 void draw_shell(const t_game_scene& scene, QPainter& painter)

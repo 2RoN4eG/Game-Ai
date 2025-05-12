@@ -31,4 +31,40 @@ TEST_CASE( "game object database" )
         REQUIRE(engine.get_speed()  == expected_engine_speed);
         REQUIRE(engine.get_weight() == expected_engine_weight);
     }
+
+    SECTION( "getting incorrect component" )
+    {
+        const t_identifier_value engine_identifier { std::numeric_limits<t_identifier_value>::max() };
+
+        t_component_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
+
+        REQUIRE_THROWS(engine_database.get_component(engine_identifier));
+    }
+
+    SECTION( "vehicle creating from database" )
+    {
+        t_engine_identifier_creator engine_identifier_creator {};
+
+        create_engine_database(database, engine_identifier_creator);
+
+
+        t_chassis_identifier_creator chassis_identifier_creator {};
+
+        create_chassis_database(database, chassis_identifier_creator);
+
+
+        t_gun_identifier_creator gun_identifier_creator {};
+
+        create_gun_database(database, gun_identifier_creator);
+
+
+        t_turret_identifier_creator turret_identifier_creator {};
+
+        create_turret_database(database, turret_identifier_creator);
+
+
+        t_radio_identifier_maker radio_identifier_creator {};
+
+        create_radio_database(database, radio_identifier_creator);
+    }
 }

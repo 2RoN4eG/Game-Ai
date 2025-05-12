@@ -23,10 +23,10 @@ namespace
 }
 
 
-t_vehicle_component::t_vehicle_component(const t_go_identifier_value go_identifier,
+t_vehicle_component::t_vehicle_component(const t_go_identifier_value identifier,
                                          const t_turret_component& turret,
                                          const t_chassis_component& chassis)
-    : _go_identifier { go_identifier }
+    : _identifier { identifier }
     , _turret { turret }
     , _chassis { chassis }
     , _weight { _chassis.get_weight() + _turret.get_weight() }
@@ -70,9 +70,9 @@ t_position_component& t_vehicle_component::get_mutable_position()
 }
 
 
-const t_identifier_value t_vehicle_component::get_go_identifier() const
+const t_identifier_value t_vehicle_component::get_identifier() const
 {
-    return _go_identifier;
+    return _identifier;
 }
 
 const t_weight_value t_vehicle_component::get_weight() const

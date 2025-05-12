@@ -29,7 +29,7 @@ public:
     const t_weight_value get_weight() const;
 
 protected:
-    const t_go_identifier_value _go_identifier {};
+    const t_go_identifier_value _identifier {};
 
     t_elevation_radians_value   _elevation_radians;
 

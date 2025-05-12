@@ -1,16 +1,16 @@
 #include "t_visibility_component.hpp"
 
 
-t_visibility_component::t_visibility_component(const t_go_identifier_value go_identifier,
+t_visibility_component::t_visibility_component(const t_go_identifier_value identifier,
                                                  const t_visibility_distance_value distance)
-    : _go_identifier { go_identifier }
+    : _identifier { identifier }
     , _distance { distance }
 {
 }
 
-const t_identifier_value t_visibility_component::get_go_identifier() const
+const t_identifier_value t_visibility_component::get_identifier() const
 {
-    return _go_identifier;
+    return _identifier;
 }
 
 const t_visibility_distance_value t_visibility_component::get_distance() const

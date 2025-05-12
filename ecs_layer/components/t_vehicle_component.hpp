@@ -18,7 +18,7 @@ using t_position_component = t_2d_position;
 class t_vehicle_component
 {
 public:
-    t_vehicle_component(const t_go_identifier_value go_identifier, 
+    t_vehicle_component(const t_go_identifier_value identifier, 
                         const t_turret_component& turret,
                         const t_chassis_component& chassis);
 
@@ -44,14 +44,14 @@ public:
 
     /** */
 
-    const t_identifier_value get_go_identifier() const;
+    const t_identifier_value get_identifier() const;
 
     const t_weight_value get_weight() const;
 
     const t_speed_limit_value get_speed_limit() const;
 
 private:
-    const t_identifier_value        _go_identifier {};
+    const t_identifier_value        _identifier {};
 
     // TODO: Move out to component manager to avoid overheading ...
     t_turret_component              _turret;

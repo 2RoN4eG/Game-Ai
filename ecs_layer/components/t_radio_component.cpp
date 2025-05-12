@@ -1,15 +1,15 @@
 #include "t_radio_component.hpp"
 
 
-t_radio_component::t_radio_component(const t_go_identifier_value go_identifier, const t_radio_distance_value distance)
-    : _go_identifier { go_identifier }
+t_radio_component::t_radio_component(const t_go_identifier_value identifier, const t_radio_distance_value distance)
+    : _identifier { identifier }
     , _distance { distance }
 {
 }
 
-const t_identifier_value t_radio_component::get_go_identifier() const
+const t_identifier_value t_radio_component::get_identifier() const
 {
-    return _go_identifier;
+    return _identifier;
 }
 
 const t_radio_distance_value t_radio_component::get_distance() const

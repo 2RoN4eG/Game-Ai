@@ -10,12 +10,12 @@
 namespace ai
 {
     template <typename t_identifier_value>
-    class t_ai_identifier_creator : public t_identifier_creator <t_identifier_value>
+    class t_ai_identifier_creator : public t_base_identifier_maker <t_identifier_value>
     {
     public:
         inline const t_identifier_value get_identifier()
         {
-            return t_identifier_creator <t_identifier_value>::increase();
+            return t_base_identifier_maker <t_identifier_value>::increase();
         }
 
         const t_identifier_value operator()()

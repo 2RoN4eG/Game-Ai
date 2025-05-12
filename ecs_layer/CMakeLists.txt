@@ -22,6 +22,8 @@ add_library(ecs_layer
     components/t_vehicle_component.hpp                              components/t_vehicle_component.cpp
     components/t_gun_component.hpp                                  components/t_gun_component.cpp
     components/t_visibility_component.hpp                           components/t_visibility_component.cpp
+    components/t_shell_component.hpp                                components/t_shell_component.cpp
+    components/t_radio_component.hpp                                components/t_radio_component.cpp
 
     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.cpp
     systems/subsystems/t_ramping_down_vehicle_speed_subsystem.hpp   systems/subsystems/t_ramping_down_vehicle_speed_subsystem.cpp

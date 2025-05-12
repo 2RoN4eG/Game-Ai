@@ -7,10 +7,12 @@
 #include "components/t_radio_component.hpp"
 
 #include "t_component_holder.hpp"
+#include "t_get_component_holder.hpp"
 
 
 class t_component_database
-    : public t_component_holder<t_engine_component>
+    : public t_get_component_holder
+    , public t_component_holder<t_engine_component>
     , public t_component_holder<t_chassis_component>
     , public t_component_holder<t_gun_component>
     , public t_component_holder<t_turret_component>
@@ -27,12 +29,12 @@ public:
 };
 
 
-t_component_database& create_engine_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+t_component_database& create_engine_database(t_component_database& database, t_go_identifier_maker& identifier_maker);
 
-t_component_database& create_chassis_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+t_component_database& create_chassis_database(t_component_database& database, t_go_identifier_maker& identifier_maker);
 
-t_component_database& create_gun_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+t_component_database& create_gun_database(t_component_database& database, t_go_identifier_maker& identifier_maker);
 
-t_component_database& create_turret_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+t_component_database& create_turret_database(t_component_database& database, t_go_identifier_maker& identifier_maker);
 
-t_component_database& create_radio_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator);
+t_component_database& create_radio_database(t_component_database& database, t_radio_identifier_maker& identifier_maker);

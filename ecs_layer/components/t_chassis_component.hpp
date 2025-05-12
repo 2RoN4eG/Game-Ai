@@ -19,7 +19,7 @@ struct t_rotatable_heading_cache
 class t_chassis_component
 {
 public:
-    t_chassis_component(const t_go_identifier_value go_identifier,
+    t_chassis_component(const t_go_identifier_value identifier,
                         const t_weight_value weight,
                         const t_engine_component& engine);
 
@@ -31,12 +31,12 @@ public:
     const t_engine_component& get_engine() const;
 
 
-    const t_identifier_value get_go_identifier() const;
+    const t_identifier_value get_identifier() const;
 
     const t_weight_value get_weight() const;
 
 private:
-    const t_identifier_value                    _go_identifier;
+    const t_identifier_value                    _identifier;
 
     // 
     t_weight_value                              _weight;

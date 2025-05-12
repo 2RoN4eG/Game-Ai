@@ -1,10 +1,10 @@
 #include "t_chassis_component.hpp"
 
 
-t_chassis_component::t_chassis_component(const t_go_identifier_value go_identifier,
+t_chassis_component::t_chassis_component(const t_go_identifier_value identifier,
                                          const t_weight_value weight,
                                          const t_engine_component& engine)
-    : _go_identifier { go_identifier }
+    : _identifier { identifier }
     , _weight { weight }
     , _engine { engine }
 {
@@ -15,9 +15,9 @@ t_chassis_component::t_chassis_component(const t_engine_component& engine)
 {
 }
 
-const t_identifier_value t_chassis_component::get_go_identifier() const
+const t_identifier_value t_chassis_component::get_identifier() const
 {
-    return _go_identifier;
+    return _identifier;
 }
 
 t_engine_component& t_chassis_component::get_mutable_engine()

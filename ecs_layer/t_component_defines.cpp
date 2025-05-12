@@ -1,7 +1,7 @@
 #include "t_component_defines.hpp"
 
 
-t_event::~t_event()
+t_event_interface::~t_event_interface()
 {
 }
 

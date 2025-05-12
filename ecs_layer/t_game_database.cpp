@@ -1,17 +1,17 @@
 #include "t_game_database.hpp"
 
 
-t_component_database& create_engine_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator)
+t_component_database& create_engine_database(t_component_database& database, t_go_identifier_maker& identifier_maker)
 {
     return database;
 }
 
-t_component_database& create_chassis_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator)
+t_component_database& create_chassis_database(t_component_database& database, t_go_identifier_maker& identifier_maker)
 {
     return database;
 }
 
-t_component_database& create_gun_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator)
+t_component_database& create_gun_database(t_component_database& database, t_go_identifier_maker& identifier_maker)
 {
     t_component_holder<t_gun_component> holder = database.get_component_holder<t_gun_component>();
 
@@ -22,7 +22,7 @@ t_component_database& create_gun_database(t_component_database& database, t_iden
     return database;
 }
 
-t_component_database& create_turret_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator)
+t_component_database& create_turret_database(t_component_database& database, t_go_identifier_maker& identifier_maker)
 {
     t_component_holder<t_turret_component> holder = database.get_component_holder<t_turret_component>();
 
@@ -33,7 +33,15 @@ t_component_database& create_turret_database(t_component_database& database, t_i
     return database;
 }
 
-t_component_database& create_radio_database(t_component_database& database, t_identifier_creator<t_identifier_value>& identifier_creator)
+t_component_database& create_radio_database(t_component_database& database, t_radio_identifier_maker& identifier_maker)
 {
+    t_component_holder<t_radio_component> holder = database.get_component_holder<t_radio_component>();
+
+    holder.create_component(identifier_maker(), t_radio_distance_value { 100 });
+    holder.create_component(identifier_maker(), t_radio_distance_value { 200 });
+    holder.create_component(identifier_maker(), t_radio_distance_value { 300 });
+    holder.create_component(identifier_maker(), t_radio_distance_value { 400 });
+    holder.create_component(identifier_maker(), t_radio_distance_value { 500 });
+
     return database;
 }

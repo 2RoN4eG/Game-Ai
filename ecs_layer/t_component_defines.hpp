@@ -3,19 +3,6 @@
 #include <algorithm>
 
 
-template <typename t_value>
-class t_range;
-
-class t_event;
-
-class t_demo_keyboard_event;
-
-template <typename t_identifier_value>
-class t_identifier_creator;
-
-class t_go_identifier_value_creator;
-
-
 using t_floating                                = float;
 
 using t_double                                  = double;
@@ -54,6 +41,8 @@ using t_range_value                             = t_floating;
 
 using t_input_device                            = int;
 
+class t_demo_keyboard_event;
+
 using t_moving_forward_event                    = t_demo_keyboard_event;
 
 using t_turn_left_event                         = t_demo_keyboard_event;
@@ -66,9 +55,7 @@ using t_vehicle_weight_value                    = t_weight_value;
 
 using t_identifier_value                        = std::size_t;
 
-using t_game_object_identifier_value            = t_identifier_value;
-
-using t_go_identifier_value                     = t_game_object_identifier_value;
+using t_go_identifier_value                     = t_identifier_value;
 
 using t_degrees_value                           = t_floating;
 
@@ -117,7 +104,7 @@ template <typename t_value>
 class t_range
 {
 public:
-    t_range(t_value minimum, t_value maximum)
+    t_range(const t_value minimum, const t_value maximum)
         : _minimum { minimum }
         , _maximum { maximum }
     {
@@ -156,20 +143,20 @@ public:
     }
 
 private:
-    t_value _minimum;
+    const t_value _minimum;
 
-    t_value _maximum;
+    const t_value _maximum;
 };
 
-class t_event
+class t_event_interface
 {
 public:
-    virtual ~t_event() = 0;
+    virtual ~t_event_interface() = 0;
 
     virtual bool operator()() const = 0;
 };
 
-class t_demo_keyboard_event : public t_event
+class t_demo_keyboard_event : public t_event_interface
 {
 public:
     t_demo_keyboard_event(const t_input_device& input_device, const t_input_device& key);
@@ -189,31 +176,41 @@ private:
     const t_input_device _key;
 };
 
-template <typename t_identifier_value>
-class t_identifier_creator
+template <typename t_identifier>
+class t_base_identifier_maker
 {
 public:
-    t_identifier_creator(t_identifier_value identifier = {})
+    t_base_identifier_maker(t_identifier identifier = {})
         : _identifier { identifier }
     {
     }
 
 protected:
-    inline const t_identifier_value increase()
+    inline const t_identifier increase()
     {
         return (++ _identifier);
     }
 
-    inline const t_identifier_value decrease()
+    inline const t_identifier decrease()
     {
         return (-- _identifier);
     }
 
 private:
-    t_identifier_value _identifier {};
+    t_identifier _identifier {};
 };
 
-class t_go_identifier_value_creator : public t_identifier_creator <t_go_identifier_value>
+template <typename t_vehicle_component, typename t_identifier>
+class t_vehicle_component_identifier_maker : public t_base_identifier_maker<t_identifier>
+{
+public:
+    t_vehicle_component_identifier_maker()
+        : t_base_identifier_maker<t_identifier>()
+    {
+    }
+};
+
+class t_go_identifier_maker : public t_base_identifier_maker<t_go_identifier_value>
 {
 public:
     const t_go_identifier_value get_identifier()
@@ -226,3 +223,13 @@ public:
         return get_identifier();
     }
 };
+
+using t_engine_identifier_creator   = t_go_identifier_maker;
+
+using t_chassis_identifier_creator  = t_go_identifier_maker;
+
+using t_gun_identifier_creator      = t_go_identifier_maker;
+
+using t_turret_identifier_creator   = t_go_identifier_maker;
+
+using t_radio_identifier_maker    = t_go_identifier_maker;

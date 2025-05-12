@@ -1,15 +1,17 @@
 #pragma once
 
+#include "t_component_defines.hpp"
+
 #include <stdexcept>
 #include <vector>
 #include <iostream>
+#include <iomanip>
 #include <functional>
 
 
 using t_holder_information_printers = std::vector<std::function<void ()>>;
 
-
-t_holder_information_printers g_holder_information_printers {};
+t_holder_information_printers& get_global_holder_information_printers();
 
 
 template <typename t_component>
@@ -23,12 +25,14 @@ public:
 public:
     t_component_holder()
     {
-        g_holder_information_printers.emplace_back([this]()
+        t_holder_information_printers& holder_information_printers = get_global_holder_information_printers();
+
+        holder_information_printers.emplace_back([this]()
         {
-            std::cout << "component holder contains " << this->_container.size() << " components" << std::endl;
+            std::cout << "component holder contains " << std::setw(2) << this->_container.size() << " components" << std::endl;
         });
 
-        std::cout << "global holder information printers contains " << g_holder_information_printers.size() << " printers" << std::endl;
+        std::cout << "global holder information printers contains " << holder_information_printers.size() << " printers" << std::endl;
     }
 
     template <typename... t_arguments>
@@ -56,7 +60,7 @@ public:
             return *iterator;
         }
 
-        throw std::runtime_error { "" };
+        throw std::runtime_error { "component_holder does not contain component by component identifier { " + std::to_string(identifier) + " }" };
     }
 
     const size_t amount() const
