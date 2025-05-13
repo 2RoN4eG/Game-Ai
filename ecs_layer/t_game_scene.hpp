@@ -24,4 +24,4 @@ public:
 };
 
 
-void create_game_scene(const t_game_database& database);
+void create_game_scene(const t_game_database& database, const t_vehicle_entity& entity);

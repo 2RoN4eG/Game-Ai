@@ -25,6 +25,8 @@ add_library(ecs_layer
     components/t_shell_component.hpp                                components/t_shell_component.cpp
     components/t_radio_component.hpp                                components/t_radio_component.cpp
 
+    components/t_vehicle_entity.hpp                                 components/t_vehicle_entity.cpp
+
     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.cpp
     systems/subsystems/t_ramping_down_vehicle_speed_subsystem.hpp   systems/subsystems/t_ramping_down_vehicle_speed_subsystem.cpp
     systems/subsystems/t_rotating_vehicle_subsystem.hpp             systems/subsystems/t_rotating_vehicle_subsystem.cpp

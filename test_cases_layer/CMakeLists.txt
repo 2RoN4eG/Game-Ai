@@ -24,14 +24,14 @@ FetchContent_Declare(
 FetchContent_MakeAvailable( trompeloeil )
 
 add_executable( test_cases_layer
-    t_helper.hpp
-    t_helper.cpp
+    t_helper.hpp t_helper.cpp
     test_ramping_up_vehicle_speed_subsystem.cpp
     test_ramping_down_vehicle_speed_subsystem.cpp
     test_range_from_minus_360_to_plus_360.cpp
     test_vehicle_speed.cpp
     test_shell_shock_effect.cpp
     test_game_database.cpp
+    test_vehicle_entity.cpp
 
     mocks/mock_sound_player.hpp
 )
