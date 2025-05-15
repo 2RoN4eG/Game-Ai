@@ -80,8 +80,6 @@ private:
 private:
     friend void t_set_vehicle_speed(t_vehicle_component& vehicle, const t_speed_value speed);
 
-    friend void t_set_vehicle_weight(t_vehicle_component& vehicle, const t_weight_value weight);
-
     friend void t_set_vehicle_speed_limit(t_vehicle_component& vehicle, const t_vehicle_speed_limit_value speed_limit);
 
     friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance);
