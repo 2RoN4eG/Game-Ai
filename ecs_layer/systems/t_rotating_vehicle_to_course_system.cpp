@@ -9,12 +9,12 @@
 
 namespace
 {
-    inline t_radians_value t_get_radians(const t_2d_vector& vector)
+    inline t_radians_value t_get_radians(const t_2d_vector_value vector)
     {
         return atan2(vector.y(), vector.x());
     }
 
-    inline t_degrees_value t_get_degrees(const t_2d_vector& vector)
+    inline t_degrees_value t_get_degrees(const t_2d_vector_value vector)
     {
         const t_radians_value radians = t_get_radians(vector);
 

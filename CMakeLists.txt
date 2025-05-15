@@ -10,3 +10,5 @@ add_subdirectory(ai_layer)
 add_subdirectory(ecs_layer)
 
 add_subdirectory(test_cases_layer)
+
+add_subdirectory(drawing_layer/Demo)

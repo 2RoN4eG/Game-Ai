@@ -23,3 +23,13 @@ const t_weight_value t_gun_component::get_weight() const
 {
     return t_weight_value {};
 }
+
+const t_shot_damage_value t_gun_component::get_shot_damage() const
+{
+    return t_shot_damage_value {};
+}
+
+const t_cooldown_time_millis_value t_gun_component::get_cooldown_time() const
+{
+    return _cooldown_time;
+}

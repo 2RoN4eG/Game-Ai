@@ -40,7 +40,7 @@ TEST_CASE( "testing vehicle entity" )
 
         const t_making_identifier_input input = std::get<0>(record);
 
-        const t_identifier_value identifier = make_identifier(input.vehicle_part, input.unique_part);
+        const t_identifier_value identifier = make_identifier_value(input.vehicle_part, input.unique_part);
 
         REQUIRE(identifier == std::get<1>(record));
     }

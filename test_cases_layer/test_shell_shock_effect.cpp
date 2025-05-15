@@ -26,7 +26,8 @@ TEST_CASE( "testing shell shock effect", "[effects]" )
 
         const t_shell_shock_effect effect { vehicle, sound_player };
 
-        REQUIRE_CALL(sound_player, play());
+        const t_identifier_value expected {};
+        REQUIRE_CALL(sound_player, play(expected));
 
         REQUIRE(vehicle.get_speed_limit() == must_be);
     }

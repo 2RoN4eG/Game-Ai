@@ -13,7 +13,7 @@ TEST_CASE( "game object database" )
 
         const t_engine_power_value engine_power { 1000 };
 
-        t_component_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
+        t_entry_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
 
         REQUIRE(engine_database.amount() == 0);
 
@@ -36,35 +36,35 @@ TEST_CASE( "game object database" )
     {
         const t_identifier_value engine_identifier { std::numeric_limits<t_identifier_value>::max() };
 
-        t_component_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
+        t_entry_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
 
         REQUIRE_THROWS(engine_database.get_component(engine_identifier));
     }
 
     SECTION( "vehicle creating from database" )
     {
-        t_engine_identifier_creator engine_identifier_creator {};
+        t_engine_identifier_maker engine_identifier_maker {};
 
-        create_engine_database(database, engine_identifier_creator);
-
-
-        t_chassis_identifier_creator chassis_identifier_creator {};
-
-        create_chassis_database(database, chassis_identifier_creator);
+        create_engine_database(database, engine_identifier_maker);
 
 
-        t_gun_identifier_creator gun_identifier_creator {};
+        t_chassis_identifier_maker chassis_identifier_maker {};
 
-        create_gun_database(database, gun_identifier_creator);
-
-
-        t_turret_identifier_creator turret_identifier_creator {};
-
-        create_turret_database(database, turret_identifier_creator);
+        create_chassis_database(database, chassis_identifier_maker);
 
 
-        t_radio_identifier_maker radio_identifier_creator {};
+        t_gun_identifier_maker gun_identifier_maker {};
 
-        create_radio_database(database, radio_identifier_creator);
+        create_gun_database(database, gun_identifier_maker);
+
+
+        t_turret_identifier_maker turret_identifier_maker {};
+
+        create_turret_database(database, turret_identifier_maker);
+
+
+        t_radio_identifier_maker radio_identifier_maker {};
+
+        create_radio_database(database, radio_identifier_maker);
     }
 }

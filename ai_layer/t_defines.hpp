@@ -10,12 +10,12 @@
 namespace ai
 {
     template <typename t_identifier_value>
-    class t_ai_identifier_creator : public t_base_identifier_maker <t_identifier_value>
+    class t_ai_identifier_maker : public t_identifier_maker <t_identifier_value>
     {
     public:
         inline const t_identifier_value get_identifier()
         {
-            return t_base_identifier_maker <t_identifier_value>::increase();
+            return t_identifier_maker <t_identifier_value>::increase();
         }
 
         const t_identifier_value operator()()
@@ -26,11 +26,11 @@ namespace ai
 
     using t_node_identifier = std::size_t;
 
-    using t_node_identifier_creator = t_ai_identifier_creator <t_node_identifier>;
+    using t_node_identifier_maker = t_ai_identifier_maker <t_node_identifier>;
 
     using t_transition_identifier = std::size_t;
 
-    using t_transition_identifier_creator = t_ai_identifier_creator <t_transition_identifier>;
+    using t_transition_identifier_maker = t_ai_identifier_maker <t_transition_identifier>;
 
     using t_floating = ::t_floating;
 

@@ -11,6 +11,7 @@ using t_description = std::string;
 class t_effect_interface
 {
 public:
+    t_effect_interface();
     virtual ~t_effect_interface() = 0;
 
     virtual void apply() = 0;

@@ -1,3 +1,4 @@
-drawing_layer/build-*
 
 build/*
+drawing_layer/Demo/build/*
+drawing_layer/build-*

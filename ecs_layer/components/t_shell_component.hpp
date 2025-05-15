@@ -1,6 +1,12 @@
 #pragma once
 
 #include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
+
+
+class t_dynamic_component_interface
+{
+};
 
 
 class t_shell_component
@@ -16,4 +22,6 @@ protected:
     const t_identifier_value    _identifier {};
 
     const t_weight_value        _weight {};
+
+    t_2d_position_value         _position {};
 };

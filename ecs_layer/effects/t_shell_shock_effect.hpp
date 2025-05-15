@@ -7,6 +7,8 @@ class t_vehicle_component;
 class t_sound_player_interface;
 
 
+// Эфект оглушения, все параметры используемые для применения эффекта можно посмотреть 
+
 class t_shell_shock_effect : public t_effect_interface
 {
 public:

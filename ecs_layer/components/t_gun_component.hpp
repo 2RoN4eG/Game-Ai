@@ -3,9 +3,14 @@
 #include "../t_component_defines.hpp"
 
 
-using t_amount          = int;
+using t_gun_amount_value            = int;
 
-using t_cooldown_time   = int;
+using t_cooldown_time_millis_value  = int;
+
+using t_shot_damage_value           = int;
+
+// Предпологается что дальше это будет контейнер [minimum ... maximum] с рандомной выборкой значния из него.
+using t_shot_damage_range           = int;
 
 
 class t_gun_component
@@ -28,12 +33,18 @@ public:
 
     const t_weight_value get_weight() const;
 
+    const t_shot_damage_value get_shot_damage() const;
+
+    const t_cooldown_time_millis_value get_cooldown_time() const;
+
 protected:
-    const t_go_identifier_value _identifier {};
+    const t_go_identifier_value     _identifier {};
 
-    t_elevation_radians_value   _elevation_radians;
+    t_elevation_radians_value       _elevation_radians {};
 
-    t_amount                    _amount { 1 };
+    t_gun_amount_value              _amount { 1 };
 
-    t_cooldown_time             _cooldown_time {};
+    t_shot_damage_value             _shot_damage { 100 };
+
+    t_cooldown_time_millis_value    _cooldown_time { 250 };
 };

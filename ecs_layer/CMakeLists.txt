@@ -6,7 +6,7 @@ add_library(ecs_layer
     tools/t_2d_vector.hpp                                           tools/t_2d_vector.cpp
 
     t_component_defines.hpp                                         t_component_defines.cpp
-    t_component_holder.hpp                                          t_component_holder.cpp
+    t_entry_holder.hpp                                          t_entry_holder.cpp
     t_game_database.hpp                                             t_game_database.cpp
     t_system_manager.hpp                                            t_system_manager.cpp
 
@@ -37,7 +37,7 @@ add_library(ecs_layer
     systems/t_rotating_vehicle_to_course_system.hpp                 systems/t_rotating_vehicle_to_course_system.cpp
     systems/t_rotating_to_course_system.hpp                         systems/t_rotating_to_course_system.cpp
 
-    caches/t_rotating_heading_to_course_cache.hpp                   caches/t_rotating_heading_to_course_cache.cpp
+    caches/t_rotating_heading_to_course_component.hpp                   caches/t_rotating_heading_to_course_component.cpp
 
     effects/t_shell_shock_effect.hpp                                effects/t_shell_shock_effect.cpp
     effects/t_damaged_ammunition_stowage.hpp                        effects/t_damaged_ammunition_stowage.cpp

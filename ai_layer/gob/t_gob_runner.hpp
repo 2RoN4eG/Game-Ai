@@ -43,11 +43,11 @@ namespace ai::gob
 
         std::vector<t_transition_pointer>       _transitions;
 
-        t_node_identifier_creator               _node_identifier_generator;
+        t_node_identifier_maker                 _node_identifier_generator;
 
         std::vector<t_node_pointer>             _node_holder;
 
-        t_transition_identifier_creator         _transition_identifier_generator;
+        t_transition_identifier_maker           _transition_identifier_generator;
 
         std::vector<t_transition_pointer>       _transition_holder;
 

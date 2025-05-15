@@ -14,16 +14,16 @@ using t_holder_information_printers = std::vector<std::function<void ()>>;
 t_holder_information_printers& get_global_holder_information_printers();
 
 
-template <typename t_component>
-class t_component_holder
+template <typename t_entry>
+class t_entry_holder
 {
 public:
-    using t_component_container = std::vector<t_component>;
+    using t_entry_container = std::vector<t_entry>;
 
-    using t_component_container_iterator = t_component_container::iterator;
+    using t_entry_container_iterator = t_entry_container::iterator;
 
 public:
-    t_component_holder()
+    t_entry_holder()
     {
         t_holder_information_printers& holder_information_printers = get_global_holder_information_printers();
 
@@ -41,19 +41,19 @@ public:
         _container.emplace_back(identifier, arguments ...);
     }
 
-    t_component& get_component(const t_go_identifier_value identifier)
+    t_entry& get_component(const t_go_identifier_value identifier)
     {
         struct t_component_finder
         {
             const t_go_identifier_value identifier {};
 
-            bool operator()(const t_component& game_object) const
+            bool operator()(const t_entry& game_object) const
             {
                 return identifier == game_object.get_identifier();
             }
         };
 
-        t_component_container_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
+        t_entry_container_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
 
         if (iterator != _container.end())
         {
@@ -69,5 +69,5 @@ public:
     }
 
 private:
-    t_component_container _container {};
+    t_entry_container _container {};
 };

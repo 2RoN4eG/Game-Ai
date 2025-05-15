@@ -4,7 +4,6 @@
 #include "components/t_vehicle_entity.hpp"
 
 
-void create_game_scene(const t_game_database& database, const t_vehicle_entity& entity)
-{
-    
+void create_game_scene_entity(const t_vehicle_entity& entity, const t_game_database& database, t_game_scene& game_scene)
+{   
 }

@@ -10,5 +10,5 @@ class mock_sound_player : public t_sound_player_interface
 public:
     ~mock_sound_player() override = default;
 
-    MAKE_CONST_MOCK0(play, void (), override);
+    MAKE_MOCK1(play, void (const t_identifier_value), override);
 };

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
 
 
 using t_floating                                = float;
@@ -93,12 +95,32 @@ using t_input_device_range_value                = t_floating;
 
 using t_distance_value                          = t_floating;
 
-using t_radio_distance_value                    = t_distance_value;
-
 using t_visibility_distance_value               = t_distance_value;
+
+using t_vehicle_visibility_distance_value       = t_visibility_distance_value;
+
+using t_radio_distance_value                    = t_distance_value;
 
 using t_vehicle_radio_distance_value            = t_radio_distance_value;
 
+using t_unsigned_short = unsigned short;
+
+enum t_vehicle_part : t_unsigned_short
+{
+    t_undefined,
+
+    t_engine    = 1,
+    t_chassis,
+
+    t_gun,
+    t_turret,
+
+    t_radio
+};
+
+using t_unique_part = t_identifier_value;
+
+t_identifier_value make_identifier_value(const t_vehicle_part vehicle_part, const t_unique_part unique_part);
 
 template <typename t_value>
 class t_range
@@ -177,10 +199,10 @@ private:
 };
 
 template <typename t_identifier>
-class t_base_identifier_maker
+class t_identifier_maker
 {
 public:
-    t_base_identifier_maker(t_identifier identifier = {})
+    t_identifier_maker(t_identifier identifier = {})
         : _identifier { identifier }
     {
     }
@@ -196,40 +218,41 @@ protected:
         return (-- _identifier);
     }
 
+    inline const t_identifier get_identifier() const
+    {
+        return _identifier;
+    }
+
 private:
     t_identifier _identifier {};
 };
 
-template <typename t_vehicle_component, typename t_identifier>
-class t_vehicle_component_identifier_maker : public t_base_identifier_maker<t_identifier>
+template <typename t_identifier, t_vehicle_part vehicle_part>
+class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
-    t_vehicle_component_identifier_maker()
-        : t_base_identifier_maker<t_identifier>()
+    t_component_identifier_maker()
+        : t_identifier_maker<t_identifier>(make_identifier_value(vehicle_part, t_unique_part {}))
     {
+        const t_identifier_value identifier = t_identifier_maker<t_identifier>::get_identifier();
+
+        std::cout << "t_component_identifier_maker starts with " << std::setw(16) << std::hex << identifier << std::dec << " identifier" << std::endl;
+    }
+
+    inline const t_identifier operator()()
+    {
+        return t_identifier_maker<t_identifier>::increase();
     }
 };
 
-class t_go_identifier_maker : public t_base_identifier_maker<t_go_identifier_value>
-{
-public:
-    const t_go_identifier_value get_identifier()
-    {
-        return increase();
-    }
+using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_undefined>;
 
-    const t_go_identifier_value operator()()
-    {
-        return get_identifier();
-    }
-};
+using t_engine_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_engine>;
 
-using t_engine_identifier_creator   = t_go_identifier_maker;
+using t_chassis_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_chassis>;
 
-using t_chassis_identifier_creator  = t_go_identifier_maker;
+using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_gun>;
 
-using t_gun_identifier_creator      = t_go_identifier_maker;
+using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_turret>;
 
-using t_turret_identifier_creator   = t_go_identifier_maker;
-
-using t_radio_identifier_maker    = t_go_identifier_maker;
+using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_radio>;

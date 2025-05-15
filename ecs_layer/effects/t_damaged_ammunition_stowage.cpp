@@ -21,11 +21,12 @@ t_damaged_ammunition_stowage::~t_damaged_ammunition_stowage()
 
 void t_damaged_ammunition_stowage::apply()
 {
-    _sound_player.play();
+    _sound_player.play(t_damaged_ammunition_stowage_disapply_sound_identifier);
 }
 
 void t_damaged_ammunition_stowage::disapply()
 {
+    _sound_player.play(t_damaged_ammunition_stowage_apply_sound_identifier);
 }
 
 const t_timestamp t_damaged_ammunition_stowage::expire_after() const

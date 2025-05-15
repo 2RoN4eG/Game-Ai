@@ -12,7 +12,8 @@
 class t_engine_component;
 class t_gun_component;
 
-using t_position_component = t_2d_position;
+
+using t_health_points_value = size_t;
 
 
 class t_vehicle_component
@@ -40,7 +41,7 @@ public:
 
     /** */
 
-    t_position_component& get_mutable_position();
+    t_2d_position_value& get_mutable_position();
 
     /** */
 
@@ -49,6 +50,8 @@ public:
     const t_weight_value get_weight() const;
 
     const t_speed_limit_value get_speed_limit() const;
+
+    const t_health_points_value get_health_points() const;
 
 private:
     const t_identifier_value        _identifier {};
@@ -59,6 +62,8 @@ private:
     // TODO: Move out to component manager to avoid overheading ...
     t_chassis_component             _chassis;
 
+    t_visibility_component          _visibility;
+
     t_radio_component               _radio;
 
     t_weight_value                  _weight {};
@@ -66,7 +71,11 @@ private:
     // TODO: Replace me to speed limit range if it necessary ...
     t_speed_limit_value             _speed_limit {};
 
-    t_position_component            _position {};
+    //
+    t_health_points_value           _health_points {};
+
+    //
+    t_2d_position_value             _position {};
 
 private:
     friend void t_set_vehicle_speed(t_vehicle_component& vehicle, const t_speed_value speed);
@@ -75,7 +84,9 @@ private:
 
     friend void t_set_vehicle_speed_limit(t_vehicle_component& vehicle, const t_vehicle_speed_limit_value speed_limit);
 
-    friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value radio_distance);
+    friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance);
+
+    friend void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value distance);
 };
 
 #endif // T_VEHICLE_COMPONENT_H

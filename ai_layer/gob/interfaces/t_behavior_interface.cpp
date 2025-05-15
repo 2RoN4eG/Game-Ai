@@ -15,4 +15,14 @@ namespace ai::gob::interfaces
     {
         return false;
     }
+
+    bool t_behavior_interface::is_possible() const
+    {
+        return true;
+    }
+
+    bool t_behavior_interface::is_reachable() const
+    {
+        return true;
+    }
 }

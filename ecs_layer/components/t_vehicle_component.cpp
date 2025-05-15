@@ -29,6 +29,7 @@ t_vehicle_component::t_vehicle_component(const t_go_identifier_value identifier,
     : _identifier { identifier }
     , _turret { turret }
     , _chassis { chassis }
+    , _visibility { identifier, t_visibility_distance_value {} }
     , _weight { _chassis.get_weight() + _turret.get_weight() }
     , _speed_limit { make_speed_limit(_chassis, _weight) }
 {
@@ -64,7 +65,7 @@ t_radio_component& t_vehicle_component::get_mutable_radio()
     return _radio;
 }
 
-t_position_component& t_vehicle_component::get_mutable_position()
+t_2d_position_value& t_vehicle_component::get_mutable_position()
 {
     return _position;
 }
@@ -87,6 +88,11 @@ const t_speed_limit_value t_vehicle_component::get_speed_limit() const
     return _speed_limit;
 }
 
+const t_health_points_value t_vehicle_component::get_health_points() const
+{
+    return _health_points;
+}
+
 
 void t_set_vehicle_speed(t_vehicle_component& vehicle, const t_speed_value speed)
 {
@@ -100,7 +106,16 @@ void t_set_vehicle_speed_limit(t_vehicle_component& vehicle, const t_vehicle_spe
     vehicle._speed_limit = speed_limit;
 }
 
-void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value radio_distance)
+void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance)
 {
-    // TODO: setting vehicle radio distance
+    t_radio_component& radio = vehicle.get_mutable_radio();
+
+    t_set_radio_distance(radio, distance);
+}
+
+void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value distance)
+{
+    t_visibility_component& visibility = vehicle.get_mutable_visibility();
+
+    t_set_visibility_distance(visibility, distance);
 }

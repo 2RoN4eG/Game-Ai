@@ -20,7 +20,7 @@ t_rotating_to_course_system::t_rotating_to_course_system()
  */
 void t_rotating_to_course_system::update(const t_frame_delta_time_value delta_time)
 {
-    for (t_rotating_heading_to_course_cache& cache : _rotating_to_course_caches)
+    for (t_rotating_heading_to_course_component& cache : _rotating_to_course_caches)
     {
         t_heading_radians_value& heading = cache._heading;
 
