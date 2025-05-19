@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
-using t_detected_target_record = t_detected_target_component;
+using t_detected_target_record = t_detected_component;
 
 using t_game_scene = int;
 
@@ -12,10 +12,6 @@ using t_game_scene_vehicle = t_identifier_value;
 using t_game_scene_teams = std::vector<t_identifier_value>;
 
 using t_game_scene_identifiers = std::vector<t_identifier_value>;
-
-using t_game_scene_vehicle_components = std::vector<t_vehicle_component>;
-
-using t_vehicle_position_value = int;
 
 using t_vehicle_team_value = int;
 

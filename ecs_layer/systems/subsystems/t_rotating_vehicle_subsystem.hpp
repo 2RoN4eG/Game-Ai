@@ -1,7 +1,7 @@
 #ifndef T_ROTATING_VEHICLE_SUBSYSTEM_H
 #define T_ROTATING_VEHICLE_SUBSYSTEM_H
 
-#include "../../t_component_defines.hpp"
+#include "../../tools/t_2d_vector.hpp"
 
 #include "../../tools/t_2d_vector.hpp"
 

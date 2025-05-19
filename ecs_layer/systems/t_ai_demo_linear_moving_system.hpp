@@ -1,7 +1,7 @@
 #ifndef T_AI_DEMO_LINEAR_MOVING_SYSTEM_H
 #define T_AI_DEMO_LINEAR_MOVING_SYSTEM_H
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 #include "../interfaces/t_updatable_interface.hpp"
 
 

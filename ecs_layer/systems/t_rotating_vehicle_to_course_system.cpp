@@ -1,6 +1,6 @@
 #include "t_rotating_vehicle_to_course_system.hpp"
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 #include "../tools/t_2d_vector.hpp"
 
 #include <cmath>

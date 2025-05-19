@@ -1,6 +1,6 @@
 #include "../interfaces/t_effect_interface.hpp"
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 class t_vehicle_component;

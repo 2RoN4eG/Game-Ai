@@ -15,7 +15,7 @@ namespace
 
         const t_vehicle_visibility_distance_value _visibility {};
 
-        const bool operator()(const t_vehicle_component& vehicle) const
+        bool operator()(const t_vehicle_component& vehicle) const
         {
             const t_vehicle_position_value position = t_get_vehicle_position(vehicle);
 

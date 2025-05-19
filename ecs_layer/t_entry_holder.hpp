@@ -89,7 +89,7 @@ private:
     {
         const t_identifier_value identifier {};
 
-        const bool operator()(const t_entry& entry) const
+        bool operator()(const t_entry& entry) const
         {
             return entry.get_identifier() == identifier;
         }

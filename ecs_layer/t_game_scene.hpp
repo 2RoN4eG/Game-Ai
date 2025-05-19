@@ -5,7 +5,7 @@
 #include "components/t_vehicle_component.hpp"
 #include "components/t_shell_component.hpp"
 #include "components/t_vehicle_entity.hpp"
-#include "components/t_detected_target_component.hpp"
+#include "components/t_detected_component.hpp"
 
 #include "effects/t_shell_shock_effect.hpp"
 
@@ -20,7 +20,7 @@ class t_game_scene
     , public t_entry_holder<t_turret_component>
     , public t_entry_holder<t_radio_component>
     , public t_entry_holder<t_vehicle_component>
-    , public t_entry_holder<t_detected_target_component>
+    , public t_entry_holder<t_detected_component>
     , public t_entry_holder<t_shell_component>
     , public t_entry_holder<t_shell_shock_effect>
 {

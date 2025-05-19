@@ -1,7 +1,7 @@
 #ifndef T_AI_DEMO_MOVABLE_COMPONENT_H
 #define T_AI_DEMO_MOVABLE_COMPONENT_H
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 class t_ai_demo_movable_component

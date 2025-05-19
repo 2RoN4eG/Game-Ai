@@ -70,7 +70,7 @@ namespace ai::gob
 
     const t_node_identifier t_runner::hold_behavior(std::unique_ptr<interfaces::t_behavior_interface>&& behavior)
     {
-        const t_node_identifier identifier = _node_identifier_generator.get_identifier();
+        const t_node_identifier identifier = _node_identifier_generator();
 
         t_node_pointer&& node = make_transition(identifier, std::move(behavior));
 
@@ -83,7 +83,7 @@ namespace ai::gob
                                                             const t_node_identifier to_node_identifier,
                                                             std::unique_ptr<interfaces::t_goal_interface>&& goal)
     {
-        const t_transition_identifier identifier = _transition_identifier_generator.get_identifier();
+        const t_transition_identifier identifier = _transition_identifier_generator();
 
         t_transition_pointer&& transition = make_transition(identifier, from_node_identifier, to_node_identifier, std::move(goal));
 

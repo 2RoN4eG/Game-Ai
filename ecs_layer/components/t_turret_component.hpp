@@ -1,7 +1,7 @@
 #ifndef T_TURRET_COMPONENT_HPP
 #define T_TURRET_COMPONENT_HPP
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 #include "t_gun_component.hpp"
 #include "t_visibility_component.hpp"

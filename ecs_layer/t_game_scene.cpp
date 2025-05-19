@@ -20,7 +20,7 @@ t_component get_database_component(const t_game_database& database, const t_vehi
         {
         }
 
-        const bool operator()(const t_identifier_value identifier)
+        bool operator()(const t_identifier_value identifier)
         {
             return (component_identifier & identifier) == identifier;
         }

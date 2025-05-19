@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 #include "../interfaces/t_updatable_interface.hpp"
 
 #include "../caches/t_rotating_heading_to_course_component.hpp"

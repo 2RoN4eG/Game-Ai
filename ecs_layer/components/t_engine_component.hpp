@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../t_component_defines.hpp"
+#include "../tools/t_2d_vector.hpp"
 
 
 // Двигатель является контейнером и упрощен до двух переменных,

@@ -13,14 +13,9 @@ namespace ai
     class t_ai_identifier_maker : public t_identifier_maker <t_identifier_value>
     {
     public:
-        inline const t_identifier_value get_identifier()
+        inline const t_identifier_value operator()()
         {
             return t_identifier_maker <t_identifier_value>::increase();
-        }
-
-        const t_identifier_value operator()()
-        {
-            return get_identifier();
         }
     };
 
