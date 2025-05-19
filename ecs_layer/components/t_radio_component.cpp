@@ -16,3 +16,9 @@ const t_radio_distance_value t_radio_component::get_distance() const
 {
     return _distance;
 }
+
+
+void t_set_radio_distance(t_radio_component& radio, const t_distance_value distance)
+{
+    radio._distance = distance;
+}

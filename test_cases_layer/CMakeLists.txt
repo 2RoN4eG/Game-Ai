@@ -25,6 +25,7 @@ FetchContent_MakeAvailable( trompeloeil )
 
 add_executable( test_cases_layer
     t_helper.hpp t_helper.cpp
+
     test_ramping_up_vehicle_speed_subsystem.cpp
     test_ramping_down_vehicle_speed_subsystem.cpp
     test_range_from_minus_360_to_plus_360.cpp

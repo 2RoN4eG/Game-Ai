@@ -5,7 +5,7 @@
 
 TEST_CASE( "game object database" )
 {
-    t_component_database database {};
+    t_game_database database {};
 
     SECTION( "component creating / getting" )
     {
@@ -13,7 +13,7 @@ TEST_CASE( "game object database" )
 
         const t_engine_power_value engine_power { 1000 };
 
-        t_entry_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
+        t_entry_holder<t_engine_component>& engine_database = database.get_mutable_entry_holder<t_engine_component>();
 
         REQUIRE(engine_database.amount() == 0);
 
@@ -21,7 +21,7 @@ TEST_CASE( "game object database" )
 
         REQUIRE(engine_database.amount() == 1);
 
-        t_engine_component& engine = engine_database.get_component(engine_identifier);
+        t_engine_component& engine = engine_database.get_mutable_component(engine_identifier);
 
         const t_engine_power_value  expected_engine_power  { expected_engine_power };
         const t_engine_speed_value  expected_engine_speed  {};
@@ -36,7 +36,7 @@ TEST_CASE( "game object database" )
     {
         const t_identifier_value engine_identifier { std::numeric_limits<t_identifier_value>::max() };
 
-        t_entry_holder<t_engine_component> engine_database = database.get_component_holder<t_engine_component>();
+        const t_entry_holder<t_engine_component>& engine_database = database.get_entry_holder<t_engine_component>();
 
         REQUIRE_THROWS(engine_database.get_component(engine_identifier));
     }

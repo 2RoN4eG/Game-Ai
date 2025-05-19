@@ -39,6 +39,8 @@ public:
 
     t_radio_component& get_mutable_radio();
 
+    t_visibility_component& get_mutable_visibility();
+
     /** */
 
     t_2d_position_value& get_mutable_position();
@@ -54,6 +56,7 @@ public:
     const t_health_points_value get_health_points() const;
 
 private:
+    //
     const t_identifier_value        _identifier {};
 
     // TODO: Move out to component manager to avoid overheading ...
@@ -62,10 +65,13 @@ private:
     // TODO: Move out to component manager to avoid overheading ...
     t_chassis_component             _chassis;
 
+    //
     t_visibility_component          _visibility;
 
+    //
     t_radio_component               _radio;
 
+    //
     t_weight_value                  _weight {};
 
     // TODO: Replace me to speed limit range if it necessary ...
@@ -85,6 +91,15 @@ private:
     friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance);
 
     friend void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value distance);
+
+
+    friend const t_radio_distance_value t_get_vehicle_radio_distance(const t_vehicle_component& vehicle);
+
+    friend const t_visibility_distance_value t_get_vehicle_visibility_distance(const t_vehicle_component& vehicle);
+
+    friend const t_position_value t_get_vehicle_position(const t_vehicle_component& vehicle);
+
+    friend const t_identifier_value t_get_vehicle_identifier(const t_vehicle_component& vehicle);
 };
 
 #endif // T_VEHICLE_COMPONENT_H

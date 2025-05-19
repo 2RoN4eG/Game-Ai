@@ -93,16 +93,6 @@ using t_elevation_radians_value                 = t_radians_value;
 
 using t_input_device_range_value                = t_floating;
 
-using t_distance_value                          = t_floating;
-
-using t_visibility_distance_value               = t_distance_value;
-
-using t_vehicle_visibility_distance_value       = t_visibility_distance_value;
-
-using t_radio_distance_value                    = t_distance_value;
-
-using t_vehicle_radio_distance_value            = t_radio_distance_value;
-
 using t_unsigned_short = unsigned short;
 
 enum t_vehicle_part : t_unsigned_short
@@ -115,7 +105,8 @@ enum t_vehicle_part : t_unsigned_short
     t_gun,
     t_turret,
 
-    t_radio
+    t_radio,
+    t_visibility,
 };
 
 using t_unique_part = t_identifier_value;
@@ -244,6 +235,7 @@ public:
         return t_identifier_maker<t_identifier>::increase();
     }
 };
+
 
 using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_undefined>;
 

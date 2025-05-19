@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../t_component_defines.hpp"
+// #include "../tools/t_2d_vector.hpp"
+
+#include "../tools/t_2d_vector.hpp"
 
 
 class t_radio_component
@@ -19,4 +21,7 @@ private:
     const t_identifier_value    _identifier {};
 
     t_radio_distance_value      _distance {};
+
+private:
+    friend void t_set_radio_distance(t_radio_component& radio, const t_distance_value distance);
 };

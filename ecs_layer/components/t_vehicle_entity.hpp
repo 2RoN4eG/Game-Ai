@@ -5,8 +5,6 @@
 #include <vector>
 
 
-using t_vehicle_part_pair = std::pair<t_vehicle_part, t_identifier_value>;
-
-using t_vehicle_entity = std::vector<t_vehicle_part_pair>;
+using t_vehicle_entity = std::vector<t_identifier_value>;
 
 using t_vehicle_entities = std::vector<t_vehicle_entity>;

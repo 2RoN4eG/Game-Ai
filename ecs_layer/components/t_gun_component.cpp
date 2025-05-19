@@ -14,6 +14,11 @@ t_gun_component::t_gun_component(const t_elevation_degrees_value elevation_degre
 {
 }
 
+const t_identifier_value t_gun_component::get_identifier() const
+{
+    return _identifier;
+}
+
 const t_elevation_radians_value t_gun_component::get_elevation() const
 {
     return _elevation_radians;

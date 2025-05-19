@@ -65,6 +65,11 @@ t_radio_component& t_vehicle_component::get_mutable_radio()
     return _radio;
 }
 
+t_visibility_component& t_vehicle_component::get_mutable_visibility()
+{
+    return _visibility;
+}
+
 t_2d_position_value& t_vehicle_component::get_mutable_position()
 {
     return _position;
@@ -118,4 +123,31 @@ void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_veh
     t_visibility_component& visibility = vehicle.get_mutable_visibility();
 
     t_set_visibility_distance(visibility, distance);
+}
+
+
+const t_position_value t_get_vehicle_position(const t_vehicle_component& vehicle)
+{
+    return vehicle._position;
+}
+
+const t_visibility_distance_value t_get_vehicle_visibility_distance(const t_vehicle_component& vehicle)
+{
+    const t_visibility_component& visibility = vehicle._visibility;
+
+    return visibility.get_distance();
+}
+
+const t_radio_distance_value t_get_vehicle_radio_distance(const t_vehicle_component& vehicle)
+{
+    const t_radio_component& radio = vehicle._radio;
+
+    return radio.get_distance();
+}
+
+const t_identifier_value t_get_vehicle_identifier(const t_vehicle_component& vehicle)
+{
+    const t_identifier_value identifier = vehicle.get_identifier();
+
+    return identifier;
 }

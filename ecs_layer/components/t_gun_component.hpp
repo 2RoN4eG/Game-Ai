@@ -19,14 +19,16 @@ public:
     t_gun_component(const t_go_identifier_value identifier, const t_elevation_degrees_value elevation_degrees);
     t_gun_component(const t_elevation_degrees_value elevation_degrees);
 
+    const t_identifier_value get_identifier() const;
+
     const t_elevation_radians_value get_elevation() const;
 
-    bool single() const
+    const bool single() const
     {
         return _amount == 1;
     }
 
-    bool dual() const
+    const bool dual() const
     {
         return _amount == 2;
     }

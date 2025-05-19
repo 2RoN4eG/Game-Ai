@@ -2,12 +2,16 @@ cmake_minimum_required(VERSION 3.5)
 
 project(ecs_layer LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_library(ecs_layer
     tools/t_2d_vector.hpp                                           tools/t_2d_vector.cpp
 
     t_component_defines.hpp                                         t_component_defines.cpp
-    t_entry_holder.hpp                                          t_entry_holder.cpp
+    t_entry_holder.hpp                                              t_entry_holder.cpp
     t_game_database.hpp                                             t_game_database.cpp
+    t_game_scene.hpp                                                t_game_scene.cpp
     t_system_manager.hpp                                            t_system_manager.cpp
 
     interfaces/t_effect_interface.hpp                               interfaces/t_effect_interface.cpp
@@ -36,6 +40,7 @@ add_library(ecs_layer
     systems/t_rotating_vehicle_system.hpp                           systems/t_rotating_vehicle_system.cpp
     systems/t_rotating_vehicle_to_course_system.hpp                 systems/t_rotating_vehicle_to_course_system.cpp
     systems/t_rotating_to_course_system.hpp                         systems/t_rotating_to_course_system.cpp
+    systems/t_detecting_enemy_system.hpp                            systems/t_detecting_enemy_system.cpp
 
     caches/t_rotating_heading_to_course_component.hpp                   caches/t_rotating_heading_to_course_component.cpp
 

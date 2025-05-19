@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "../t_component_defines.hpp"
+
 
 using t_timestamp = int;
 
@@ -12,6 +14,7 @@ class t_effect_interface
 {
 public:
     t_effect_interface();
+
     virtual ~t_effect_interface() = 0;
 
     virtual void apply() = 0;
@@ -22,4 +25,11 @@ public:
 
     [[maybe_unused]]
     virtual t_description get_description() const { return {}; }
+};
+
+
+class t_updatable_effect_interface
+{
+public:
+    virtual void update(const t_frame_delta_time_value delta_time) = 0;
 };

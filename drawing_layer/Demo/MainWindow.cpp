@@ -4,8 +4,10 @@
 #include <QPaintEvent>
 #include <QPainter>
 
+#include "../../ecs_layer/t_game_scene.hpp"
 
-constexpr QSize t_shell_size { 20, 50 };
+
+constexpr QSize t_shell_size { 2, 2 };
 
 constexpr size_t t_gun_line_length { 20 };
 
@@ -14,7 +16,14 @@ constexpr QSize t_turret_size { 20, 50 };
 constexpr QSize t_chassis_size { 20, 50 };
 
 
-using t_game_scene = std::vector<int>;
+struct t_hud_component
+{
+    bool is_flamed {};      // машина горит
+
+    bool is_shocked {};     // экипаж контужен
+
+    bool is_illuminated {}; // машина засвечена
+};
 
 
 void draw_shell(const t_game_scene& scene, QPainter& painter)
@@ -37,15 +46,18 @@ void draw_chassis(const t_game_scene& scene, QPainter& painter)
 {
     QPen pen(Qt::black, 12, Qt::SolidLine, Qt::RoundCap);
 
-    painter.setPen(pen);
-
     const int x = {};
     const int y = {};
 
     const int w = {};
     const int h = {};
 
+    painter.setPen(pen);
     painter.drawRect(x, y, t_gun_line_length * 2, t_gun_line_length);
+}
+
+void draw_hud(const t_game_scene& scene, QPainter& painter)
+{
 }
 
 
@@ -54,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 }
 
 MainWindow::~MainWindow()

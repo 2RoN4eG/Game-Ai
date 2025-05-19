@@ -17,3 +17,9 @@ const t_visibility_distance_value t_visibility_component::get_distance() const
 {
     return _distance;
 }
+
+
+void t_set_visibility_distance(t_visibility_component& visibility, t_distance_value distance)
+{
+    visibility._distance = distance;
+}

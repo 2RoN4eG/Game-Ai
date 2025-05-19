@@ -37,13 +37,27 @@ t_2d_vector_value operator/(const t_2d_vector_value& vector, const t_2d_vector_a
 t_2d_vector_value operator*(const t_2d_vector_value& vector, const t_2d_vector_axis_value& value);
 
 
-using t_2d_position_value    = t_2d_vector_value;
+using t_2d_position_value                   = t_2d_vector_value;
 
-using t_2d_heading_value     = t_2d_vector_value;
+using t_2d_heading_value                    = t_2d_vector_value;
 
-using t_2d_course            = t_2d_vector_value;
+using t_2d_course                           = t_2d_vector_value;
 
-using t_2d_angular_velocity  = t_2d_vector_value;
+using t_2d_angular_velocity                 = t_2d_vector_value;
+
+using t_position_value                      = t_2d_position_value;
+
+using t_vehicle_position_value              = t_position_value;
+
+using t_distance_value                      = t_2d_vector_axis_value;
+
+using t_visibility_distance_value           = t_distance_value;
+
+using t_vehicle_visibility_distance_value   = t_visibility_distance_value;
+
+using t_radio_distance_value                = t_distance_value;
+
+using t_vehicle_radio_distance_value        = t_radio_distance_value;
 
 
 ///
@@ -96,9 +110,17 @@ t_2d_vector_value t_make_vector_from_degrees_along_y_axis_radians(const t_angle_
 t_2d_vector_value t_make_vector_from_degrees_along_y_axis_degrees(const t_angle_degrees_value degrees);
 
 ///
+/// \brief t_get_distance gets distance between 2 2D vectors (points).
+/// \param lhs - 2D vector.
+/// \param rhs - 2D vector.
+/// \return
+///
+t_distance_value t_get_distance(const t_2d_vector_value& lhs, const t_2d_vector_value& rhs);
+
+///
 /// \brief operator<< prints contained variables to stream
 /// \param stream for printing vector variables
-/// \param 2D vector
+/// \param vector is 2D vector
 /// \return
 ///
 std::ostream& operator<<(std::ostream& stream, const t_2d_vector_value& vector);

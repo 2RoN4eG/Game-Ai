@@ -108,6 +108,15 @@ t_2d_vector_value t_make_vector_from_degrees_along_y_axis_degrees(const t_angle_
     return t_make_vector_from_angle_along_x_axis_degrees(90.);
 }
 
+t_distance_value t_get_distance(const t_2d_vector_value& lhs, const t_2d_vector_value& rhs)
+{
+    const t_2d_vector_axis_value x { lhs.x() - rhs.x() };
+
+    const t_2d_vector_axis_value y { lhs.y() - rhs.y() };
+
+    return sqrt(x * x + y * y);
+}
+
 
 std::ostream& operator<<(std::ostream& stream, const t_2d_vector_value& vector)
 {
