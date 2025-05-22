@@ -49,4 +49,7 @@ protected:
     t_shot_damage_value             _shot_damage { 100 };
 
     t_cooldown_time_millis_value    _cooldown_time { 250 };
+
+public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_gun };
 };

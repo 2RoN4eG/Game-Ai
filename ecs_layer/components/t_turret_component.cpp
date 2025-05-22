@@ -4,9 +4,9 @@
 
 
 t_turret_component::t_turret_component(const t_azimuth_degrees_value azimuth_degrees,
-                                       const t_elevation_degrees_value elevation_degrees)
+                                       const t_elevation_degrees_value gun_elevation_degrees)
     : _azimuth_radians { t_convert_degrees_to_radians(azimuth_degrees) }
-    , _gun { elevation_degrees }
+    , _gun { gun_elevation_degrees }
     , _visibility { {}, {} }
 {
 }
@@ -17,6 +17,11 @@ t_turret_component::t_turret_component(const t_azimuth_degrees_value azimuth_deg
     , _gun { gun }
     , _visibility { {}, {} }
 {
+}
+
+const t_identifier_value t_turret_component::get_identifier() const
+{
+    return _identifier;
 }
 
 const t_azimuth_degrees_value t_turret_component::get_azimuth() const

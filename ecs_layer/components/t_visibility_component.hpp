@@ -22,4 +22,7 @@ private:
 
 private:
     friend void t_set_visibility_distance(t_visibility_component& visibility, t_distance_value distance);
+
+public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_visibility };
 };

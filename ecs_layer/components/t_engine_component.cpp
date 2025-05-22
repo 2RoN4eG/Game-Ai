@@ -54,6 +54,23 @@ void t_set_engine_weight(t_engine_component& engine, const t_engine_weight_value
     engine._weight = weight < epsilon_value ? 0 : weight;
 }
 
+
+const t_engine_speed_value t_get_engine_speed(t_engine_component& engine)
+{
+    return engine.get_speed();
+}
+
+const t_engine_power_value t_get_engine_power(t_engine_component& engine)
+{
+    return engine.get_power();
+}
+
+const t_engine_weight_value t_get_engine_weight(t_engine_component& engine)
+{
+    return engine.get_weight();
+}
+
+
 bool operator==(const t_engine_component& lhs, const t_engine_component& rhs)
 {
     return lhs._speed == rhs._speed && lhs._power == rhs._power;

@@ -11,10 +11,12 @@ class t_turret_component
 {
 public:
     t_turret_component(const t_azimuth_degrees_value azimuth_degrees,
-                       const t_elevation_degrees_value elevation_degrees);
+                       const t_elevation_degrees_value gun_elevation_degrees);
 
     t_turret_component(const t_azimuth_degrees_value azimuth_degrees,
                        const t_gun_component& gun);
+
+    const t_identifier_value get_identifier() const;
 
     const t_azimuth_degrees_value get_azimuth() const;
 
@@ -36,6 +38,9 @@ protected:
     t_weight_value              _weight {};
 
     t_azimuth_radians_value     _azimuth_radians {};
+
+public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_turret };
 };
 
 #endif // T_TURRET_COMPONENT_HPP

@@ -9,7 +9,7 @@
 
 namespace
 {
-    struct t_select_by_visibility_distance
+    struct t_by_visibility_distance_selector
     {
         const t_vehicle_position_value _position {};
 
@@ -25,7 +25,7 @@ namespace
         }
     };
 
-    struct t_convert_to
+    struct t_to_detected_converter
     {
         const t_identifier_value _identifier {};
 
@@ -49,9 +49,9 @@ t_detecting_enemy_system::~t_detecting_enemy_system()
 
 void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
 {
-    const t_entry_holder<t_vehicle_component>& entry_holder = _game_scene.get_entry_holder<t_vehicle_component>();
+    const t_entry_holder<t_vehicle_component>& vehicle_entry_holder = _game_scene.get_entry_holder<t_vehicle_component>();
 
-    for (const t_vehicle_component& vehicle : entry_holder)
+    for (const t_vehicle_component& vehicle : vehicle_entry_holder)
     {
         const t_identifier_value identifier { t_get_vehicle_identifier(vehicle) };
 
@@ -59,14 +59,18 @@ void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
 
         const t_vehicle_visibility_distance_value visibility { t_get_vehicle_visibility_distance(vehicle) };
 
-        auto visible_vehicles = entry_holder
-            | std::views::filter(t_select_by_visibility_distance { position, visibility })
-            ;
+        auto visible_vehicles = vehicle_entry_holder
+                              | std::views::filter(t_by_visibility_distance_selector { position, visibility })
+                              ;
 
         std::vector<t_detected_component> detected_vehicles {};
 
-        std::transform(visible_vehicles.begin(), visible_vehicles.end(), std::back_inserter(detected_vehicles), t_convert_to { identifier });
+        std::transform(visible_vehicles.begin(), visible_vehicles.end(), std::back_inserter(detected_vehicles), t_to_detected_converter { identifier });
 
         std::cout << "vehicle { identifier: " << identifier << " } detected " << detected_vehicles.size() << " vehicles" << std::endl;
+
+        t_entry_holder<t_detected_component>& detected_entry_holder = _game_scene.get_mutable_entry_holder<t_detected_component>();
+
+        detected_entry_holder.set_components(detected_vehicles);
     }
 }

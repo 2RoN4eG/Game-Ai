@@ -42,7 +42,7 @@ add_library(ecs_layer
     systems/t_rotating_to_course_system.hpp                         systems/t_rotating_to_course_system.cpp
     systems/t_detecting_enemy_system.hpp                            systems/t_detecting_enemy_system.cpp
 
-    caches/t_rotating_heading_to_course_component.hpp                   caches/t_rotating_heading_to_course_component.cpp
+    caches/t_rotating_heading_to_course_component.hpp               caches/t_rotating_heading_to_course_component.cpp
 
     effects/t_shell_shock_effect.hpp                                effects/t_shell_shock_effect.cpp
     effects/t_damaged_ammunition_stowage.hpp                        effects/t_damaged_ammunition_stowage.cpp

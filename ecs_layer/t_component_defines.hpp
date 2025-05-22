@@ -95,7 +95,7 @@ using t_input_device_range_value                = t_floating;
 
 using t_unsigned_short = unsigned short;
 
-enum t_vehicle_part : t_unsigned_short
+enum t_component_identifier_value : t_unsigned_short
 {
     t_undefined,
 
@@ -109,9 +109,9 @@ enum t_vehicle_part : t_unsigned_short
     t_visibility,
 };
 
-using t_unique_part = t_identifier_value;
+using t_unique_identifier_value = t_identifier_value;
 
-t_identifier_value make_identifier_value(const t_vehicle_part vehicle_part, const t_unique_part unique_part);
+t_identifier_value get_identifier_value(const t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part);
 
 template <typename t_value>
 class t_range
@@ -218,12 +218,12 @@ private:
     t_identifier _identifier {};
 };
 
-template <typename t_identifier, t_vehicle_part vehicle_part>
+template <typename t_identifier, t_component_identifier_value vehicle_part>
 class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
     t_component_identifier_maker()
-        : t_identifier_maker<t_identifier>(make_identifier_value(vehicle_part, t_unique_part {}))
+        : t_identifier_maker<t_identifier>(get_identifier_value(vehicle_part, t_unique_identifier_value {}))
     {
         const t_identifier_value identifier = t_identifier_maker<t_identifier>::get_identifier();
 
@@ -237,14 +237,14 @@ public:
 };
 
 
-using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_undefined>;
+using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_undefined>;
 
-using t_engine_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_engine>;
+using t_engine_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_engine>;
 
-using t_chassis_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_chassis>;
+using t_chassis_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_chassis>;
 
-using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_gun>;
+using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_gun>;
 
-using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_turret>;
+using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_turret>;
 
-using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_vehicle_part::t_radio>;
+using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_radio>;

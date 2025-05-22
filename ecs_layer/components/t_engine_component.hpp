@@ -42,5 +42,16 @@ private:
 
     friend void t_set_engine_weight(t_engine_component& engine, const t_engine_weight_value weight);
 
+
+    friend const t_engine_speed_value t_get_engine_speed(t_engine_component& engine);
+
+    friend const t_engine_power_value t_get_engine_power(t_engine_component& engine);
+
+    friend const t_engine_weight_value t_get_engine_weight(t_engine_component& engine);
+
+
     friend bool operator==(const t_engine_component& lhs, const t_engine_component& rhs);
+
+public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_engine };
 };

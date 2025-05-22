@@ -21,6 +21,8 @@ public:
 
     using t_entry_holder_container_constant_iterator = typename t_entry_holder_container::const_iterator;
 
+    using t_entry_holder_container_iterator = typename t_entry_holder_container::iterator;
+
 public:
     t_entry_holder()
     {
@@ -35,15 +37,13 @@ public:
     }
 
     template <typename... t_arguments>
-    void create_component(const t_go_identifier_value identifier, t_arguments... arguments)
+    void create_component(const t_go_identifier_value identifier, t_arguments&& ...arguments)
     {
-        _container.emplace_back(identifier, arguments ...);
+        _container.emplace_back(identifier, std::forward<t_arguments...>(arguments ...));
     }
 
     t_entry& get_mutable_component(const t_go_identifier_value identifier)
     {
-        using t_entry_holder_container_iterator = typename t_entry_holder_container::iterator;
-
         t_entry_holder_container_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
 
         if (iterator != _container.end())
@@ -66,12 +66,22 @@ public:
         throw std::runtime_error { "component_holder does not contain component by component identifier { " + std::to_string(identifier) + " }" };
     }
 
+    void set_component(const t_entry& entry)
+    {
+        _container.emplace_back(entry);
+    }
+
+    void set_components(const t_entry_holder_container& container)
+    {
+        _container.insert(_container.end(), container.begin(), container.end());
+    }
+
     template <typename t_predicate>
-    t_entry_holder_container select(const t_predicate& predicate)
+    t_entry_holder_container select(t_predicate&& predicate)
     {
         t_entry_holder_container to_container {};
 
-        std::copy_if(_container.begin(), _container.end(), std::back_inserter(to_container), predicate);
+        std::copy_if(_container.begin(), _container.end(), std::back_inserter(to_container), std::forward(predicate));
 
         return to_container;
     }
@@ -104,4 +114,14 @@ private:
     {
         return entry_holder._container.end();
     }
+
+    // friend t_entry_holder_container_iterator begin(t_entry_holder<t_entry>& entry_holder)
+    // {
+    //     return entry_holder._container.begin();
+    // }
+
+    // friend t_entry_holder_container_iterator end(t_entry_holder<t_entry>& entry_holder)
+    // {
+    //     return entry_holder._container.end();
+    // }
 };

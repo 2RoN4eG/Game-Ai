@@ -15,6 +15,7 @@ class t_game_database
     , public t_entry_holder<t_gun_component>
     , public t_entry_holder<t_turret_component>
     , public t_entry_holder<t_radio_component>
+    , public t_entry_holder<t_visibility_component>
 {
 public:
     t_game_database() = default;
@@ -33,12 +34,4 @@ public:
 };
 
 
-t_game_database& create_engine_database(t_game_database& database, t_engine_identifier_maker& identifier_maker);
-
-t_game_database& create_chassis_database(t_game_database& database, t_chassis_identifier_maker& identifier_maker);
-
-t_game_database& create_gun_database(t_game_database& database, t_gun_identifier_maker& identifier_maker);
-
-t_game_database& create_turret_database(t_game_database& database, t_turret_identifier_maker& identifier_maker);
-
-t_game_database& create_radio_database(t_game_database& database, t_radio_identifier_maker& identifier_maker);
+size_t create_game_database(t_game_database& database);

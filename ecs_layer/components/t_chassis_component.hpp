@@ -19,6 +19,9 @@ struct t_rotatable_heading_cache
 class t_chassis_component
 {
 public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_chassis };
+
+public:
     t_chassis_component(const t_go_identifier_value identifier,
                         const t_weight_value weight,
                         const t_engine_component& engine);
@@ -39,16 +42,16 @@ private:
     const t_identifier_value                    _identifier;
 
     // 
-    t_weight_value                              _weight;
+    const t_weight_value                        _weight;
+
+    //
+    t_engine_component                          _engine;
 
     // Направление шасси (куда смотрит шасси)
     t_heading_radians_value                     _heading {};
 
     // Скорость вращения шасси (градус в секунду)
     t_heading_speed_radians_per_second_value    _heading_speed {};
-
-    //
-    t_engine_component                          _engine;
 
 private:
     friend void t_set_chassis_speed(t_chassis_component& chassis, const t_speed_value speed);

@@ -24,4 +24,7 @@ private:
 
 private:
     friend void t_set_radio_distance(t_radio_component& radio, const t_distance_value distance);
+
+public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_radio };
 };

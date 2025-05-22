@@ -5,35 +5,13 @@
 #include "../t_game_scene.hpp"
 
 
-t_vehicle_component& get_game_scene_vehicle(t_game_scene& scene)
-{
-    const t_go_identifier_value identifier {};
-
-    const t_elevation_degrees_value gun_elevation {};
-
-    static t_gun_component gun { identifier, gun_elevation };
-
-    const t_azimuth_degrees_value turret_azimuth {};
-
-    static t_turret_component turret { identifier, turret_azimuth };
-
-    static t_engine_component engine { identifier, t_engine_power_value { 1000. } };
-
-    static t_chassis_component chassis { identifier, t_weight_value {}, engine };
-
-    static t_vehicle_component vehicle { identifier, turret, chassis };
-
-    return vehicle;
-}
-
-
 namespace
 {
     using t_identifier_values = std::vector<t_identifier_value>;
 
     using t_vehicle_identifier_value = t_go_identifier_value;
 
-    using t_self_detected_enemy_records = std::vector<t_detected_target_record>;
+    using t_self_detected_records = std::vector<t_detected_target_record>;
 
     const t_vehicle_team_value get_vehicle_team(const t_vehicle_component& vehicle)
     {
@@ -57,28 +35,28 @@ namespace
         return {};
     }
 
-    t_self_detected_enemy_records get_self_detected_vehicles(const t_game_scene& game_scene,
-                                                             const t_vehicle_identifier_value self_identifier)
+    t_self_detected_records get_self_detected_vehicles(const t_game_scene& game_scene,
+                                                       const t_vehicle_identifier_value self_identifier)
     {
         const t_entry_holder<t_detected_target_record>& holder = game_scene.get_entry_holder<t_detected_target_record>();
 
         struct t_self_detected_predicate
         {
-            t_identifier_value _detected_by {};
+            const t_identifier_value _detected_by {};
 
-            bool operator()(const t_detected_target_record& record) const
+            const bool operator()(const t_detected_target_record& record) const
             {
                 return record._source == t_detecting_source::self_detected && record._detected_by = _detected_by;
             }
         };
 
-        return holder.select(t_self_detected_predicate { self_identifier });
+        return holder.select(std::move(t_self_detected_predicate { self_identifier }));
     }
 
     void set_radio_detected_enemies(const t_game_scene& game_scene,
                                     const t_vehicle_team_value vehicle_team,
                                     const t_vehicle_identifier_value self_vehicle_identifier,
-                                    const t_self_detected_enemy_records& self_detected_enemies)
+                                    const t_self_detected_records& self_detected_enemies)
     {
     }
 }
@@ -124,7 +102,7 @@ void t_radio_transmitting_system::update(const t_frame_delta_time_value delta_ti
 
         // 2. Каждой дружественной машине передаем список идентификаторов обнаруженных (видимых) машин.
 
-        const t_self_detected_enemy_records& self_detected_enemies = get_self_detected_vehicles(_game_scene, self_vehicle_identifier);
+        const t_self_detected_records& self_detected_enemies = get_self_detected_vehicles(_game_scene, self_vehicle_identifier);
 
 
         set_radio_detected_enemies(_game_scene, vehicle_team, self_vehicle_identifier, self_detected_enemies);

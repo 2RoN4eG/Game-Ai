@@ -15,7 +15,8 @@ enum t_detecting_source
     received_by_radio = transmited_by_radio,
     by_friendly_radio = received_by_radio,
 
-    by_radio = by_friendly_radio
+    by_radio = by_friendly_radio,
+    by_self = self_detected
 };
 
 using t_visibility_source = t_detecting_source;
@@ -58,4 +59,3 @@ public:
 
 
 using t_detected_components = std::vector<t_detected_component>;
-

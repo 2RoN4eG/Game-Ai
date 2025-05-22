@@ -1,5 +1,5 @@
-#ifndef T_DEFINES_HPP
-#define T_DEFINES_HPP
+#pragma once
+
 
 #include <memory>
 #include <string>
@@ -39,5 +39,3 @@ namespace ai
 
     using t_description_view = std::string_view;
 }
-
-#endif // T_DEFINES_HPP
