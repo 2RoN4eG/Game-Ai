@@ -1,3 +1,6 @@
+Game Ai mechanics based on ECS methodology with Catch2 testing and Qt ui
+
+
 Building
 
 
