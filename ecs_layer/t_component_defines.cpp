@@ -33,7 +33,7 @@ bool t_demo_keyboard_event::operator()() const
 }
 
 
-t_identifier_value get_identifier_value(const t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part)
+t_identifier_value make_identifier(const t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part)
 {
     // if (!std::is_same_v<t_component_identifier_value, t_unsigned_short>)
     // {

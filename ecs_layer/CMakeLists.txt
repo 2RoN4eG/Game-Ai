@@ -28,8 +28,9 @@ add_library(ecs_layer
     components/t_visibility_component.hpp                           components/t_visibility_component.cpp
     components/t_shell_component.hpp                                components/t_shell_component.cpp
     components/t_radio_component.hpp                                components/t_radio_component.cpp
-
     components/t_vehicle_entity.hpp                                 components/t_vehicle_entity.cpp
+    components/t_braking_distance_component.hpp                     components/t_braking_distance_component.cpp
+    components/t_braking_control_component.hpp                      components/t_braking_control_component.cpp
 
     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp     systems/subsystems/t_ramping_up_vehicle_speed_subsystem.cpp
     systems/subsystems/t_ramping_down_vehicle_speed_subsystem.hpp   systems/subsystems/t_ramping_down_vehicle_speed_subsystem.cpp
@@ -41,6 +42,8 @@ add_library(ecs_layer
     systems/t_rotating_vehicle_to_course_system.hpp                 systems/t_rotating_vehicle_to_course_system.cpp
     systems/t_rotating_to_course_system.hpp                         systems/t_rotating_to_course_system.cpp
     systems/t_detecting_enemy_system.hpp                            systems/t_detecting_enemy_system.cpp
+    systems/t_braking_distance_system.hpp                           systems/t_braking_distance_system.cpp
+    systems/t_braking_control_system.hpp                            systems/t_braking_control_system.cpp
 
     caches/t_rotating_heading_to_course_component.hpp               caches/t_rotating_heading_to_course_component.cpp
 

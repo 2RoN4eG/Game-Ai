@@ -1,5 +1,4 @@
-#ifndef T_GOB_TRANSITION_H
-#define T_GOB_TRANSITION_H
+#pragma once
 
 #include "../t_defines.hpp"
 
@@ -48,5 +47,3 @@ namespace ai::gob
                                          const t_node_identifier to,
                                          std::unique_ptr<interfaces::t_goal_interface>&& goal);
 }
-
-#endif // T_GOB_TRANSITION_H

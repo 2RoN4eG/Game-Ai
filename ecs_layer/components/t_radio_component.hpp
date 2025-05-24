@@ -8,6 +8,9 @@
 class t_radio_component
 {
 public:
+    static const t_component_identifier_value t_part { t_component_identifier_value::t_radio };
+
+public:
     t_radio_component() = default;
     t_radio_component(const t_go_identifier_value identifier, const t_radio_distance_value distance);
 
@@ -23,8 +26,5 @@ private:
     t_radio_distance_value      _distance {};
 
 private:
-    friend void t_set_radio_distance(t_radio_component& radio, const t_distance_value distance);
-
-public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_radio };
+    friend void t_set_radio_distance(t_radio_component& radio, const t_radio_distance_value distance);
 };

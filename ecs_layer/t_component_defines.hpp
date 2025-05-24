@@ -5,21 +5,26 @@
 #include <iomanip>
 
 
-using t_floating                                = float;
+using t_floating_value                          = float;
 
-using t_double                                  = double;
+using t_double_value                            = double;
 
-using t_1d_position_value                       = t_floating;
+using t_1d_position_value                       = t_floating_value;
 
-using t_delta_position_component                = t_floating;
+using t_delta_position_component                = t_floating_value;
 
 using t_across_component                        = t_delta_position_component;
 
-using t_speed_value                             = t_floating;
 
-using t_power_value                             = t_floating;
+using t_speed_value                             = t_floating_value;
 
-using t_weight_value                            = t_floating;
+using t_speed_limit_value                       = t_speed_value;
+
+
+using t_power_value                             = t_floating_value;
+
+using t_weight_value                            = t_floating_value;
+
 
 using t_engine_speed_value                      = t_speed_value;
 
@@ -27,19 +32,21 @@ using t_engine_power_value                      = t_power_value;
 
 using t_engine_weight_value                     = t_weight_value;
 
+
 using t_vehicle_speed_value                     = t_speed_value;
 
-using t_speed_limit_value                       = t_speed_value;
-
 using t_vehicle_speed_limit_value               = t_speed_limit_value;
+
+
 
 using t_delta_speed_value                       = t_speed_value;
 
 using t_speed_scale_value                       = t_speed_value;
 
-using t_frame_delta_time_value                  = t_floating;
 
-using t_range_value                             = t_floating;
+using t_frame_delta_time_value                  = t_floating_value;
+
+using t_range_value                             = t_floating_value;
 
 using t_input_device                            = int;
 
@@ -59,9 +66,9 @@ using t_identifier_value                        = std::size_t;
 
 using t_go_identifier_value                     = t_identifier_value;
 
-using t_degrees_value                           = t_floating;
+using t_degrees_value                           = t_floating_value;
 
-using t_radians_value                           = t_floating;
+using t_radians_value                           = t_floating_value;
 
 using t_angle_degrees_value                     = t_degrees_value;
 
@@ -91,7 +98,7 @@ using t_elevation_degrees_value                 = t_degrees_value;
 
 using t_elevation_radians_value                 = t_radians_value;
 
-using t_input_device_range_value                = t_floating;
+using t_input_device_range_value                = t_floating_value;
 
 using t_unsigned_short = unsigned short;
 
@@ -111,7 +118,7 @@ enum t_component_identifier_value : t_unsigned_short
 
 using t_unique_identifier_value = t_identifier_value;
 
-t_identifier_value get_identifier_value(const t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part);
+t_identifier_value make_identifier(t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part);
 
 template <typename t_value>
 class t_range
@@ -223,7 +230,7 @@ class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
     t_component_identifier_maker()
-        : t_identifier_maker<t_identifier>(get_identifier_value(vehicle_part, t_unique_identifier_value {}))
+        : t_identifier_maker<t_identifier>(make_identifier(vehicle_part, t_unique_identifier_value {}))
     {
         const t_identifier_value identifier = t_identifier_maker<t_identifier>::get_identifier();
 
@@ -248,3 +255,18 @@ using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifi
 using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_turret>;
 
 using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_radio>;
+
+
+using t_integer_value = int;
+
+using t_acceleration_value = t_floating_value;
+
+using t_time_floating_value = t_floating_value;
+
+using t_time_value = t_integer_value;
+
+using t_time_second_value = t_time_value;
+
+using t_delta_time_floating_value = t_floating_value;
+
+using t_frame_per_second_value = t_time_second_value;

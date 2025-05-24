@@ -36,6 +36,13 @@ namespace
             return t_detected_component { t_visibility_source::self_detected, _identifier, identifier };
         }
     };
+
+    using t_detected_vehicle_components = std::vector<t_detected_component>;
+
+    void print_detected_vehicles(const t_detected_vehicle_components& detected_vehicles)
+    {
+
+    }
 }
 
 t_detecting_enemy_system::t_detecting_enemy_system(t_game_scene& game_scene)

@@ -58,7 +58,7 @@ t_2d_vector_value operator*(const t_2d_vector_value& vector, const t_2d_vector_a
 }
 
 
-t_floating t_get_vector_length(const t_2d_vector_value& vector)
+t_floating_value t_get_vector_length(const t_2d_vector_value& vector)
 {
     return std::sqrt( vector.x() * vector.x() + vector.y() * vector.y() );
 }
@@ -90,7 +90,7 @@ t_2d_vector_value t_make_vector_from_angle_along_x_axis_radians(const t_angle_ra
 
 t_2d_vector_value t_make_vector_from_angle_along_x_axis_degrees(const t_angle_degrees_value degrees)
 {
-    const t_floating radians = t_convert_degrees_to_radians(degrees);
+    const t_2d_vector_axis_value radians = t_convert_degrees_to_radians(degrees);
 
     return t_make_vector_from_angle_along_x_axis_radians(radians);
 }

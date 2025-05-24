@@ -15,7 +15,7 @@ const t_identifier_value get_entity_identifier(const t_vehicle_entity& entity, c
         const t_identifier_value _identifier {};
 
         t_identifier_finder(const t_component_identifier_value component_part)
-            : _identifier { get_identifier_value(component_part, t_unique_identifier_value {}) }
+            : _identifier { make_identifier(component_part, t_unique_identifier_value {}) }
         {
         }
 
@@ -65,12 +65,12 @@ const t_vehicle_entity create_vehicle_entity(const t_unique_identifier_value uni
 {
     const t_vehicle_entity entity
     {
-        get_identifier_value(t_component_identifier_value::t_engine,     unique), // engine
-        get_identifier_value(t_component_identifier_value::t_chassis,    unique), // chassis
-        get_identifier_value(t_component_identifier_value::t_gun,        unique), // gun
-        get_identifier_value(t_component_identifier_value::t_turret,     unique), // turret
-        get_identifier_value(t_component_identifier_value::t_radio,      unique), // radio
-        get_identifier_value(t_component_identifier_value::t_visibility, unique), // visibility
+        make_identifier(t_component_identifier_value::t_engine,     unique), // engine
+        make_identifier(t_component_identifier_value::t_chassis,    unique), // chassis
+        make_identifier(t_component_identifier_value::t_gun,        unique), // gun
+        make_identifier(t_component_identifier_value::t_turret,     unique), // turret
+        make_identifier(t_component_identifier_value::t_radio,      unique), // radio
+        make_identifier(t_component_identifier_value::t_visibility, unique), // visibility
     };
 
     return entity;

@@ -3,7 +3,7 @@
 #include "../t_component_defines.hpp"
 
 
-using t_2d_vector_axis_value = t_floating;
+using t_2d_vector_axis_value = t_floating_value;
 
 
 class t_2d_vector_value
@@ -50,6 +50,8 @@ using t_position_value                      = t_2d_position_value;
 using t_vehicle_position_value              = t_position_value;
 
 using t_distance_value                      = t_2d_vector_axis_value;
+
+using t_braking_distance_value              = t_distance_value;
 
 using t_visibility_distance_value           = t_distance_value;
 

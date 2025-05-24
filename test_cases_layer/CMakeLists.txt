@@ -33,6 +33,7 @@ add_executable( test_cases_layer
     test_shell_shock_effect.cpp
     test_game_database.cpp
     test_vehicle_entity.cpp
+    test_braking_control_system.cpp
 
     mocks/mock_sound_player.hpp
 )

@@ -37,9 +37,9 @@ public:
     }
 
     template <typename... t_arguments>
-    void create_component(const t_go_identifier_value identifier, t_arguments&& ...arguments)
+    void create_component(const t_go_identifier_value identifier, t_arguments&&... arguments)
     {
-        _container.emplace_back(identifier, std::forward<t_arguments...>(arguments ...));
+        _container.emplace_back(identifier, std::forward<t_arguments>(arguments)...);
     }
 
     t_entry& get_mutable_component(const t_go_identifier_value identifier)
@@ -112,16 +112,16 @@ private:
 
     friend t_entry_holder_container_constant_iterator end(const t_entry_holder<t_entry>& entry_holder)
     {
-        return entry_holder._container.end();
+        return entry_holder._container.cend();
     }
 
-    // friend t_entry_holder_container_iterator begin(t_entry_holder<t_entry>& entry_holder)
-    // {
-    //     return entry_holder._container.begin();
-    // }
+    friend t_entry_holder_container_iterator begin(t_entry_holder<t_entry>& entry_holder)
+    {
+        return entry_holder._container.begin();
+    }
 
-    // friend t_entry_holder_container_iterator end(t_entry_holder<t_entry>& entry_holder)
-    // {
-    //     return entry_holder._container.end();
-    // }
+    friend t_entry_holder_container_iterator end(t_entry_holder<t_entry>& entry_holder)
+    {
+        return entry_holder._container.end();
+    }
 };

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-constexpr t_floating epsilon_value = 1e-10;
+constexpr t_floating_value epsilon_value = 1e-10;
 
 constexpr t_engine_speed_value t_speed_epsilon_value = epsilon_value;
 

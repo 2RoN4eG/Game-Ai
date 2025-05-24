@@ -7,6 +7,9 @@
 #include "../ecs_layer/t_component_defines.hpp"
 
 
+using t_ai_floating = t_floating_value;
+
+
 namespace ai
 {
     template <typename t_identifier_value>
@@ -27,13 +30,11 @@ namespace ai
 
     using t_transition_identifier_maker = t_ai_identifier_maker <t_transition_identifier>;
 
-    using t_floating = ::t_floating;
-
     using t_integer = int;
 
     using t_delta_time = t_frame_delta_time_value;
 
-    using t_priority = t_floating;
+    using t_priority = t_ai_floating;
 
     constexpr t_priority t_default_priority { 1.f };
 

@@ -1,4 +1,4 @@
-#include "t_gob_runner.hpp"
+#include "t_gob_brain.hpp"
 
 #include <algorithm>
 #include <ranges>
@@ -64,22 +64,22 @@ namespace ai::gob
     }
 
 
-    t_runner::t_runner()
+    t_brain::t_brain()
     {
     }
 
-    const t_node_identifier t_runner::hold_behavior(std::unique_ptr<interfaces::t_behavior_interface>&& behavior)
+    const t_node_identifier t_brain::hold_behavior(std::unique_ptr<interfaces::t_behavior_interface>&& behavior)
     {
         const t_node_identifier identifier = _node_identifier_generator();
 
-        t_node_pointer&& node = make_transition(identifier, std::move(behavior));
+        t_node_pointer&& node = make_node(identifier, std::move(behavior));
 
         _node_holder.emplace_back(std::move(node));
 
         return identifier;
     }
 
-    const t_transition_identifier t_runner::hold_transition(const t_node_identifier from_node_identifier,
+    const t_transition_identifier t_brain::hold_transition(const t_node_identifier from_node_identifier,
                                                             const t_node_identifier to_node_identifier,
                                                             std::unique_ptr<interfaces::t_goal_interface>&& goal)
     {
@@ -92,7 +92,7 @@ namespace ai::gob
         return identifier;
     }
 
-    void t_runner::finish_preparing()
+    void t_brain::finish_preparing()
     {
         _root = _node_holder.front();
 
@@ -101,7 +101,7 @@ namespace ai::gob
         _transitions = get_transitions(_transition_holder, _root->get_identifier());
     }
 
-    void t_runner::update(const t_delta_time delta_time)
+    void t_brain::update(const t_delta_time delta_time)
     {
         if (!_root)
         {

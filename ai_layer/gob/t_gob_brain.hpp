@@ -22,11 +22,11 @@ namespace ai::gob
     // Ответсвенность данного класса:
     // Хранить все узлы
     // Хранить все переходы на узлы
-    class t_runner
+    class t_brain
     {
     public:
-        t_runner();
-        ~t_runner() = default;
+        t_brain();
+        ~t_brain() = default;
 
         const t_node_identifier hold_behavior(std::unique_ptr<interfaces::t_behavior_interface>&& behaviour);
 
@@ -51,7 +51,7 @@ namespace ai::gob
 
         std::vector<t_transition_pointer>       _transition_holder;
 
-        friend class t_runner_maker;
+        friend class t_brain_maker;
     };
 
 }   // namespace ai::gob

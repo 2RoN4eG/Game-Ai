@@ -18,7 +18,7 @@ add_library(ai_layer
     gob/behaviors/t_1d_linear_moving_behavior.hpp   gob/behaviors/t_1d_linear_moving_behavior.cpp
     gob/behaviors/t_idle_behavior.hpp               gob/behaviors/t_idle_behavior.cpp
     #
-    gob/t_gob_runner.hpp                            gob/t_gob_runner.cpp
+    gob/t_gob_brain.hpp                             gob/t_gob_brain.cpp
 )
 
 target_link_libraries( ai_layer PRIVATE ecs_layer )
