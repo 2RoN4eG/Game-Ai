@@ -1,6 +1,6 @@
 #pragma once
 
-#include "t_entry_holder.hpp"
+#include "t_entry_holder_aggregator.hpp"
 
 #include "components/t_vehicle_component.hpp"
 #include "components/t_shell_component.hpp"
@@ -15,49 +15,22 @@
 class t_game_database;
 
 
-class t_game_scene
-    : public t_entry_holder<t_engine_component>
-    , public t_entry_holder<t_chassis_component>
-    , public t_entry_holder<t_gun_component>
-    , public t_entry_holder<t_turret_component>
-    , public t_entry_holder<t_radio_component>
-    , public t_entry_holder<t_visibility_component>
-    , public t_entry_holder<t_detected_component>
-    , public t_entry_holder<t_vehicle_component>
-    , public t_entry_holder<t_braking_control_component>
-    , public t_entry_holder<t_braking_distance_component>
-    , public t_entry_holder<t_shell_component>
-    , public t_entry_holder<t_shell_shock_effect>
+class t_game_scene : public t_entry_holder_aggregator<
+        t_engine_component,
+        t_chassis_component,
+        t_gun_component,
+        t_turret_component,
+        t_radio_component,
+        t_visibility_component,
+        t_detected_component,
+        t_vehicle_component,
+        t_braking_control_component,
+        t_braking_distance_component,
+        t_shell_component,
+        // effects
+        t_shell_shock_effect
+    >
 {
-public:
-    template <typename t_entry>
-    inline t_entry_holder<t_entry>& get_mutable_entry_holder()
-    {
-        return *this;
-    }
-
-    // template <typename t_entry>
-    // t_entry& get_mutable_entry(const t_go_identifier_value identifier)
-    // {
-    //     t_entry_holder<t_component>& entry_holder { *this };
-
-    //     return entry_holder.get_mutable_component<t_entry>(identifier);
-    // }
-
-
-    template <typename t_entry>
-    inline const t_entry_holder<t_entry>& get_entry_holder() const
-    {
-        return *this;
-    }
-
-    // template <typename t_component>
-    // const t_component& get_entry(const t_go_identifier_value identifier) const
-    // {
-    //     const t_entry_holder<t_component>& entry_holder { *this };
-
-    //     return entry_holder.get_component<t_component>(identifier);
-    // }
 };
 
 

@@ -21,10 +21,19 @@ public:
 
     virtual void disapply() = 0;
 
-    virtual const t_timestamp expire_after() const = 0;
+    const t_timestamp expire_after() const
+    {
+        return _timestamp;
+    };
 
     [[maybe_unused]]
-    virtual t_description get_description() const { return {}; }
+    t_description get_description() const
+    {
+        return {};
+    }
+
+private:
+    t_timestamp _timestamp;
 };
 
 

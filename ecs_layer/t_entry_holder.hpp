@@ -91,6 +91,9 @@ public:
         return _container.size();
     }
 
+    void print_debug_information() const {
+    }
+
 private:
     t_entry_holder_container _container {};
 
