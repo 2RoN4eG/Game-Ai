@@ -1,5 +1,4 @@
-#ifndef T_VEHICLE_COMPONENT_H
-#define T_VEHICLE_COMPONENT_H
+#pragma once
 
 #include "t_chassis_component.hpp"
 #include "t_turret_component.hpp"
@@ -19,6 +18,7 @@ using t_health_points_value = size_t;
 class t_vehicle_component
 {
 public:
+    t_vehicle_component(const t_go_identifier_value identifier);
     t_vehicle_component(const t_go_identifier_value identifier, 
                         const t_turret_component& turret,
                         const t_chassis_component& chassis);
@@ -59,6 +59,11 @@ private:
     //
     const t_identifier_value        _identifier {};
 
+    t_team_value                    _team {};
+
+    //
+    t_2d_position_value             _position {};
+
     // TODO: Move out to component manager to avoid overheading ...
     t_turret_component              _turret;
 
@@ -80,17 +85,18 @@ private:
     //
     t_health_points_value           _health_points {};
 
-    //
-    t_2d_position_value             _position {};
-
 private:
     friend void t_set_vehicle_speed(t_vehicle_component& vehicle, const t_speed_value speed);
 
     friend void t_set_vehicle_speed_limit(t_vehicle_component& vehicle, const t_vehicle_speed_limit_value speed_limit);
 
-    friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance);
+    friend void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value radio_distance);
 
-    friend void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value distance);
+    friend void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value visibility_distance);
+
+    friend void t_set_vehicle_position(t_vehicle_component& vehicle, const t_position_value position);
+
+    friend void t_set_vehicle_team(t_vehicle_component& vehicle, const t_team_value team);
 
 
     friend const t_radio_distance_value t_get_vehicle_radio_distance(const t_vehicle_component& vehicle);
@@ -100,6 +106,6 @@ private:
     friend const t_position_value t_get_vehicle_position(const t_vehicle_component& vehicle);
 
     friend const t_identifier_value t_get_vehicle_identifier(const t_vehicle_component& vehicle);
-};
 
-#endif // T_VEHICLE_COMPONENT_H
+    friend const t_team_value t_get_vehicle_team(const t_vehicle_component& vehicle);
+};

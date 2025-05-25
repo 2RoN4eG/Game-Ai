@@ -108,7 +108,7 @@ t_game_scene create_vehicles_game_scene(const t_game_database& database, size_t 
     return game_scene;
 }
 
-void game_scene_create_vehicle(t_game_scene& game_scene)
+void create_game_scene_vehicle(t_game_scene& game_scene)
 {
     
 }

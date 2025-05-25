@@ -19,7 +19,7 @@ void t_braking_control_system::update(const t_delta_time_floating_value delta_ti
 
         // check if speed is equal speed limit
 
-        const t_acceleration_value& acceleration { component._acceleration };
+        const t_acceleration_value acceleration { component._acceleration };
 
         speed = std::max(t_speed_value {}, speed - acceleration * delta_time);
     }

@@ -37,9 +37,9 @@ public:
     }
 
     template <typename... t_arguments>
-    void create_component(const t_go_identifier_value identifier, t_arguments&&... arguments)
+    t_entry& create_component(const t_go_identifier_value identifier, t_arguments&&... arguments)
     {
-        _container.emplace_back(identifier, std::forward<t_arguments>(arguments)...);
+        return _container.emplace_back(identifier, std::forward<t_arguments>(arguments)...);
     }
 
     t_entry& get_mutable_component(const t_go_identifier_value identifier)
@@ -91,7 +91,9 @@ public:
         return _container.size();
     }
 
-    void print_debug_information() const {
+    void print_debug_information() const
+    {
+        std::cout << "t_entry_holder contains " << _container.size() << " components" << std::endl;
     }
 
 private:

@@ -26,3 +26,6 @@ private:
 public:
     static const t_component_identifier_value t_part { t_component_identifier_value::t_visibility };
 };
+
+
+using t_vehicle_visibility_component = t_visibility_component;

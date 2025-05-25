@@ -37,20 +37,10 @@ class t_game_scene : public t_entry_holder_aggregator<
 using t_game_scene_vehicle_components = std::vector<t_vehicle_component>;
 
 
-// inline t_game_scene_vehicle_components& get_mutable_game_scene_vehicles(t_game_scene& game_scene, const t_identifier_value identifier)
-// {
-//     t_entry_holder<t_vehicle_component>& entry_holder = game_scene.get_mutable_entry_holder<t_vehicle_component>();
-
-//     // TODO: Think how to get vehicles from entry_holder ...
-
-//     return entry_holder.get_mutable_component(identifier);
-// }
-
-
 t_game_scene create_2_vehicles_game_scene(const t_game_database& database);
 
 
-void game_scene_create_vehicle(t_game_scene& game_scene);
+void create_game_scene_vehicle(t_game_scene& game_scene);
 
 
 using t_player_identifier_value = t_identifier_value;

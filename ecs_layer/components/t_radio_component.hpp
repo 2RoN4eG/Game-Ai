@@ -28,3 +28,6 @@ private:
 private:
     friend void t_set_radio_distance(t_radio_component& radio, const t_radio_distance_value distance);
 };
+
+
+using t_vehicle_radio_component = t_radio_component;

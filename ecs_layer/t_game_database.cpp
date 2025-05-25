@@ -17,24 +17,24 @@ size_t create_chassis_database(t_game_database& database, t_chassis_identifier_m
 
 size_t create_gun_database(t_game_database& database, t_gun_identifier_maker& identifier_maker)
 {
-    t_entry_holder<t_gun_component>& holder = database.get_mutable_entry_holder<t_gun_component>();
+    t_entry_holder<t_gun_component>& gun_holder = database.get_mutable_entry_holder<t_gun_component>();
 
-    holder.create_component(identifier_maker(), t_elevation_degrees_value {});
-    holder.create_component(identifier_maker(), t_elevation_degrees_value {});
-    holder.create_component(identifier_maker(), t_elevation_degrees_value {});
+    gun_holder.create_component(identifier_maker(), t_elevation_degrees_value {});
+    gun_holder.create_component(identifier_maker(), t_elevation_degrees_value {});
+    gun_holder.create_component(identifier_maker(), t_elevation_degrees_value {});
 
-    return holder.amount();
+    return gun_holder.amount();
 }
 
 size_t create_turret_database(t_game_database& database, t_turret_identifier_maker& identifier_maker)
 {
-    t_entry_holder<t_turret_component>& holder = database.get_mutable_entry_holder<t_turret_component>();
+    t_entry_holder<t_turret_component>& turret_holder = database.get_mutable_entry_holder<t_turret_component>();
 
-    holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
-    holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
-    holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
+    turret_holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
+    turret_holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
+    turret_holder.create_component(t_azimuth_degrees_value {}, t_elevation_degrees_value {});
 
-    return holder.amount();
+    return turret_holder.amount();
 }
 
 size_t create_radio_database(t_game_database& database, t_radio_identifier_maker& identifier_maker)

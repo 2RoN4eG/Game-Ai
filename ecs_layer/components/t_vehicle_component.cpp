@@ -23,6 +23,26 @@ namespace
 }
 
 
+t_vehicle_component::t_vehicle_component(const t_go_identifier_value identifier)
+    : t_vehicle_component { identifier,
+                            t_turret_component {
+                                t_azimuth_degrees_value {},
+                                t_gun_component {
+                                    identifier,
+                                    t_elevation_degrees_value {}
+                                }
+                            },
+                            t_chassis_component {
+                                identifier,
+                                t_weight_value {},
+                                t_engine_component {
+                                    identifier
+                                } 
+                            }
+                        }
+{
+}
+
 t_vehicle_component::t_vehicle_component(const t_go_identifier_value identifier,
                                          const t_turret_component& turret,
                                          const t_chassis_component& chassis)
@@ -111,18 +131,28 @@ void t_set_vehicle_speed_limit(t_vehicle_component& vehicle, const t_vehicle_spe
     vehicle._speed_limit = speed_limit;
 }
 
-void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value distance)
+void t_set_vehicle_radio_distance(t_vehicle_component& vehicle, const t_vehicle_radio_distance_value radio_distance)
 {
     t_radio_component& radio = vehicle.get_mutable_radio();
 
-    t_set_radio_distance(radio, distance);
+    t_set_radio_distance(radio, radio_distance);
 }
 
-void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value distance)
+void t_set_vehicle_visibility_distance(t_vehicle_component& vehicle, const t_vehicle_visibility_distance_value visibility_distance)
 {
     t_visibility_component& visibility = vehicle.get_mutable_visibility();
 
-    t_set_visibility_distance(visibility, distance);
+    t_set_visibility_distance(visibility, visibility_distance);
+}
+
+void t_set_vehicle_position(t_vehicle_component& vehicle, const t_position_value position)
+{
+    vehicle._position = position;
+}
+
+void t_set_vehicle_team(t_vehicle_component& vehicle, const t_team_value team)
+{
+    vehicle._team = team;
 }
 
 
@@ -150,4 +180,9 @@ const t_identifier_value t_get_vehicle_identifier(const t_vehicle_component& veh
     const t_identifier_value identifier = vehicle.get_identifier();
 
     return identifier;
+}
+
+const t_team_value t_get_vehicle_team(const t_vehicle_component& vehicle)
+{
+    return vehicle._team;
 }

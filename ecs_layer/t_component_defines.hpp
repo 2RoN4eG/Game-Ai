@@ -114,6 +114,8 @@ enum t_component_identifier_value : t_unsigned_short
 
     t_radio,
     t_visibility,
+
+    t_vehicle
 };
 
 using t_unique_identifier_value = t_identifier_value;
@@ -256,17 +258,23 @@ using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifi
 
 using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_radio>;
 
+using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_vehicle>;
 
-using t_integer_value = int;
 
-using t_acceleration_value = t_floating_value;
+using t_integer_value               = int;
 
-using t_time_floating_value = t_floating_value;
 
-using t_time_value = t_integer_value;
+using t_acceleration_value          = t_floating_value;
 
-using t_time_second_value = t_time_value;
+using t_time_floating_value         = t_floating_value;
 
-using t_delta_time_floating_value = t_floating_value;
+using t_time_value                  = t_integer_value;
 
-using t_frame_per_second_value = t_time_second_value;
+using t_time_second_value           = t_time_value;
+
+using t_delta_time_floating_value   = t_floating_value;
+
+using t_frame_per_second_value      = t_time_second_value;
+
+
+using t_team_value                  = t_integer_value;
