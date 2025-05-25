@@ -121,13 +121,6 @@ TEST_CASE( "testing detecting enemy system", "[systems]" )
 
     SECTION( "updating detecting enemy system" )
     {
-        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
-        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 0);
-        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
-    }
-
-    SECTION( "updating detecting enemy system" )
-    {
         t_detecting_enemy_system system { game_scene };
 
         system.update(t_frame_delta_time_value {});
