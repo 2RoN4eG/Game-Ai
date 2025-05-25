@@ -24,8 +24,10 @@ class t_game_scene : public t_entry_holder_aggregator<
         t_visibility_component,
         t_detected_component,
         t_vehicle_component,
+        // 
         t_braking_control_component,
         t_braking_distance_component,
+        // 
         t_shell_component,
         // effects
         t_shell_shock_effect

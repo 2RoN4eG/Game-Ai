@@ -90,7 +90,7 @@ void veryfy_visibility_distance(t_game_scene& game_scene, const t_identifier_val
 }
 
 
-int count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_value identifier)
+inline int count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_value identifier)
 {
     const t_entry_holder<t_detected_component>& holder = game_scene.get_entry_holder<t_detected_component>();
 
@@ -109,19 +109,26 @@ int count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_
     return std::count_if(begin(holder), end(holder), t_count_predicate { t_detecting_source::by_self, identifier });
 }
 
+
 // create 3 vehicles with different options ...
 
 TEST_CASE( "testing detecting enemy system", "[systems]" )
 {
     t_game_scene game_scene {};
 
-    t_create_game_scene_vehicle(game_scene, t_identifier_value { 0 }, t_team_value { 0 }, t_vehicle_position_value {   0,   0 }, t_visibility_distance_value { 100 }, t_radio_distance_value { 450 }); // 
-    t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 1 is 300.0
-    t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
+    t_detecting_enemy_system system { game_scene };
 
-    SECTION( "updating detecting enemy system" )
+    SECTION( "vehicle { identifier 1 } detects one vehicle { identifier 0 }, vehicle { identifier 2 } does not detect anybody" )
     {
-        t_detecting_enemy_system system { game_scene };
+        system.update(t_frame_delta_time_value {});
+
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 0);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
+
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 0 }, t_team_value { 0 }, t_vehicle_position_value {   0,   0 }, t_visibility_distance_value { 100 }, t_radio_distance_value { 450 }); // 
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 1 is 300.0
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
 
         system.update(t_frame_delta_time_value {});
 
