@@ -16,8 +16,6 @@ public:
 
     void disapply() override;
 
-    const t_timestamp expire_after() const override;
-
 private:
     t_sound_player_interface& _sound_player;
 };

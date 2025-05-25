@@ -19,14 +19,10 @@ public:
 
     void disapply() override;
 
-    const t_timestamp expire_after() const override;
-
 private:
     t_vehicle_component& _vehicle;
 
     t_sound_player_interface& _sound_player;
-
-    t_timestamp _expire_after {};
 
     t_speed_limit_value _speed_limit {};
 

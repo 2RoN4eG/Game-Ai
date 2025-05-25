@@ -11,9 +11,9 @@ constexpr t_identifier_value t_shell_shock_effect_sound_identifier_disapplied {}
 
 
 t_shell_shock_effect::t_shell_shock_effect(t_vehicle_component& vehicle, t_sound_player_interface& sound_player)
-    : _vehicle { vehicle }
+    : t_effect_interface { t_timestamp { 40 } }
+    , _vehicle { vehicle }
     , _sound_player { sound_player }
-    , _expire_after { 25 }
 {
     apply();
 }
@@ -55,9 +55,4 @@ void t_shell_shock_effect::disapply()
     /** */
 
     _sound_player.play(t_shell_shock_effect_sound_identifier_disapplied);
-}
-
-const t_timestamp t_shell_shock_effect::expire_after() const
-{
-    return _expire_after;
 }

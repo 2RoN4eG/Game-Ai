@@ -11,7 +11,8 @@ t_identifier_value t_damaged_ammunition_stowage_disapply_sound_identifier = {};
 
 
 t_damaged_ammunition_stowage::t_damaged_ammunition_stowage(t_sound_player_interface& sound_player)
-    : _sound_player { sound_player } 
+    : t_effect_interface { t_timestamp { 40 } }
+    , _sound_player { sound_player } 
 {
 }
 
@@ -27,9 +28,4 @@ void t_damaged_ammunition_stowage::apply()
 void t_damaged_ammunition_stowage::disapply()
 {
     _sound_player.play(t_damaged_ammunition_stowage_apply_sound_identifier);
-}
-
-const t_timestamp t_damaged_ammunition_stowage::expire_after() const
-{
-    return t_timestamp { 40 };
 }

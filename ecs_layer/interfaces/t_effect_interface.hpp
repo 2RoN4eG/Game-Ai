@@ -13,27 +13,23 @@ using t_description = std::string;
 class t_effect_interface
 {
 public:
-    t_effect_interface();
+    t_effect_interface(const t_timestamp expire_after);
 
     virtual ~t_effect_interface() = 0;
+
 
     virtual void apply() = 0;
 
     virtual void disapply() = 0;
 
-    const t_timestamp expire_after() const
-    {
-        return _timestamp;
-    };
+
+    const t_timestamp expire_after() const;
 
     [[maybe_unused]]
-    t_description get_description() const
-    {
-        return {};
-    }
+    t_description get_description() const;
 
 private:
-    t_timestamp _timestamp;
+    t_timestamp _expire_after {};
 };
 
 
