@@ -5,7 +5,7 @@
 #include "components/t_vehicle_component.hpp"
 #include "components/t_shell_component.hpp"
 #include "components/t_vehicle_entity.hpp"
-#include "components/t_detected_component.hpp"
+#include "components/t_detected_enemy_component.hpp"
 #include "components/t_braking_distance_component.hpp"
 #include "components/t_braking_control_component.hpp"
 
@@ -22,7 +22,7 @@ class t_game_scene : public t_entry_holder_aggregator<
         t_turret_component,
         t_radio_component,
         t_visibility_component,
-        t_detected_component,
+        t_detected_enemy_component,
         //
         t_vehicle_component,
         //

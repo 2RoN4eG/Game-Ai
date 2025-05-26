@@ -2,10 +2,10 @@
 
 #include "../tools/t_2d_vector.hpp"
 
+#include "../components/t_detected_enemy_component.hpp"
 
-using t_detected_target_record = t_detected_component;
 
-using t_game_scene = int;
+using t_detected_enemy_record = t_detected_enemy_component;
 
 using t_game_scene_vehicle = t_identifier_value;
 
@@ -24,7 +24,7 @@ class t_game_scene;
 class t_radio_transmitting_system
 {
 public:
-    t_radio_transmitting_system();
+    t_radio_transmitting_system(t_game_scene& game_scene);
 
     ~t_radio_transmitting_system();
 

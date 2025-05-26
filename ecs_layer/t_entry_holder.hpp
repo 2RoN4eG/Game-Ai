@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
+#include <utility>
 
 
 using t_holder_information_printers = std::vector<std::function<void ()>>;
@@ -77,11 +78,11 @@ public:
     }
 
     template <typename t_predicate>
-    t_entry_holder_container select(t_predicate&& predicate)
+    t_entry_holder_container select(t_predicate&& predicate) const
     {
         t_entry_holder_container to_container {};
 
-        std::copy_if(_container.begin(), _container.end(), std::back_inserter(to_container), std::forward(predicate));
+        std::copy_if(_container.begin(), _container.end(), std::back_inserter(to_container), std::move(predicate));
 
         return to_container;
     }

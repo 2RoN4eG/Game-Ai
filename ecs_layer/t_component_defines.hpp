@@ -102,6 +102,7 @@ using t_input_device_range_value                = t_floating_value;
 
 using t_unsigned_short = unsigned short;
 
+
 enum t_component_identifier_value : t_unsigned_short
 {
     t_undefined,
@@ -117,6 +118,7 @@ enum t_component_identifier_value : t_unsigned_short
 
     t_vehicle
 };
+
 
 using t_unique_identifier_value = t_identifier_value;
 
@@ -257,6 +259,9 @@ using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifi
 using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_turret>;
 
 using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_radio>;
+
+using t_visibility_identifier_maker = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_visibility>;
+
 
 using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_component_identifier_value::t_vehicle>;
 

@@ -38,15 +38,15 @@ namespace
     {
         const t_identifier_value _identifier {};
 
-        t_detected_component operator()(const t_vehicle_component& vehicle) const
+        t_detected_enemy_component operator()(const t_vehicle_component& vehicle) const
         {
-            const t_identifier_value identifier = t_get_vehicle_identifier(vehicle);
+            const t_identifier_value enemy = t_get_vehicle_identifier(vehicle);
 
-            return t_detected_component { t_visibility_source::self_detected, _identifier, identifier };
+            return t_detected_enemy_component { t_visibility_source::self_detected, _identifier, enemy };
         }
     };
 
-    using t_detected_vehicle_components = std::vector<t_detected_component>;
+    using t_detected_vehicle_components = std::vector<t_detected_enemy_component>;
 
     void print_detected_vehicles(const t_detected_vehicle_components& detected_vehicles)
     {
@@ -80,13 +80,13 @@ void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
                               | std::views::filter(t_by_visibility_distance_selector { team, position, visibility })
                               ;
 
-        std::vector<t_detected_component> detected_vehicles {};
+        std::vector<t_detected_enemy_component> detected_vehicles {};
 
         std::transform(visible_vehicles.begin(), visible_vehicles.end(), std::back_inserter(detected_vehicles), t_to_detected_converter { identifier });
 
         std::cout << "vehicle { identifier: " << identifier << ", position { x: " << std::setw(4) << position.x() << ", y: " << std::setw(4) << position.y() << ", visibility: " << visibility << " }" << " } detected " << detected_vehicles.size() << " vehicles" << std::endl;
 
-        t_entry_holder<t_detected_component>& detected_entry_holder = _game_scene.get_mutable_entry_holder<t_detected_component>();
+        t_entry_holder<t_detected_enemy_component>& detected_entry_holder = _game_scene.get_mutable_entry_holder<t_detected_enemy_component>();
 
         detected_entry_holder.set_components(detected_vehicles);
     }

@@ -5,9 +5,9 @@
 using t_angle_degrees = float;
 
 
-const t_angle_degrees radial_distance(const t_angle_degrees lhs, const t_angle_degrees rhs)
+const t_angle_degrees radial_distance(const t_angle_degrees from, const t_angle_degrees to)
 {
-    return (lhs - rhs);
+    return (from - to);
 }
 
 
@@ -38,6 +38,7 @@ struct t_angular_holder
 
     const t_angle_degrees course {};
 };
+
 
 std::ostream& operator<<(std::ostream& stream, const t_angular_holder& holder)
 {

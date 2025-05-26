@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "systems/t_detecting_enemy_system.hpp"
+#include "systems/t_radio_transmitting_system.hpp"
 
 #include "t_game_database.hpp"
 #include "t_game_scene.hpp"
@@ -78,21 +79,10 @@ void prepare_testable_game_scene(t_game_scene& game_scene)
     vehicle_holder.create_component(identifier_maker());
 }
 
-void veryfy_visibility_distance(t_game_scene& game_scene, const t_identifier_value source, const t_visibility_distance_value visibility_distance, const t_identifier_value enemy)
-{
-    const t_vehicle_position_value source_position = t_get_game_scene_vehicle_position(game_scene, source);
-
-    const t_vehicle_position_value enemy_position = t_get_game_scene_vehicle_position(game_scene, enemy);
-
-    const t_distance_value distance = t_get_distance(source_position, enemy_position);
-
-    REQUIRE(distance < visibility_distance);
-}
-
 
 inline int count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_value identifier)
 {
-    const t_entry_holder<t_detected_component>& holder = game_scene.get_entry_holder<t_detected_component>();
+    const t_entry_holder<t_detected_enemy_component>& holder = game_scene.get_entry_holder<t_detected_enemy_component>();
 
     struct t_count_predicate
     {
@@ -100,7 +90,7 @@ inline int count_game_scene_self_detected(t_game_scene& game_scene, const t_iden
 
         t_identifier_value _identifier {};
 
-        const bool operator()(const t_detected_component& detected) const
+        const bool operator()(const t_detected_enemy_component& detected) const
         {
             return detected._source == _source && detected._detected_by == _identifier;
         }
@@ -118,14 +108,35 @@ TEST_CASE( "testing detecting enemy system", "[systems]" )
 
     t_detecting_enemy_system system { game_scene };
 
-    SECTION( "vehicle { identifier 1 } detects one vehicle { identifier 0 }, vehicle { identifier 2 } does not detect anybody" )
+    SECTION( "vehicles are not existing" )
     {
         system.update(t_frame_delta_time_value {});
 
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 0);
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
+    }
 
+    SECTION( "vehicle { identifier 1 } detects one vehicle { identifier 0 }, vehicle { identifier 2 } does not detect anybody" )
+    {
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 0 }, t_team_value { 0 }, t_vehicle_position_value {   0,   0 }, t_visibility_distance_value { 100 }, t_radio_distance_value { 450 }); // 
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 1 is 300.0
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
+
+        system.update(t_frame_delta_time_value {});
+
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 1);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
+
+        SECTION( "vehicle { identifier 1 } transmits information about vehicle { identifier 0 } to vehicle { identifier 2 }" )
+        {
+            t_radio_transmitting_system system { game_scene };
+        }
+    }
+
+    SECTION( "vehicle { identifier 1 } detects one vehicle { identifier 0 }, vehicle { identifier 2 } does not detect anybody" )
+    {
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 0 }, t_team_value { 0 }, t_vehicle_position_value {   0,   0 }, t_visibility_distance_value { 100 }, t_radio_distance_value { 450 }); // 
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 1 is 300.0
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
