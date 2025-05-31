@@ -35,7 +35,7 @@ add_executable( test_cases_layer
     test_vehicle_entity.cpp
     test_braking_control_system.cpp
     test_detecting_enemy_system.cpp
-    test_double_buffering_team_player_system.cpp
+    test_double_buffering_team_player_lookup_system.cpp
 
     mocks/mock_sound_player.hpp
 )
