@@ -46,7 +46,7 @@ add_library(ecs_layer
     systems/t_braking_distance_system.hpp                               systems/t_braking_distance_system.cpp
     systems/t_braking_control_system.hpp                                systems/t_braking_control_system.cpp
 
-    systems/concepts/t_double_buffering_team_player_holding_system.hpp  systems/concepts/t_double_buffering_team_player_holding_system.cpp
+    systems/concepts/t_double_buffering_team_player_lookup_system.hpp  systems/concepts/t_double_buffering_team_player_lookup_system.cpp
 
     caches/t_rotating_heading_to_course_component.hpp                   caches/t_rotating_heading_to_course_component.cpp
 

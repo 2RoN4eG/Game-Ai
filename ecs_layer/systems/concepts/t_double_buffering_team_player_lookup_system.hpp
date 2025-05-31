@@ -41,7 +41,7 @@ public:
 };
 
 
-class t_double_buffering_team_player_holding_system
+class t_double_buffering_team_player_lookup_system
 {
 public:
     void create_team_player(const t_team_value team, const t_identifier_value identifier)
@@ -132,7 +132,7 @@ struct t_player_sorter
 class t_exit_sorter
 {
 public:
-    t_exit_sorter(t_double_buffering_team_player_holding_system& system)
+    t_exit_sorter(t_double_buffering_team_player_lookup_system& system)
         : _players { system._players }
         , _team_player_holder ( system._team_player_holder )
     {

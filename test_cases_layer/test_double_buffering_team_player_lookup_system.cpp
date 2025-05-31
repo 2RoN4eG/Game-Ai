@@ -1,12 +1,12 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "systems/concepts/t_double_buffering_team_player_holding_system.hpp"
+#include "systems/concepts/t_double_buffering_team_player_lookup_system.hpp"
 
 
-TEST_CASE( "t_double_buffering_team_player_holding_system", "[concepts]" )
+TEST_CASE( "t_double_buffering_team_player_lookup_system", "[concepts]" )
 {
-    t_double_buffering_team_player_holding_system system {};
+    t_double_buffering_team_player_lookup_system system {};
 
     SECTION( "making teams for players" )
     {
