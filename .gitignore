@@ -1,4 +1,8 @@
 
-build/*
+*/build/*
 drawing_layer/Demo/build/*
 drawing_layer/build-*
+build-*/
+build/.cmake/*
+build*/
+*.txt.user

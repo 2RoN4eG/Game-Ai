@@ -21,11 +21,12 @@ TEST_CASE( "testing shell shock effect", "[effects]" )
     const t_speed_limit_value initial { 100 };
     const t_speed_limit_value must_be { 80 };
 
-    REQUIRE(vehicle.get_speed_limit() == initial);
-
     mock_sound_player sound_player;
 
+    SECTION( "applying shell shock effect" )
     {
+        REQUIRE(vehicle.get_speed_limit() == initial);
+
         const t_shell_shock_effect effect { vehicle, sound_player };
 
         const t_identifier_value expected {};

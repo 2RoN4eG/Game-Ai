@@ -11,4 +11,6 @@ add_subdirectory(ecs_layer)
 
 add_subdirectory(test_cases_layer)
 
-add_subdirectory(drawing_layer/Demo)
+add_subdirectory(demo/drawing_layer)
+
+add_subdirectory(demo/demo_brain_for_shooting)
