@@ -21,9 +21,7 @@ public:
     }
 };
 
-
 using t_player_holder = std::vector<t_player>;
-
 
 class t_team_player
 {
@@ -39,7 +37,6 @@ public:
     {
     }
 };
-
 
 class t_double_buffering_team_player_lookup_system
 {
@@ -84,7 +81,6 @@ private:
     friend class t_exit_sorter;
 };
 
-
 struct t_player_comparator
 {
     const bool operator()(const t_player& lhs, const t_player& rhs) const 
@@ -97,7 +93,6 @@ struct t_player_comparator
         return lhs._team < rhs._team;
     }
 };
-
 
 struct t_team_player_finder
 {
@@ -114,7 +109,6 @@ struct t_team_player_finder
     }
 };
 
-
 struct t_player_sorter
 {
     bool operator()(const t_player& lhs, const t_player& rhs) const 
@@ -127,7 +121,6 @@ struct t_player_sorter
         return lhs._identifier < rhs._identifier;
     }
 };
-
 
 class t_exit_sorter
 {

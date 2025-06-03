@@ -10,6 +10,9 @@
 #include <utility>
 
 
+#define CLASS_NAME(T) typeid(T).name()
+
+
 using t_holder_information_printers = std::vector<std::function<void ()>>;
 
 t_holder_information_printers& get_global_holder_information_printers();
@@ -38,6 +41,12 @@ public:
     }
 
     template <typename... t_arguments>
+    t_entry& create_component(t_arguments&&... arguments)
+    {
+        return _container.emplace_back(std::forward<t_arguments>(arguments)...);
+    }
+
+    template <typename... t_arguments>
     t_entry& create_component(const t_go_identifier_value identifier, t_arguments&&... arguments)
     {
         return _container.emplace_back(identifier, std::forward<t_arguments>(arguments)...);
@@ -55,6 +64,16 @@ public:
         throw std::runtime_error { "component_holder does not contain component by component identifier { " + std::to_string(identifier) + " }" };
     }
 
+    t_entry& get_mutable_component()
+    {
+        if (_container.size() != 1)
+        {
+            throw std::runtime_error { "component_holder contains " + std::to_string(_container.size()) + " components, use t_entry& get_mutable_component(const t_go_identifier_value) instead, " + CLASS_NAME(t_entry) };
+        }
+
+        return _container.front();
+    }
+
     const t_entry& get_component(const t_go_identifier_value identifier) const
     {
         t_entry_holder_container_constant_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
@@ -64,7 +83,17 @@ public:
             return *iterator;
         }
 
-        throw std::runtime_error { "component_holder does not contain component by component identifier { " + std::to_string(identifier) + " }" };
+        throw std::runtime_error { "component_holder<> does not contain component by component identifier { " + std::to_string(identifier) + " }" };
+    }
+
+    const t_entry& get_component() const
+    {
+        if (_container.size() != 1)
+        {
+            throw std::runtime_error { "component_holder<> contains " + std::to_string(_container.size()) + " components, use t_entry& get_component(const t_go_identifier_value) instead" };
+        }
+
+        return _container.front();
     }
 
     void set_component(const t_entry& entry)

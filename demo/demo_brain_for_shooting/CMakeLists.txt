@@ -27,6 +27,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(demo_brain_for_shooting
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        t_enemy_spawn_system.hpp t_enemy_spawn_system.cpp
+        t_shooting_game_scene_creator.hpp t_shooting_game_scene_creator.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET demo_brain_for_shooting APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

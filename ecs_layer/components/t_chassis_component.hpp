@@ -56,3 +56,8 @@ private:
 private:
     friend void t_set_chassis_speed(t_chassis_component& chassis, const t_speed_value speed);
 };
+
+inline std::string_view get_descriptor(const t_chassis_component&)
+{
+    return "t_chassis_component";
+}

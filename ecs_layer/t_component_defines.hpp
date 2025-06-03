@@ -283,3 +283,5 @@ using t_frame_per_second_value      = t_time_second_value;
 
 
 using t_team_value                  = t_integer_value;
+
+using t_health_points_value         = t_integer_value;

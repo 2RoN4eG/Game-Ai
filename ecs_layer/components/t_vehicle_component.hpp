@@ -12,9 +12,6 @@ class t_engine_component;
 class t_gun_component;
 
 
-using t_health_points_value = size_t;
-
-
 class t_vehicle_component
 {
 public:

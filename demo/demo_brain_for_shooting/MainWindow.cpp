@@ -10,11 +10,18 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , startPoint { width() / 2, height() }
-    , _enemy {}
+    , _random_area_size { width(), height() / 2 }
+    , _game_scene_creator { _game_scene }
+    , _spawn_system { _game_scene, _random_area_size.width(), _random_area_size.height() }
+    , _brain_system { _game_scene }
+    , _player { t_shooting_game_scene_get_mutable_context<t_player_context>(_game_scene) }
+    , _enemy { t_shooting_game_scene_get_mutable_context<t_enemy_context>(_game_scene) }
+    , _weapon { t_shooting_game_scene_get_mutable_context<t_weapon_context>(_game_scene) }
+    , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
+    , _rotation { t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene) }
 {
     ui->setupUi(this);
 
-    setMouseTracking(true);
     connect(&timer, &QTimer::timeout, this, &MainWindow::updateRotation);
 
     qDebug() << "run timer on " << (1000 / 60);
@@ -22,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     timer.start(1000 / 60); // Примерно 60 FPS (каждые ~16 мс)
 
     qDebug() << "main window size is " << size() << ", start position is " << startPoint;
+
+    _spawn_system.set_ramdom_area_size(width(), height() / 2);
 }
 
 MainWindow::~MainWindow()
@@ -45,24 +54,14 @@ void MainWindow::paintEvent(QPaintEvent*)
     painter.setPen(QPen(Qt::black, 3));
 
     // Вычисление конечной точки на основе heading
+
     QPointF endPoint
     (
-        startPoint.x() + line_length * std::cos(_rotation_context.heading * M_PI / 180),
-        startPoint.y() + line_length * std::sin(_rotation_context.heading * M_PI / 180)
+        startPoint.x() + line_length * std::cos(_rotation._heading * M_PI / 180.),
+        startPoint.y() + line_length * std::sin(_rotation._heading * M_PI / 180.)
     );
 
     painter.drawLine(startPoint, endPoint);
-}
-
-void MainWindow::mouseMoveEvent(QMouseEvent* event)
-{
-    // Вычисление целевого угла (course) к курсору
-
-    qDebug() << "mouse move event on possiotion " << event->pos();
-
-    const QPointF targetVector = event->pos() - startPoint;
-
-    _rotation_context.course = std::atan2(targetVector.y(), targetVector.x()) * 180.0 / M_PI;
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -73,6 +72,8 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
     _random_area_size = { width(), height() / 2 };
 
+    _spawn_system.set_ramdom_area_size(width(), height() / 2);
+
     // qDebug() << "main window size is " << size() << ", start position is " << startPoint;
 }
 
@@ -80,41 +81,24 @@ void MainWindow::updateRotation()
 {
     // Передаем ~16 мс (0.016 секунд) как deltaTime
 
+    _spawn_system.update(_delta_time);
+
     t_moving_system_updater(g_moving_context_holder, _delta_time);
 
-    t_rotation_system_updater(_rotation_context, _delta_time);
+    t_rotation_system_updater(_rotation, _delta_time);
+
+    _brain_system.update(_delta_time);
 
     update();
 
-    t_ai_system_updater(_delta_time);
-
-    if (t_is_course_reached(_rotation_context) == false)
-    {
-        return;
-    }
-
     if (t_is_alive(_enemy))
     {
-        t_shooting_game_scene game_scene {};
-
-        t_shooting_system_updater(game_scene, _weapon, _delta_time);
-
-        const float damage { 100.f / 5.f * _delta_time };
-
-        // qDebug() << "damage is " << damage << ", frames require " << (_enemy.health_points / damage);
-
-        _enemy.health_points -= damage;
-
         return;
     }
-
-    _enemy = t_get_random_enemy(0, _random_area_size.width(), 0, _random_area_size.height());
 
     // g_ui_events.emplace_back("enemy is created on possition " + std::to_string(_enemy.x) + ", " + std::to_string(_enemy.y));
 
     const QPointF targetVector = QPointF(_enemy.position.x(), _enemy.position.y()) - startPoint;
 
-    _rotation_context.course = std::atan2(targetVector.y(), targetVector.x()) * 180.0 / M_PI;
-
-
+    _rotation._course = std::atan2(targetVector.y(), targetVector.x()) * 180.0 / M_PI;
 }
