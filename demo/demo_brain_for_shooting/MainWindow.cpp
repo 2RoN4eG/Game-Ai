@@ -3,34 +3,38 @@
 
 #include "../../ecs_layer/t_game_scene.hpp"
 
+
 #include "t_shooting_game_scene.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , startPoint { width() / 2, height() }
-    , _random_area_size { width(), height() / 2 }
-    , _game_scene_creator { _game_scene }
-    , _spawn_system { _game_scene, _random_area_size.width(), _random_area_size.height() }
+    , _game_scene_creator { _game_scene }   // creates
+    , _projectile_collision_system { _game_scene }
+    , _drawable_weapon_locating_system { _game_scene }
+    , _spawn_system { _game_scene }
     , _brain_system { _game_scene }
-    , _player { t_shooting_game_scene_get_mutable_context<t_player_context>(_game_scene) }
-    , _enemy { t_shooting_game_scene_get_mutable_context<t_enemy_context>(_game_scene) }
-    , _weapon { t_shooting_game_scene_get_mutable_context<t_weapon_context>(_game_scene) }
-    , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
     , _rotation { t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene) }
+    , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
 {
     ui->setupUi(this);
 
-    connect(&timer, &QTimer::timeout, this, &MainWindow::updateRotation);
+    const t_random_area_size width            = MainWindow::width();
+    const t_random_area_size half_of_width    = MainWindow::width() / 2;
+
+    const t_random_area_size height           = MainWindow::height();
+    const t_random_area_size half_of_height   = MainWindow::height() / 2;
+
+    _spawn_system.on_game_scene_size_changed(width, half_of_height);
+
+    _drawable_weapon_locating_system.on_game_scene_size_changed(half_of_width, height);
+
+    connect(&timer, &QTimer::timeout, this, &MainWindow::update_systems);
 
     qDebug() << "run timer on " << (1000 / 60);
 
     timer.start(1000 / 60); // Примерно 60 FPS (каждые ~16 мс)
-
-    qDebug() << "main window size is " << size() << ", start position is " << startPoint;
-
-    _spawn_system.set_ramdom_area_size(width(), height() / 2);
 }
 
 MainWindow::~MainWindow()
@@ -45,41 +49,44 @@ void MainWindow::paintEvent(QPaintEvent*)
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.setBrush(Qt::yellow);
-    painter.drawRect(QRect { 0, 0, _random_area_size.width(), _random_area_size.height() });
+    painter.drawRect(0, 0, _spawn_system.width(), _spawn_system.height());
 
     painter.setPen(QPen(Qt::black, 7));
 
-    painter.drawPoint(QPointF { _enemy.position.x(), _enemy.position.y() });
+    t_enemy_context& _enemy = t_shooting_game_scene_get_mutable_context<t_enemy_context>(_game_scene);
 
+    painter.drawPoint(_enemy.position.x(), _enemy.position.y());
     painter.setPen(QPen(Qt::black, 3));
 
     // Вычисление конечной точки на основе heading
 
-    QPointF endPoint
-    (
-        startPoint.x() + line_length * std::cos(_rotation._heading * M_PI / 180.),
-        startPoint.y() + line_length * std::sin(_rotation._heading * M_PI / 180.)
-    );
+    const t_position_context& since = _drawable_weapon.position;
 
-    painter.drawLine(startPoint, endPoint);
+    const t_position_context till = get_rotated_length_point(_drawable_weapon, _rotation);
+
+    painter.drawLine(since.x(), since.y(), till.x(), till.y());
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
-    // qDebug() << "resize event contains size " << event->size();
+    qDebug() << "MainWindow new size is " << event->size();
 
-    startPoint = { width() / 2, height() };
+    const t_axis_value width            = MainWindow::width();
+    const t_axis_value half_of_width    = MainWindow::width() / 2;
 
-    _random_area_size = { width(), height() / 2 };
+    const t_axis_value height           = MainWindow::height();
+    const t_axis_value half_of_height   = MainWindow::height() / 2;
 
-    _spawn_system.set_ramdom_area_size(width(), height() / 2);
+    _spawn_system.on_game_scene_size_changed(width, half_of_height);
 
-    // qDebug() << "main window size is " << size() << ", start position is " << startPoint;
+    _drawable_weapon_locating_system.on_game_scene_size_changed(half_of_width, height);
 }
 
-void MainWindow::updateRotation()
+void MainWindow::update_systems()
 {
     // Передаем ~16 мс (0.016 секунд) как deltaTime
+
+    _projectile_collision_system.update(_delta_time);
 
     _spawn_system.update(_delta_time);
 
@@ -91,14 +98,11 @@ void MainWindow::updateRotation()
 
     update();
 
-    if (t_is_alive(_enemy))
+    const t_enemy_context& enemy = t_shooting_game_scene_get_context<t_enemy_context>(_game_scene);
+    if (t_is_alive(enemy))
     {
         return;
     }
 
     // g_ui_events.emplace_back("enemy is created on possition " + std::to_string(_enemy.x) + ", " + std::to_string(_enemy.y));
-
-    const QPointF targetVector = QPointF(_enemy.position.x(), _enemy.position.y()) - startPoint;
-
-    _rotation._course = std::atan2(targetVector.y(), targetVector.x()) * 180.0 / M_PI;
 }

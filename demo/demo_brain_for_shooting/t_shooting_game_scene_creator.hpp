@@ -1,6 +1,9 @@
 #ifndef T_SHOOTING_GAME_SCENE_CREATOR_HPP
 #define T_SHOOTING_GAME_SCENE_CREATOR_HPP
 
+#include "t_component_contexts_and_systems.hpp"
+
+
 class t_shooting_game_scene;
 
 

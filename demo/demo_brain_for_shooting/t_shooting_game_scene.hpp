@@ -15,46 +15,19 @@ class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
 {
 };
 
+
 template <typename t_context>
 inline t_context& t_shooting_game_scene_get_mutable_context(t_shooting_game_scene& game_scene)
 {
-    t_entry_holder<t_context>& enemy_holder = game_scene.get_mutable_entry_holder<t_context>();
+    t_entry_holder<t_context>& entry_holder = game_scene.get_mutable_entry_holder<t_context>();
 
-    return enemy_holder.get_mutable_component();
+    return entry_holder.get_mutable_component();
 }
 
-
-inline t_rotation_context& t_shooting_game_scene_get_rotation_context(t_shooting_game_scene& game_scene)
+template <typename t_context>
+inline const t_context& t_shooting_game_scene_get_context(const t_shooting_game_scene& game_scene)
 {
-    t_entry_holder<t_rotation_context>& rotation_holder = game_scene.get_mutable_entry_holder<t_rotation_context>();
+    const t_entry_holder<t_context>& entry_holder = game_scene.get_entry_holder<t_context>();
 
-    return rotation_holder.get_mutable_component();
-}
-
-inline t_enemy_context& t_shooting_game_scene_get_mutable_enemy_context(t_shooting_game_scene& game_scene)
-{
-    t_entry_holder<t_enemy_context>& enemy_holder = game_scene.get_mutable_entry_holder<t_enemy_context>();
-
-    return enemy_holder.get_mutable_component();
-}
-
-inline t_weapon_context& t_shooting_game_scene_get_mutable_weapon_context(t_shooting_game_scene& game_scene)
-{
-    t_entry_holder<t_weapon_context>& weapon_holder = game_scene.get_mutable_entry_holder<t_weapon_context>();
-
-    return weapon_holder.get_mutable_component();
-}
-
-inline const t_weapon_context& t_shooting_game_scene_get_weapon_context(t_shooting_game_scene& game_scene)
-{
-    const t_entry_holder<t_weapon_context>& weapon_holder = game_scene.get_entry_holder<t_weapon_context>();
-
-    return weapon_holder.get_component();
-}
-
-inline t_rotation_context& t_shooting_game_scene_get_mutable_rotation_context(t_shooting_game_scene& game_scene)
-{
-    t_entry_holder<t_rotation_context>& rotation_holder = game_scene.get_mutable_entry_holder<t_rotation_context>();
-
-    return rotation_holder.get_mutable_component();
+    return entry_holder.get_component();
 }

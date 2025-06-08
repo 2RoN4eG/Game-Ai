@@ -25,6 +25,11 @@ bool t_is_alive(const t_enemy_context& context)
     return context.health_points > 0;
 }
 
+bool t_is_dead(const t_enemy_context& context)
+{
+    return context.health_points == 0;
+}
+
 bool t_is_weapon_reloading(const t_weapon_context& context)
 {
     return context.cooldown_time > 0.;
@@ -33,8 +38,11 @@ bool t_is_weapon_reloading(const t_weapon_context& context)
 inline t_position_context get_rotated_gun_position(const t_drawable_weapon_context& gun, const t_rotation_context& rotation)
 {
     const t_position_context gun_position = gun.position;
+
     const t_axis_value       gun_length   = gun.length;
     const t_axis_value       gun_heading  = rotation._heading;
+
+    // TODO: Replace gun_position.x/y() + gun_length * std::cos/std::sin(gun_heading * M_PI / 180.f)
 
     const t_axis_value       end_of_gun_x = gun_position.x() + gun_length * std::cos(gun_heading * M_PI / 180.f);
     const t_axis_value       end_of_gun_y = gun_position.y() + gun_length * std::sin(gun_heading * M_PI / 180.f);
@@ -109,6 +117,16 @@ void t_moving_system_updater(t_moving_context_holder& holder, const float delta)
     }
 }
 
+void t_projectile_moving_system_updater(t_moving_context_holder& holder, const float delta)
+{
+    for (t_moving_context& context : holder)
+    {
+        const t_velocity_context step = context.velocity * delta;
+
+        context.position = context.position + step;
+    }
+}
+
 void t_weapon_cooldown_runner(t_weapon_context& weapon)
 {
     weapon.cooldown_time = weapon.reloading_time;
@@ -134,24 +152,24 @@ void t_projectile_collision_system_updater(t_shooting_game_scene& game_scene, co
 
     const t_position_context& enemy_position = enemy.position;
 
-    const t_size_context& enemy_size = enemy.size;
+    // const t_size_context& enemy_size = enemy.size;
 
-    const t_2d_vector_axis_value x_lhs { enemy_position.x() - enemy_size.width / 2 };
+    // const t_2d_vector_axis_value x_lhs { enemy_position.x() - enemy_size.width() / 2 };
 
-    const t_2d_vector_axis_value x_rhs { enemy_position.x() + enemy_size.width / 2 };
+    // const t_2d_vector_axis_value x_rhs { enemy_position.x() + enemy_size.width() / 2 };
 
-    const t_2d_vector_axis_value y_lhs { enemy_position.y() - enemy_size.height / 2 };
+    // const t_2d_vector_axis_value y_lhs { enemy_position.y() - enemy_size.height() / 2 };
 
-    const t_2d_vector_axis_value y_rhs { enemy_position.y() + enemy_size.height / 2 };
+    // const t_2d_vector_axis_value y_rhs { enemy_position.y() + enemy_size.height() / 2 };
 
     for (const t_projectile_context& projectile : g_projectile_context_holder)
     {
         const t_position_context& projectile_position = projectile._position;
 
-        const bool has_collided {
-            projectile_position.x() >= x_lhs && projectile_position.x() <= x_rhs && 
-            projectile_position.y() >= y_lhs && projectile_position.y() <= y_rhs
-        };
+        // const bool has_collided {
+        //     projectile_position.x() >= x_lhs && projectile_position.x() <= x_rhs &&
+        //     projectile_position.y() >= y_lhs && projectile_position.y() <= y_rhs
+        // };
     }
 }
 

@@ -14,21 +14,22 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        MainWindow.cpp
-        MainWindow.h
+        MainWindow.cpp MainWindow.h
         MainWindow.ui
 
-        t_ai_shooting_brain_system.hpp          t_ai_shooting_brain_system.cpp
+        t_shooting_ai_brain_system.hpp          t_shooting_ai_brain_system.cpp
         t_component_contexts_and_systems.hpp    t_component_contexts_and_systems.cpp
         t_shooting_game_scene.hpp               t_shooting_game_scene.cpp
+        t_enemy_spawn_system.hpp                t_enemy_spawn_system.cpp
+        t_shooting_game_scene_creator.hpp       t_shooting_game_scene_creator.cpp
+        t_drawable_weapon_locating_system.hpp   t_drawable_weapon_locating_system.cpp
+        t_projectile_collision_system.hpp       t_projectile_collision_system.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(demo_brain_for_shooting
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        t_enemy_spawn_system.hpp t_enemy_spawn_system.cpp
-        t_shooting_game_scene_creator.hpp t_shooting_game_scene_creator.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET demo_brain_for_shooting APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

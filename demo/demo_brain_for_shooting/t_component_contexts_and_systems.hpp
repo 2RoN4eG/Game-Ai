@@ -20,6 +20,10 @@ using t_velocity_context            = t_2d_vector_value;
 
 using t_heat_damage                 = t_floating_value;
 
+using t_radius_value                = t_floating_value;
+
+using t_collision_radius            = t_radius_value;
+
 using t_projectile_identifier_value = t_identifier_value;
 
 using t_weapon_identifier_value     = t_identifier_value;
@@ -67,14 +71,14 @@ struct t_player_context
 
 struct t_size_context
 {
-    t_2d_vector_axis_value width {};
+    t_2d_vector_axis_value _width {};
 
-    t_2d_vector_axis_value height {};
+    t_2d_vector_axis_value _height {};
 
 
     t_size_context(const t_2d_vector_axis_value width, const t_2d_vector_axis_value height)
-        : width { width }
-        , height { height }
+        : _width { width }
+        , _height { height }
     {
     }
 
@@ -83,11 +87,23 @@ struct t_size_context
     {
     }
 
+    const t_2d_vector_axis_value width() const
+    {
+        return _width;
+    }
+
+    const t_2d_vector_axis_value height() const
+    {
+        return _height;
+    }
+
     static t_context_descriptor get_description()
     {
         return "t_size_context";
     }
 };
+
+using t_game_scene_size_context = t_size_context;
 
 struct t_enemy_context
 {
@@ -95,19 +111,22 @@ struct t_enemy_context
 
     t_position_context      position {};
 
-    t_size_context          size {};
-
 
     t_enemy_context(const t_long_value health_points, const t_axis_value x, const t_axis_value y)
         : health_points { health_points }
         , position { x, y }
-        , size {}
     {
         std::cout << "enemy was spawned on position x: " << x << ", y: " << y << ", health points: " << health_points << std::endl;
     }
 
     t_enemy_context()
         : t_enemy_context { {}, {}, {} }
+    {
+        std::cout << "enemy was spawned on position x: " << position.x() << ", y: " << position.y() << ", health points: " << health_points << std::endl;
+    }
+
+    t_enemy_context(const t_long_value health_points)
+        : t_enemy_context { health_points, t_axis_value {}, t_axis_value {} }
     {
         std::cout << "enemy was spawned on position x: " << position.x() << ", y: " << position.y() << ", health points: " << health_points << std::endl;
     }
@@ -149,9 +168,25 @@ struct t_drawable_weapon_context
     t_position_context position {};
 
     t_axis_value length { 50.0 }; // Длина линии
+
+    t_drawable_weapon_context(const t_position_context& position)
+        : position { position }
+        , length { 50.0 }
+    {
+    }
+
+    t_drawable_weapon_context()
+        : t_drawable_weapon_context { {} }
+    {
+    }
 };
 
-inline t_position_context get_end_position(const t_drawable_weapon_context& drawable_weapon, const t_rotation_context& rotation)
+inline void set_drawable_weapon_position(t_drawable_weapon_context& drawable_weapon, const t_position_context& position)
+{
+    drawable_weapon.position = position;
+}
+
+inline t_position_context get_rotated_length_point(const t_drawable_weapon_context& drawable_weapon, const t_rotation_context& rotation)
 {
     const t_position_context& position = drawable_weapon.position;
     const t_axis_value& length = drawable_weapon.length;
@@ -170,8 +205,8 @@ struct t_projectile_context
 
     t_heat_damage                   _heat_damage {};
 
-    // collision radius
-    int                             _radius {};
+    //
+    t_collision_radius              _radius {};
 
     //
     t_position_context              _position {};
@@ -182,7 +217,7 @@ struct t_projectile_context
 
     t_projectile_context(const t_projectile_identifier_value identifier,
                          const t_heat_damage heat_damage,
-                         const int radius,
+                         const t_radians_value radius,
                          const t_position_context position,
                          const t_velocity_context velocity)
         : _identifier { identifier }
@@ -214,11 +249,14 @@ struct t_weapon_context
 
     const t_heat_damage         heat_damage { 60 };         // _per_shot
 
+    const t_speed_value         projectile_speed { 20 };    //
+
 
     t_weapon_context()
         : reloading_time { 10. }
         , cooldown_time {}
         , heat_damage { 60 }
+        , projectile_speed { 20 }
     {
     }
 
@@ -242,6 +280,8 @@ extern t_projectile_context_holder  g_projectile_context_holder;
 t_position_context get_gun_context(t_drawable_weapon_context& gun);
 
 bool t_is_alive(const t_enemy_context& context);
+
+bool t_is_dead(const t_enemy_context& context);
 
 t_enemy_context t_get_random_enemy(int x_range_minimum, int x_ramge_maximum, int y_range_minimum, int y_ramge_maximum);
 

@@ -27,9 +27,9 @@ t_shooting_game_scene_creator::t_shooting_game_scene_creator(t_shooting_game_sce
 
     t_shooting_game_scene_create_context<t_weapon_context>(game_scene);
 
-    t_shooting_game_scene_create_context<t_enemy_context>(game_scene);
-
     // ui contexts
 
     t_shooting_game_scene_create_context<t_drawable_weapon_context>(game_scene);
+
+    t_shooting_game_scene_create_context<t_enemy_context>(game_scene, t_health_points_value {});
 }

@@ -9,10 +9,12 @@
 #include <cmath>
 
 #include "t_component_contexts_and_systems.hpp"
-#include "t_ai_shooting_brain_system.hpp"
+#include "t_shooting_ai_brain_system.hpp"
 #include "t_shooting_game_scene.hpp"
 #include "t_enemy_spawn_system.hpp"
 #include "t_shooting_game_scene_creator.hpp"
+#include "t_drawable_weapon_locating_system.hpp"
+#include "t_projectile_collision_system.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -28,16 +30,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private:
-    QPoint startPoint; // Фиксированная начальная точка
-
     const t_axis_value line_length { 50.0 }; // Длина линии
 
-
-    t_drawable_weapon_context _gun_context {};
-
     QTimer timer;
-
-    QSize _random_area_size {};
 
     t_axis_value _delta_time { 1. / 60. };
 
@@ -45,19 +40,17 @@ private:
 
     t_shooting_game_scene_creator _game_scene_creator;
 
-    t_player_context& _player;
+    t_projectile_collision_system _projectile_collision_system;
 
-    t_enemy_context& _enemy;
-
-    t_weapon_context& _weapon;
-
-    t_drawable_weapon_context& _drawable_weapon;
+    t_drawable_weapon_locating_system _drawable_weapon_locating_system;
 
     t_rotation_context& _rotation;
 
+    t_drawable_weapon_context& _drawable_weapon;
+
     t_enemy_spawn_system _spawn_system;
 
-    t_ai_shooting_brain_system _brain_system;
+    t_shooting_ai_brain_system _brain_system;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -69,7 +62,7 @@ protected:
     void resizeEvent(QResizeEvent*) override;
 
 private slots:
-    void updateRotation();
+    void update_systems();
 
 private:
     Ui::MainWindow *ui;
