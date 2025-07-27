@@ -13,4 +13,4 @@ add_subdirectory(test_cases_layer)
 
 add_subdirectory(demo/drawing_layer)
 
-add_subdirectory(demo/demo_brain_for_shooting)
+add_subdirectory(demo/demo_shooting_brain)

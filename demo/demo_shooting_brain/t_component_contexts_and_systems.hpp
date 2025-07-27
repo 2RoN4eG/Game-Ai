@@ -24,9 +24,9 @@ using t_radius_value                = t_floating_value;
 
 using t_collision_radius            = t_radius_value;
 
-using t_projectile_identifier_value = t_identifier_value;
+using t_projectile_identifier_value = t_go_identifier_value;
 
-using t_weapon_identifier_value     = t_identifier_value;
+using t_weapon_identifier_value     = t_go_identifier_value;
 
 using t_integral_value              = t_long_value;
 

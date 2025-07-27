@@ -14,15 +14,17 @@ void t_projectile_collision_system::update(const t_update_delta_time delta_time)
 
     const t_entry_holder<t_projectile_context>& projectile_holder = _game_scene.get_entry_holder<t_projectile_context>();
 
-    if (projectile_holder.amount())
-    {
-        std::cout << "holder contains " << projectile_holder.amount() << " projectiles" << std::endl;
-    }
+    // if (projectile_holder.amount())
+    // {
+    //     std::cout << "holder contains " << projectile_holder.amount() << " projectiles" << std::endl;
+    // }
 
     const t_position_context& enemy_position = enemy.position;
 
     for (const t_projectile_context& projectile : projectile_holder)
     {
+        // TODO: Подумать не стоит ли оперировать сразу итераторами внутри данного цикла?
+
         const t_position_context& projectile_position = projectile._position;
 
         const t_distance_value distance = t_get_distance(enemy_position, projectile_position);
@@ -34,6 +36,12 @@ void t_projectile_collision_system::update(const t_update_delta_time delta_time)
             continue;
         }
 
-        std::cout << "projectile { identifier } hits enemy { identifier }, distance is " << distance << ", radius is " << radius << std::endl;
+        // std::cout << "projectile { identifier } hits enemy { identifier }, distance is " << distance << ", radius is " << radius << std::endl;
+
+        t_entry_holder<t_remove_projectile_event>& remove_projectile_event_holder = _game_scene.get_mutable_entry_holder<t_remove_projectile_event>();
+
+        remove_projectile_event_holder.create_component(projectile._identifier);
+
+        std::cout << "remove_projectile_event_holder amount is " << remove_projectile_event_holder.amount() << std::endl;
     }
 }

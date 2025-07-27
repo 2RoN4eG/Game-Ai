@@ -15,6 +15,8 @@
 #include "t_shooting_game_scene_creator.hpp"
 #include "t_drawable_weapon_locating_system.hpp"
 #include "t_projectile_collision_system.hpp"
+#include "t_projectile_moving_system.hpp"
+#include "t_removing_projectile_system.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -36,21 +38,25 @@ private:
 
     t_axis_value _delta_time { 1. / 60. };
 
-    t_shooting_game_scene _game_scene;
+    t_shooting_game_scene               _game_scene;
 
-    t_shooting_game_scene_creator _game_scene_creator;
+    t_shooting_game_scene_creator       _game_scene_creator;
 
-    t_projectile_collision_system _projectile_collision_system;
+    t_projectile_moving_system          _projectile_moving_system;
 
-    t_drawable_weapon_locating_system _drawable_weapon_locating_system;
+    t_projectile_collision_system       _projectile_collision_system;
 
-    t_rotation_context& _rotation;
+    t_drawable_weapon_locating_system   _drawable_weapon_locating_system;
 
-    t_drawable_weapon_context& _drawable_weapon;
+    t_rotation_context&                 _rotation;
 
-    t_enemy_spawn_system _spawn_system;
+    t_drawable_weapon_context&          _drawable_weapon;
 
-    t_shooting_ai_brain_system _brain_system;
+    t_enemy_spawn_system                _enemy_spawn_system;
+
+    t_shooting_ai_brain_system          _shooting_ai_brain_system;
+
+    t_removing_projectile_system        _removing_projectile_system;
 
 public:
     MainWindow(QWidget *parent = nullptr);

@@ -116,9 +116,16 @@ public:
         return to_container;
     }
 
+
+
     const size_t amount() const
     {
         return _container.size();
+    }
+
+    const size_t size() const
+    {
+        return amount();
     }
 
     void print_debug_information() const

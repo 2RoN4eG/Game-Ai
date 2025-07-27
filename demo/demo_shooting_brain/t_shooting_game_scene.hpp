@@ -3,6 +3,7 @@
 #include "../../ecs_layer/t_entry_holder_aggregator.hpp"
 
 #include "t_component_contexts_and_systems.hpp"
+#include "t_remove_projectile_event.hpp"
 
 
 class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
@@ -11,7 +12,8 @@ class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
                                                                t_rotation_context,
                                                                t_projectile_context,
                                                                t_player_context,
-                                                               t_drawable_weapon_context>
+                                                               t_drawable_weapon_context,
+                                                               t_remove_projectile_event>
 {
 };
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(demo_brain_for_shooting VERSION 0.1 LANGUAGES CXX)
+project(demo_shooting_brain VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -24,42 +24,45 @@ set(PROJECT_SOURCES
         t_shooting_game_scene_creator.hpp       t_shooting_game_scene_creator.cpp
         t_drawable_weapon_locating_system.hpp   t_drawable_weapon_locating_system.cpp
         t_projectile_collision_system.hpp       t_projectile_collision_system.cpp
+        t_projectile_moving_system.hpp          t_projectile_moving_system.cpp
+        t_remove_projectile_event.hpp           t_remove_projectile_event.cpp
+        t_removing_projectile_system.hpp        t_removing_projectile_system.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(demo_brain_for_shooting
+    qt_add_executable(demo_shooting_brain
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET demo_brain_for_shooting APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET demo_shooting_brain APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(demo_brain_for_shooting SHARED
+        add_library(demo_shooting_brain SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(demo_brain_for_shooting
+        add_executable(demo_shooting_brain
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(demo_brain_for_shooting PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(demo_brain_for_shooting PRIVATE ecs_layer ai_layer)
+target_link_libraries(demo_shooting_brain PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(demo_shooting_brain PRIVATE ecs_layer ai_layer)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.demo_brain_for_shooting)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.demo_shooting_brain)
 endif()
 
-set_target_properties(demo_brain_for_shooting PROPERTIES
+set_target_properties(demo_shooting_brain PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -68,12 +71,12 @@ set_target_properties(demo_brain_for_shooting PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS demo_brain_for_shooting
+install(TARGETS demo_shooting_brain
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(demo_brain_for_shooting)
+    qt_finalize_executable(demo_shooting_brain)
 endif()

@@ -29,6 +29,7 @@ namespace
         return restricted_value;
     }
 
+
     class t_setting_course_to_enemy_subsystem
     {
     public:
@@ -51,7 +52,9 @@ namespace
 
             t_rotation_context& rotation = t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene);
 
-            rotation._course = std::atan2(target.y(), target.x()) * 180.0 / M_PI;
+            t_floating_value& enemy_course = rotation._course;
+
+            enemy_course = std::atan2(target.y(), target.x()) * 180.0 / M_PI;
         }
 
     private:

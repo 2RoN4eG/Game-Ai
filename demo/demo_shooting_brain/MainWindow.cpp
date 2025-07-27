@@ -5,16 +5,19 @@
 
 
 #include "t_shooting_game_scene.hpp"
+#include "t_removing_projectile_system.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , _game_scene_creator { _game_scene }   // creates
-    , _projectile_collision_system { _game_scene }
-    , _drawable_weapon_locating_system { _game_scene }
-    , _spawn_system { _game_scene }
-    , _brain_system { _game_scene }
+    , _game_scene_creator { _game_scene }               // creates
+    , _projectile_moving_system { _game_scene }         //
+    , _projectile_collision_system { _game_scene }      //
+    , _drawable_weapon_locating_system { _game_scene }  //
+    , _enemy_spawn_system { _game_scene }               //
+    , _shooting_ai_brain_system { _game_scene }         //
+    , _removing_projectile_system { _game_scene }       //
     , _rotation { t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene) }
     , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
 {
@@ -26,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     const t_random_area_size height           = MainWindow::height();
     const t_random_area_size half_of_height   = MainWindow::height() / 2;
 
-    _spawn_system.on_game_scene_size_changed(width, half_of_height);
+    _enemy_spawn_system.on_game_scene_size_changed(width, half_of_height);
 
     _drawable_weapon_locating_system.on_game_scene_size_changed(half_of_width, height);
 
@@ -49,7 +52,7 @@ void MainWindow::paintEvent(QPaintEvent*)
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.setBrush(Qt::yellow);
-    painter.drawRect(0, 0, _spawn_system.width(), _spawn_system.height());
+    painter.drawRect(0, 0, _enemy_spawn_system.width(), _enemy_spawn_system.height());
 
     painter.setPen(QPen(Qt::black, 7));
 
@@ -65,6 +68,8 @@ void MainWindow::paintEvent(QPaintEvent*)
     const t_position_context till = get_rotated_length_point(_drawable_weapon, _rotation);
 
     painter.drawLine(since.x(), since.y(), till.x(), till.y());
+
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -77,7 +82,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     const t_axis_value height           = MainWindow::height();
     const t_axis_value half_of_height   = MainWindow::height() / 2;
 
-    _spawn_system.on_game_scene_size_changed(width, half_of_height);
+    _enemy_spawn_system.on_game_scene_size_changed(width, half_of_height);
 
     _drawable_weapon_locating_system.on_game_scene_size_changed(half_of_width, height);
 }
@@ -86,23 +91,21 @@ void MainWindow::update_systems()
 {
     // Передаем ~16 мс (0.016 секунд) как deltaTime
 
+    _projectile_moving_system.update(_delta_time);
+
     _projectile_collision_system.update(_delta_time);
 
-    _spawn_system.update(_delta_time);
+    _enemy_spawn_system.update(_delta_time);
+
+    // t_game_scene_deleting_system system {};
 
     t_moving_system_updater(g_moving_context_holder, _delta_time);
 
     t_rotation_system_updater(_rotation, _delta_time);
 
-    _brain_system.update(_delta_time);
+    _shooting_ai_brain_system.update(_delta_time);
+
+    // _removing_projectile_system.update(_delta_time);
 
     update();
-
-    const t_enemy_context& enemy = t_shooting_game_scene_get_context<t_enemy_context>(_game_scene);
-    if (t_is_alive(enemy))
-    {
-        return;
-    }
-
-    // g_ui_events.emplace_back("enemy is created on possition " + std::to_string(_enemy.x) + ", " + std::to_string(_enemy.y));
 }

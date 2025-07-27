@@ -63,25 +63,25 @@ void t_shooting_ai_brain_system::update(const t_update_delta_time delta_time)
 
     const t_position_context& distance = enemy_position - projectile_position;
 
-    std::cout << "distance is " << distance.x() << ", " << distance.y() << std::endl;
+    // std::cout << "distance is " << distance.x() << ", " << distance.y() << std::endl;
 
     const t_position_context& normilized = t_normilize_vector(distance);
 
-    std::cout << "normilized is " << normilized.x() << ", " << normilized.y() << std::endl;
+    // std::cout << "normilized is " << normilized.x() << ", " << normilized.y() << std::endl;
 
     const t_speed_value projectile_speed = _weapon_context.projectile_speed;
 
-    const t_position_context& velocity = normilized * projectile_speed;
+    const t_position_context& projectile_velocity = normilized * projectile_speed;
 
-    std::cout << "velocity is " << velocity.x() << ", " << velocity.y() << std::endl;
+    // std::cout << "velocity is " << projectile_velocity.x() << ", " << projectile_velocity.y() << std::endl;
 
     const t_collision_radius collision_radius { 5 };
 
     t_entry_holder<t_projectile_context>& projectile_holder = _game_scene.get_mutable_entry_holder<t_projectile_context>();
 
-    projectile_holder.create_component(t_projectile_identifier_value {}, _weapon_context.heat_damage, collision_radius, projectile_position, t_velocity_context {});
+    projectile_holder.create_component(t_projectile_identifier_value {}, _weapon_context.heat_damage, collision_radius, projectile_position, projectile_velocity);
 
-    std::cout << "[brain] projectiles amount is " << projectile_holder.amount() << std::endl;
+    // std::cout << "[brain] projectiles amount is " << projectile_holder.amount() << std::endl;
 
     t_weapon_cooldown_runner(_weapon_context);
 }
