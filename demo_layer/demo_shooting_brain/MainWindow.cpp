@@ -35,8 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(&timer, &QTimer::timeout, this, &MainWindow::update_systems);
 
-    qDebug() << "run timer on " << (1000 / 60);
-
     timer.start(1000 / 60); // Примерно 60 FPS (каждые ~16 мс)
 }
 
@@ -64,12 +62,9 @@ void MainWindow::paintEvent(QPaintEvent*)
     // Вычисление конечной точки на основе heading
 
     const t_position_context& since = _drawable_weapon.position;
-
     const t_position_context till = get_rotated_length_point(_drawable_weapon, _rotation);
 
     painter.drawLine(since.x(), since.y(), till.x(), till.y());
-
-
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -85,6 +80,8 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     _enemy_spawn_system.on_game_scene_size_changed(width, half_of_height);
 
     _drawable_weapon_locating_system.on_game_scene_size_changed(half_of_width, height);
+
+    // TODO: Вычислить новую линию (орудие), новую точку врага, новую зону появления врага
 }
 
 void MainWindow::update_systems()
@@ -95,6 +92,8 @@ void MainWindow::update_systems()
 
     _projectile_collision_system.update(_delta_time);
 
+    _removing_projectile_system.update(_delta_time);
+
     _enemy_spawn_system.update(_delta_time);
 
     // t_game_scene_deleting_system system {};
@@ -104,8 +103,6 @@ void MainWindow::update_systems()
     t_rotation_system_updater(_rotation, _delta_time);
 
     _shooting_ai_brain_system.update(_delta_time);
-
-    // _removing_projectile_system.update(_delta_time);
 
     update();
 }

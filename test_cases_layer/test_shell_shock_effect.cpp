@@ -23,20 +23,24 @@ TEST_CASE( "testing shell shock effect", "[effects]" )
 
     mock_sound_player sound_player;
 
-    SECTION( "applying shell shock effect" )
+    SECTION( "applying / disapplying shell shock effect" )
     {
         REQUIRE(vehicle.get_speed_limit() == initial);
 
-        const t_shell_shock_effect effect { vehicle, sound_player };
+        t_shell_shock_effect effect { vehicle, sound_player };
 
-        const t_identifier_value expected {};
-        REQUIRE_CALL(sound_player, play(eq(expected)));
+        effect.apply();
 
         REQUIRE(vehicle.get_speed_limit() == must_be);
+
+        const t_identifier_value expected_apply {};
+        REQUIRE_CALL(sound_player, play(eq(expected_apply)));
+
+        effect.disapply();
+
+        REQUIRE(vehicle.get_speed_limit() == initial);
+
+        const t_identifier_value expected_disapply {};
+        REQUIRE_CALL(sound_player, play(eq(expected_disapply)));
     }
-
-    const t_identifier_value expected {};
-    REQUIRE_CALL(sound_player, play(eq(expected)));
-
-    REQUIRE(vehicle.get_speed_limit() == initial);
 }

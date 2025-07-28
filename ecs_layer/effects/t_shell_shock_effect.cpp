@@ -15,12 +15,10 @@ t_shell_shock_effect::t_shell_shock_effect(t_vehicle_component& vehicle, t_sound
     , _vehicle { vehicle }
     , _sound_player { sound_player }
 {
-    apply();
 }
 
 t_shell_shock_effect::~t_shell_shock_effect()
 {
-    disapply();
 }
 
 void t_shell_shock_effect::apply()
@@ -41,7 +39,7 @@ void t_shell_shock_effect::apply()
 
     t_set_vehicle_radio_distance(_vehicle, distance);
 
-    /** */
+    /** play sound for applied effect */
 
     _sound_player.play(t_shell_shock_effect_sound_identifier_applied);
 }
@@ -52,7 +50,7 @@ void t_shell_shock_effect::disapply()
 
     t_set_vehicle_radio_distance(_vehicle, _radio_distance);
 
-    /** */
+    /** play sound for disapplied effect */
 
     _sound_player.play(t_shell_shock_effect_sound_identifier_disapplied);
 }

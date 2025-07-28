@@ -32,11 +32,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private:
-    const t_axis_value line_length { 50.0 }; // Длина линии
+    QTimer                              timer;
 
-    QTimer timer;
+    const t_axis_value                  line_length { 50.0 }; // Длина линии
 
-    t_axis_value _delta_time { 1. / 60. };
+    t_axis_value                        _delta_time { 1. / 60. };
 
     t_shooting_game_scene               _game_scene;
 

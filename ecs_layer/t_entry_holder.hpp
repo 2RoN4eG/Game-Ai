@@ -167,3 +167,7 @@ private:
         return entry_holder._container.end();
     }
 };
+
+// Создать класс t_component_holder из класса t_entry_holder и сделать
+// аналогичное решение только для класса t_event_holder. Различием станет
+// только вызов методов apply() и disapply() для эффекта.
