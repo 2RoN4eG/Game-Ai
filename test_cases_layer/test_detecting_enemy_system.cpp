@@ -80,23 +80,25 @@ void prepare_testable_game_scene(t_game_scene& game_scene)
 }
 
 
-inline int count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_value identifier)
+inline size_t count_game_scene_self_detected(t_game_scene& game_scene, const t_identifier_value identifier)
 {
     const t_entry_holder<t_detected_enemy_component>& holder = game_scene.get_entry_holder<t_detected_enemy_component>();
 
     struct t_count_predicate
     {
-        t_detecting_source _source {};
-
         t_identifier_value _identifier {};
 
         const bool operator()(const t_detected_enemy_component& detected) const
         {
-            return detected._source == _source && detected._detected_by == _identifier;
+            return detected._detecting_source == t_detecting_source::self_detected && detected._detected_by == _identifier;
         }
     };
 
-    return std::count_if(begin(holder), end(holder), t_count_predicate { t_detecting_source::by_self, identifier });
+    size_t count = std::count_if(begin(holder), end(holder), t_count_predicate { identifier });
+
+    std::cout << "vehicle { " << identifier << " } detected { " << count << " } targets" << std::endl;
+
+    return count;
 }
 
 
@@ -118,13 +120,15 @@ TEST_CASE( "testing detecting enemy system", "[systems]" )
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 0);
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 3 }) == 0);
     }
 
     SECTION( "vehicle { identifier 1 } detects one vehicle { identifier 0 }, vehicle { identifier 2 } does not detect anybody" )
     {
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 0 }, t_team_value { 0 }, t_vehicle_position_value {   0,   0 }, t_visibility_distance_value { 100 }, t_radio_distance_value { 450 }); // 
-        t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 1 is 300.0
-        t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 350 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 1 }, t_team_value { 1 }, t_vehicle_position_value {   0, 300 }, t_visibility_distance_value { 310 }, t_radio_distance_value { 450 }); // visibility distance between 0 and 1 is 300.0
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 310 }, t_radio_distance_value { 450 }); // visibility distance between 0 and 2 is 300.0
+        t_create_game_scene_vehicle(game_scene, t_identifier_value { 3 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 310 }, t_radio_distance_value { 450 }); // distance between 0 and 2 is 424.264{...}
 
         for (int _{}; _ < 2; ++_)
         {
@@ -133,6 +137,7 @@ TEST_CASE( "testing detecting enemy system", "[systems]" )
 
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 0 }) == 0);
         REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 1 }) == 1);
-        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 0);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 2 }) == 1);
+        REQUIRE(count_game_scene_self_detected(game_scene, t_identifier_value { 3 }) == 0);
     }
 }

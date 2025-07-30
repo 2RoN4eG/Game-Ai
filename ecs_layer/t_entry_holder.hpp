@@ -34,8 +34,12 @@ public:
 
         holder_information_printers.emplace_back([this]()
         {
+            return;
+
             std::cout << "component holder contains " << std::setw(2) << this->_container.size() << " components" << std::endl;
         });
+
+        return;
 
         std::cout << "global holder information printers contains " << holder_information_printers.size() << " printers" << std::endl;
     }

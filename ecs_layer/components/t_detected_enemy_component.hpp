@@ -47,16 +47,15 @@ using t_visibility_source = t_detecting_source;
 class t_detected_enemy_component
 {
 public:
-    // 
     // [[maybe_unused]] t_identifier_value _holder {};
 
     // Источник обнаружения
-    t_visibility_source _source {};
+    t_detecting_source _detecting_source {};
 
     // Идентификатор машины обнаружевшей машину противника
     t_identifier_value _detected_by {};
 
-    // Идентификатор машины противника
+    // Идентификатор машины противника (t_target)
     t_identifier_value _enemy {};
 };
 
@@ -66,7 +65,7 @@ using t_detected_enemy_components = std::vector<t_detected_enemy_component>;
 
 inline std::ostream& operator<<(std::ostream& stream, const t_detected_enemy_component& detected_enemy)
 {
-    stream << detected_enemy._source << ", " << detected_enemy._detected_by << ", " << detected_enemy._enemy << std::endl;
+    stream << detected_enemy._detecting_source << ", " << detected_enemy._detected_by << ", " << detected_enemy._enemy << std::endl;
 
     return stream;
 }

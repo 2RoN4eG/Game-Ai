@@ -46,6 +46,8 @@ public:
 
     const t_identifier_value get_identifier() const;
 
+    const t_team_value get_team() const;
+
     const t_weight_value get_weight() const;
 
     const t_speed_limit_value get_speed_limit() const;

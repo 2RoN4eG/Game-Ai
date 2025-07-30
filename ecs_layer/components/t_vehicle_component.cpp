@@ -101,6 +101,11 @@ const t_identifier_value t_vehicle_component::get_identifier() const
     return _identifier;
 }
 
+const t_team_value t_vehicle_component::get_team() const
+{
+    return _team;
+}
+
 const t_weight_value t_vehicle_component::get_weight() const
 {
     // TODO: Replace to accumulator of turret weight, chassis weight and radio weight

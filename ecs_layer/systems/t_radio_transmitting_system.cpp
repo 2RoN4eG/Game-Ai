@@ -46,7 +46,7 @@ namespace
 
             const bool operator()(const t_detected_enemy_component& component) const
             {
-                return component._source == t_detecting_source::self_detected && component._detected_by == _detected_by;
+                return component._detecting_source == t_detecting_source::self_detected && component._detected_by == _detected_by;
             }
         };
 

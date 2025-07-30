@@ -64,6 +64,10 @@ t_detecting_enemy_system::~t_detecting_enemy_system()
 
 void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
 {
+    // getting team holder for vehicles on the map
+
+    // getting 
+
     const t_entry_holder<t_vehicle_component>& vehicle_entry_holder = _game_scene.get_entry_holder<t_vehicle_component>();
 
     for (const t_vehicle_component& vehicle : vehicle_entry_holder)
@@ -84,10 +88,12 @@ void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
 
         std::transform(visible_vehicles.begin(), visible_vehicles.end(), std::back_inserter(detected_vehicles), t_to_detected_converter { identifier });
 
-        std::cout << "vehicle { identifier: " << identifier << ", position { x: " << std::setw(4) << position.x() << ", y: " << std::setw(4) << position.y() << ", visibility: " << visibility << " }" << " } detected " << detected_vehicles.size() << " vehicles" << std::endl;
+        std::cout << "vehicle { identifier: " << identifier << ", position { x: " << std::setw(4) << position.x() << ", y: " << std::setw(4) << position.y() << ", visibility distance: " << visibility << " }" << " } detected " << detected_vehicles.size() << " vehicles" << std::endl;
 
         t_entry_holder<t_detected_enemy_component>& detected_entry_holder = _game_scene.get_mutable_entry_holder<t_detected_enemy_component>();
 
         detected_entry_holder.set_components(detected_vehicles);
     }
+
+    std::cout << std::endl;
 }
