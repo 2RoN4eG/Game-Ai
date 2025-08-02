@@ -5,9 +5,9 @@
 #include "../interfaces/t_sound_player_interface.hpp"
 
 
-constexpr t_identifier_value t_shell_shock_effect_sound_identifier_applied {};
+constexpr t_identifier_value t_shell_shock_effect_applied_sound_identifier {};
 
-constexpr t_identifier_value t_shell_shock_effect_sound_identifier_disapplied {};
+constexpr t_identifier_value t_shell_shock_effect_disapplied_sound_identifier {};
 
 
 t_shell_shock_effect::t_shell_shock_effect(t_vehicle_component& vehicle, t_sound_player_interface& sound_player)
@@ -41,7 +41,7 @@ void t_shell_shock_effect::apply()
 
     /** play sound for applied effect */
 
-    _sound_player.play(t_shell_shock_effect_sound_identifier_applied);
+    _sound_player.play(t_shell_shock_effect_applied_sound_identifier);
 }
 
 void t_shell_shock_effect::disapply()
@@ -52,5 +52,5 @@ void t_shell_shock_effect::disapply()
 
     /** play sound for disapplied effect */
 
-    _sound_player.play(t_shell_shock_effect_sound_identifier_disapplied);
+    _sound_player.play(t_shell_shock_effect_disapplied_sound_identifier);
 }
