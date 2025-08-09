@@ -5,6 +5,9 @@
 
 #include "../../ecs_layer/tools/t_2d_vector.hpp"
 
+#include <cmath>
+
+
 class t_shooting_game_scene;
 
 
