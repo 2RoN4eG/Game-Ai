@@ -4,6 +4,8 @@
 
 #include "../components/t_detected_enemy_component.hpp"
 
+#include <vector>
+
 
 using t_detected_enemy_record = t_detected_enemy_component;
 

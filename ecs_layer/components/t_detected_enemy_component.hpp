@@ -2,6 +2,8 @@
 
 #include "../t_component_defines.hpp"
 
+#include <vector>
+
 
 // Машина может быть видна в двух случаях:
 // - обнаружена самостоятельно
