@@ -14,7 +14,7 @@
 #include "t_enemy_spawn_system.hpp"
 #include "t_shooting_game_scene_creator.hpp"
 #include "t_drawable_weapon_locating_system.hpp"
-#include "t_projectile_collision_system.hpp"
+#include "t_colliding_projectile_system.hpp"
 #include "t_projectile_moving_system.hpp"
 #include "t_removing_projectile_system.hpp"
 #include "t_weapon_cooldown_system.hpp"
@@ -45,7 +45,7 @@ private:
 
     t_projectile_moving_system          _projectile_moving_system;
 
-    t_projectile_collision_system       _projectile_collision_system;
+    t_colliding_projectile_system       _projectile_collision_system;
 
     t_drawable_weapon_locating_system   _drawable_weapon_locating_system;
 

@@ -2,7 +2,7 @@ name: CMake Build & Test
 
 on:
   push:
-      branches: [ main ]
+      branches: [ main, * ]
 
 jobs:
   build-and-test:
@@ -26,12 +26,13 @@ jobs:
     - name: Build Game AI project
       run: |
         cd build
-        cmake --build .
+        cmake --build . -j$nproc
 
     - name: Run tests
       run: |
+        cd build/test_case_layer/
         ctest --output-on-failure
-      continue-on-error: true
+        # continue-on-error: true
 
     - name: Send Telegram notification
       run: |

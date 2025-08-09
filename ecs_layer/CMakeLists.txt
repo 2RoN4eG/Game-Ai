@@ -32,10 +32,6 @@ add_library(ecs_layer
     components/t_braking_distance_component.hpp                         components/t_braking_distance_component.cpp
     components/t_braking_control_component.hpp                          components/t_braking_control_component.cpp
 
-    systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp         systems/subsystems/t_ramping_up_vehicle_speed_subsystem.cpp
-    systems/subsystems/t_ramping_down_vehicle_speed_subsystem.hpp       systems/subsystems/t_ramping_down_vehicle_speed_subsystem.cpp
-    systems/subsystems/t_rotating_vehicle_subsystem.hpp                 systems/subsystems/t_rotating_vehicle_subsystem.cpp
-
     systems/t_ai_demo_linear_moving_system.hpp                          systems/t_ai_demo_linear_moving_system.cpp    
     systems/t_ramping_vehicle_speed_system.hpp                          systems/t_ramping_vehicle_speed_system.cpp
     systems/t_rotating_vehicle_system.hpp                               systems/t_rotating_vehicle_system.cpp
@@ -45,6 +41,10 @@ add_library(ecs_layer
     systems/t_radio_transmitting_system.hpp                             systems/t_radio_transmitting_system.cpp
     systems/t_braking_distance_system.hpp                               systems/t_braking_distance_system.cpp
     systems/t_braking_control_system.hpp                                systems/t_braking_control_system.cpp
+
+    systems/subsystems/t_ramping_up_vehicle_speed_subsystem.hpp         systems/subsystems/t_ramping_up_vehicle_speed_subsystem.cpp
+    systems/subsystems/t_ramping_down_vehicle_speed_subsystem.hpp       systems/subsystems/t_ramping_down_vehicle_speed_subsystem.cpp
+    systems/subsystems/t_rotating_vehicle_subsystem.hpp                 systems/subsystems/t_rotating_vehicle_subsystem.cpp
 
     systems/concepts/t_double_buffering_team_player_lookup_subsystem.hpp  systems/concepts/t_double_buffering_team_player_lookup_subsystem.cpp
 

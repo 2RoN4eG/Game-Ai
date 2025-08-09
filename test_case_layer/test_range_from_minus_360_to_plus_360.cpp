@@ -32,7 +32,7 @@ TEST_CASE( "range [-180, +180]", "[angle is -15]" )
 }
 
 
-struct t_angular_holder
+struct t_heading_cource
 {
     const t_angle_degrees heading {};
 
@@ -40,7 +40,7 @@ struct t_angular_holder
 };
 
 
-std::ostream& operator<<(std::ostream& stream, const t_angular_holder& holder)
+std::ostream& operator<<(std::ostream& stream, const t_heading_cource& holder)
 {
     stream << "heading is " << holder.heading << ", course is " << holder.course;
 
@@ -50,16 +50,17 @@ std::ostream& operator<<(std::ostream& stream, const t_angular_holder& holder)
 
 TEST_CASE( "angle between course and heading" )
 {
-    const std::vector<t_angular_holder> holders
+    const std::vector<t_heading_cource> heading_cource_container
     {
         { .heading =   90., .course =  180. },
         { .heading = -125., .course = - 15. }
     };
 
-    for (const t_angular_holder& holder : holders)
+    for (const t_heading_cource& heading_cource : heading_cource_container)
     {
-        std::cout << holder << ", radial distance " << radial_distance(holder.heading, holder.course)
-                            << ", reverse radial distance " << radial_distance(holder.course, holder.heading)
-                            << std::endl;
+        std::cout << heading_cource 
+                  << ", direct radial distance " << radial_distance(heading_cource.heading, heading_cource.course)
+                  << ", reverse radial distance " << radial_distance(heading_cource.course, heading_cource.heading)
+                  << std::endl;
     }
 }

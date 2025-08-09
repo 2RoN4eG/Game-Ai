@@ -109,7 +109,6 @@ public:
     }
 
 
-
     const size_t amount() const
     {
         return _container.size();

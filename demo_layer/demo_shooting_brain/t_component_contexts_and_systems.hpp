@@ -336,7 +336,7 @@ void t_weapon_cooldown_updater(t_weapon_context& weapon, const float delta);
 
 bool does_projectile_collide_with_anything(t_shooting_game_scene& game_scene, const t_projectile_context& projectile);
 
-void t_projectile_collision_system_updater(t_shooting_game_scene& game_scene, const float delta);
+void t_colliding_projectile_system_updater(t_shooting_game_scene& game_scene, const float delta);
 
 void t_moving_projectile_system_updater(t_shooting_game_scene& game_scene, const float delta);
 

@@ -31,7 +31,7 @@ set(PROJECT_SOURCES
 
         t_enemy_spawn_system.hpp                t_enemy_spawn_system.cpp
         t_drawable_weapon_locating_system.hpp   t_drawable_weapon_locating_system.cpp
-        t_projectile_collision_system.hpp       t_projectile_collision_system.cpp
+        t_colliding_projectile_system.hpp       t_colliding_projectile_system.cpp
         t_projectile_moving_system.hpp          t_projectile_moving_system.cpp
         t_removing_projectile_system.hpp        t_removing_projectile_system.cpp
         t_weapon_cooldown_system.hpp            t_weapon_cooldown_system.cpp

@@ -137,7 +137,7 @@ void t_weapon_cooldown_updater(t_weapon_context& weapon, const float delta)
     weapon.cooldown_time -= delta;
 }
 
-void t_projectile_collision_system_updater(t_shooting_game_scene& game_scene, const float delta)
+void t_colliding_projectile_system_updater(t_shooting_game_scene& game_scene, const float delta)
 {
     const t_entry_holder<t_projectile_context>& projectile_holder = game_scene.get_entry_holder<t_projectile_context>();
 

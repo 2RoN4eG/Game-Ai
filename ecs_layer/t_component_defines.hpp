@@ -19,7 +19,7 @@ using t_across_component                        = t_delta_position_component;
 
 using t_speed_value                             = t_floating_value;
 
-using t_speed_limit_value                       = t_speed_value;
+using t_speed_limit_value                       = t_floating_value;
 
 
 using t_power_value                             = t_floating_value;
@@ -66,6 +66,8 @@ using t_vehicle_weight_value                    = t_weight_value;
 using t_identifier_value                        = std::size_t;
 
 using t_go_identifier_value                     = t_identifier_value;
+
+using t_sound_identifier_value                  = t_go_identifier_value;
 
 using t_degrees_value                           = t_floating_value;
 
@@ -173,6 +175,7 @@ private:
     const t_value _maximum;
 };
 
+
 class t_event_interface
 {
 public:
@@ -180,6 +183,7 @@ public:
 
     virtual bool operator()() const = 0;
 };
+
 
 class t_demo_keyboard_event : public t_event_interface
 {
@@ -200,6 +204,7 @@ private:
 
     const t_input_device _key;
 };
+
 
 template <typename t_identifier>
 class t_identifier_maker
