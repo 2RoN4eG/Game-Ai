@@ -2,28 +2,31 @@ name: CMake Build & Test
 
 on:
   push:
-    branches: [ main ]
+      branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: checkout repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: install dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
+
+    - name: create build folder
+      run: mkdir build
+
+    - name: going to build folder
+      run: cd build
 
     - name: Configure CMake
       run: |
-        mkdir build
-        cd build
         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
 
     - name: Build project
       run: |
-        cd build
         cmake --build .
 
     - name: Run tests
