@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 
 using t_floating_value                          = float;
