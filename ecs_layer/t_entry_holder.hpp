@@ -30,18 +30,6 @@ public:
 public:
     t_entry_holder()
     {
-        t_holder_information_printers& holder_information_printers = get_global_holder_information_printers();
-
-        holder_information_printers.emplace_back([this]()
-        {
-            return;
-
-            std::cout << "component holder contains " << std::setw(2) << this->_container.size() << " components" << std::endl;
-        });
-
-        return;
-
-        std::cout << "global holder information printers contains " << holder_information_printers.size() << " printers" << std::endl;
     }
 
     template <typename... t_arguments>

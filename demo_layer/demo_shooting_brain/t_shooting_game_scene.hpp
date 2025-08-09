@@ -8,7 +8,6 @@
 
 class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
                                                                t_weapon_context,
-                                                               t_moving_context,
                                                                t_rotation_context,
                                                                t_projectile_context,
                                                                t_player_context,
@@ -17,9 +16,8 @@ class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
 {
 };
 
-
 template <typename t_context>
-inline t_context& t_shooting_game_scene_get_mutable_context(t_shooting_game_scene& game_scene)
+inline t_context& get_shooting_brain_game_scene_mutable_context(t_shooting_game_scene& game_scene)
 {
     t_entry_holder<t_context>& entry_holder = game_scene.get_mutable_entry_holder<t_context>();
 
@@ -27,7 +25,7 @@ inline t_context& t_shooting_game_scene_get_mutable_context(t_shooting_game_scen
 }
 
 template <typename t_context>
-inline const t_context& t_shooting_game_scene_get_context(const t_shooting_game_scene& game_scene)
+inline const t_context& get_shooting_brain_game_scene_context(const t_shooting_game_scene& game_scene)
 {
     const t_entry_holder<t_context>& entry_holder = game_scene.get_entry_holder<t_context>();
 

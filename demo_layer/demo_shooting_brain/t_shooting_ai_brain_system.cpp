@@ -16,9 +16,9 @@ namespace
 
 t_shooting_ai_brain_system::t_shooting_ai_brain_system(t_shooting_game_scene& game_scene)
     : _game_scene { game_scene }
-    , _rotation_context { t_shooting_game_scene_get_mutable_context<t_rotation_context>(game_scene) }
-    , _enemy_context { t_shooting_game_scene_get_mutable_context<t_enemy_context>(game_scene) }
-    , _weapon_context { t_shooting_game_scene_get_mutable_context<t_weapon_context>(game_scene) }
+    , _rotation_context { get_shooting_brain_game_scene_mutable_context<t_rotation_context>(game_scene) }
+    , _enemy_context { get_shooting_brain_game_scene_mutable_context<t_enemy_context>(game_scene) }
+    , _weapon_context { get_shooting_brain_game_scene_mutable_context<t_weapon_context>(game_scene) }
 {
 }
 
@@ -51,37 +51,29 @@ void t_shooting_ai_brain_system::update(const t_update_delta_time delta_time)
 
     // spawn projectile
 
-    const t_drawable_weapon_context& drawable_weapon = t_shooting_game_scene_get_context<t_drawable_weapon_context>(_game_scene);
+    const t_drawable_weapon_context& drawable_weapon = get_shooting_brain_game_scene_context<t_drawable_weapon_context>(_game_scene);
 
-    const t_rotation_context& rotation = t_shooting_game_scene_get_context<t_rotation_context>(_game_scene);
+    const t_rotation_context& rotation = get_shooting_brain_game_scene_context<t_rotation_context>(_game_scene);
 
     const t_position_context& projectile_position = get_rotated_length_point(drawable_weapon, rotation);
 
-    const t_enemy_context& enemy = t_shooting_game_scene_get_context<t_enemy_context>(_game_scene);
+    const t_enemy_context& enemy = get_shooting_brain_game_scene_context<t_enemy_context>(_game_scene);
 
     const t_position_context& enemy_position = enemy.position;
 
     const t_position_context& distance = enemy_position - projectile_position;
 
-    // std::cout << "distance is " << distance.x() << ", " << distance.y() << std::endl;
-
     const t_position_context& normilized = t_normilize_vector(distance);
-
-    // std::cout << "normilized is " << normilized.x() << ", " << normilized.y() << std::endl;
 
     const t_speed_value projectile_speed = _weapon_context.projectile_speed;
 
     const t_position_context& projectile_velocity = normilized * projectile_speed;
 
-    // std::cout << "velocity is " << projectile_velocity.x() << ", " << projectile_velocity.y() << std::endl;
-
-    const t_collision_radius collision_radius { 5 };
+    const t_collision_radius_value collision_radius { 5 };
 
     t_entry_holder<t_projectile_context>& projectile_holder = _game_scene.get_mutable_entry_holder<t_projectile_context>();
 
     projectile_holder.create_component(t_projectile_identifier_value {}, _weapon_context.heat_damage, collision_radius, projectile_position, projectile_velocity);
-
-    // std::cout << "[brain] projectiles amount is " << projectile_holder.amount() << std::endl;
 
     t_weapon_cooldown_runner(_weapon_context);
 }

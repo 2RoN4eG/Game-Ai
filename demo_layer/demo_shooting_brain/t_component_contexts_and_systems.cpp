@@ -137,11 +137,6 @@ void t_weapon_cooldown_updater(t_weapon_context& weapon, const float delta)
     weapon.cooldown_time -= delta;
 }
 
-bool does_projectile_collide_with_anything(t_shooting_game_scene& game_scene, const t_projectile_context& projectile)
-{
-    return {};
-}
-
 void t_projectile_collision_system_updater(t_shooting_game_scene& game_scene, const float delta)
 {
     const t_entry_holder<t_projectile_context>& projectile_holder = game_scene.get_entry_holder<t_projectile_context>();
@@ -154,17 +149,16 @@ void t_projectile_collision_system_updater(t_shooting_game_scene& game_scene, co
 
     // const t_size_context& enemy_size = enemy.size;
 
-    // const t_2d_vector_axis_value x_lhs { enemy_position.x() - enemy_size.width() / 2 };
-
-    // const t_2d_vector_axis_value x_rhs { enemy_position.x() + enemy_size.width() / 2 };
-
+    // const t_2d_vector_axis_value x_lhs { enemy_position.x() - enemy_size.width()  / 2 };
+    // const t_2d_vector_axis_value x_rhs { enemy_position.x() + enemy_size.width()  / 2 };
     // const t_2d_vector_axis_value y_lhs { enemy_position.y() - enemy_size.height() / 2 };
-
     // const t_2d_vector_axis_value y_rhs { enemy_position.y() + enemy_size.height() / 2 };
 
     for (const t_projectile_context& projectile : g_projectile_context_holder)
     {
         const t_position_context& projectile_position = projectile._position;
+
+        t_distance_value distance = t_get_distance(projectile_position, enemy_position);
 
         // const bool has_collided {
         //     projectile_position.x() >= x_lhs && projectile_position.x() <= x_rhs &&

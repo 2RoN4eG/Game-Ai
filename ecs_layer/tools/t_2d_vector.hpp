@@ -107,7 +107,7 @@ t_2d_vector_value t_make_vector_from_degrees_along_y_axis_radians(const t_angle_
 ///
 /// \brief t_make_vector_from_degrees_along_y_axis_degrees creates 2D vector from angle in degrees.
 /// \param degrees - angle in degrees.
-/// \return 2D vector.
+/// \return 2D vector value.
 ///
 t_2d_vector_value t_make_vector_from_degrees_along_y_axis_degrees(const t_angle_degrees_value degrees);
 
@@ -115,7 +115,7 @@ t_2d_vector_value t_make_vector_from_degrees_along_y_axis_degrees(const t_angle_
 /// \brief t_get_distance gets distance between 2 2D vectors (points).
 /// \param lhs - 2D vector.
 /// \param rhs - 2D vector.
-/// \return
+/// \return linear distance value.
 ///
 t_distance_value t_get_distance(const t_2d_vector_value& lhs, const t_2d_vector_value& rhs);
 

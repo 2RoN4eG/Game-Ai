@@ -7,7 +7,7 @@
 
 t_drawable_weapon_locating_system::t_drawable_weapon_locating_system(t_shooting_game_scene& game_scene)
     : _game_scene { game_scene }
-    , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
+    , _drawable_weapon { get_shooting_brain_game_scene_mutable_context<t_drawable_weapon_context>(_game_scene) }
 {
 }
 

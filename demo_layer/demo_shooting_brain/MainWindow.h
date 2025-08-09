@@ -17,6 +17,7 @@
 #include "t_projectile_collision_system.hpp"
 #include "t_projectile_moving_system.hpp"
 #include "t_removing_projectile_system.hpp"
+#include "t_weapon_cooldown_system.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -57,6 +58,8 @@ private:
     t_shooting_ai_brain_system          _shooting_ai_brain_system;
 
     t_removing_projectile_system        _removing_projectile_system;
+
+    t_weapon_cooldown_system            _weapon_cooldown_system;
 
 public:
     MainWindow(QWidget *parent = nullptr);

@@ -18,8 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     , _enemy_spawn_system { _game_scene }               //
     , _shooting_ai_brain_system { _game_scene }         //
     , _removing_projectile_system { _game_scene }       //
-    , _rotation { t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene) }
-    , _drawable_weapon { t_shooting_game_scene_get_mutable_context<t_drawable_weapon_context>(_game_scene) }
+    , _weapon_cooldown_system { _game_scene }
+    , _rotation { get_shooting_brain_game_scene_mutable_context<t_rotation_context>(_game_scene) }
+    , _drawable_weapon { get_shooting_brain_game_scene_mutable_context<t_drawable_weapon_context>(_game_scene) }
 {
     ui->setupUi(this);
 
@@ -49,22 +50,42 @@ void MainWindow::paintEvent(QPaintEvent*)
 
     painter.setRenderHint(QPainter::Antialiasing);
 
+    //
+
     painter.setBrush(Qt::yellow);
     painter.drawRect(0, 0, _enemy_spawn_system.width(), _enemy_spawn_system.height());
 
+    //
+
+    t_enemy_context& _enemy = get_shooting_brain_game_scene_mutable_context<t_enemy_context>(_game_scene);
+
     painter.setPen(QPen(Qt::black, 7));
-
-    t_enemy_context& _enemy = t_shooting_game_scene_get_mutable_context<t_enemy_context>(_game_scene);
-
     painter.drawPoint(_enemy.position.x(), _enemy.position.y());
-    painter.setPen(QPen(Qt::black, 3));
-
+    
     // Вычисление конечной точки на основе heading
 
     const t_position_context& since = _drawable_weapon.position;
     const t_position_context till = get_rotated_length_point(_drawable_weapon, _rotation);
 
+    painter.setPen(QPen(Qt::black, 3));
     painter.drawLine(since.x(), since.y(), till.x(), till.y());
+
+    //
+
+    try
+    {
+        const t_entry_holder<t_projectile_context>& projectile_holder = _game_scene.get_entry_holder<t_projectile_context>();
+
+        painter.setPen(QPen(Qt::blue, 7));
+
+        for (const t_projectile_context& projectile : projectile_holder)
+        {
+            painter.drawPoint(projectile._position.x(), projectile._position.y());
+        }
+    }
+    catch (...)
+    {
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -103,6 +124,8 @@ void MainWindow::update_systems()
     t_rotation_system_updater(_rotation, _delta_time);
 
     _shooting_ai_brain_system.update(_delta_time);
+
+    _weapon_cooldown_system.update(_delta_time);
 
     update();
 }

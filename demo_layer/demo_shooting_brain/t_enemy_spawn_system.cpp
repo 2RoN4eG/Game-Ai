@@ -40,9 +40,9 @@ namespace
 
         void update(const t_update_delta_time delta_time)
         {
-            const t_drawable_weapon_context& drawable_weapon = t_shooting_game_scene_get_context<t_drawable_weapon_context>(_game_scene);
+            const t_drawable_weapon_context& drawable_weapon = get_shooting_brain_game_scene_context<t_drawable_weapon_context>(_game_scene);
 
-            const t_enemy_context& enemy = t_shooting_game_scene_get_context<t_enemy_context>(_game_scene);
+            const t_enemy_context& enemy = get_shooting_brain_game_scene_context<t_enemy_context>(_game_scene);
 
             const t_position_context& drawable_weapon_position = drawable_weapon.position;
 
@@ -50,7 +50,7 @@ namespace
 
             const t_position_context target = enemy_position - drawable_weapon_position;
 
-            t_rotation_context& rotation = t_shooting_game_scene_get_mutable_context<t_rotation_context>(_game_scene);
+            t_rotation_context& rotation = get_shooting_brain_game_scene_mutable_context<t_rotation_context>(_game_scene);
 
             t_floating_value& enemy_course = rotation._course;
 

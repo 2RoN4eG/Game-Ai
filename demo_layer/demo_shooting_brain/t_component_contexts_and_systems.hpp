@@ -10,19 +10,23 @@ class t_shooting_game_scene;
 
 using t_long_value                  = long;
 
+using t_long_long_value             = long long;
+
 using t_floating_value              = float;
 
 using t_axis_value                  = t_2d_vector_axis_value;
+
+using t_length_value                = t_axis_value;
 
 using t_position_context            = t_2d_vector_value;
 
 using t_velocity_context            = t_2d_vector_value;
 
-using t_heat_damage                 = t_floating_value;
+using t_heat_damage_value           = t_floating_value;
 
 using t_radius_value                = t_floating_value;
 
-using t_collision_radius            = t_radius_value;
+using t_collision_radius_value      = t_radius_value;
 
 using t_projectile_identifier_value = t_go_identifier_value;
 
@@ -50,7 +54,6 @@ struct t_moving_context
 struct t_player_context
 {
     t_position_context      position {};
-
 
     t_player_context(const t_axis_value x, const t_axis_value y)
         : position { x, y }
@@ -107,12 +110,11 @@ using t_game_scene_size_context = t_size_context;
 
 struct t_enemy_context
 {
-    t_long_value            health_points;
-
     t_position_context      position {};
 
+    t_health_points_value   health_points;
 
-    t_enemy_context(const t_long_value health_points, const t_axis_value x, const t_axis_value y)
+    t_enemy_context(const t_health_points_value health_points, const t_axis_value x, const t_axis_value y)
         : health_points { health_points }
         , position { x, y }
     {
@@ -125,7 +127,7 @@ struct t_enemy_context
         std::cout << "enemy was spawned on position x: " << position.x() << ", y: " << position.y() << ", health points: " << health_points << std::endl;
     }
 
-    t_enemy_context(const t_long_value health_points)
+    t_enemy_context(const t_health_points_value health_points)
         : t_enemy_context { health_points, t_axis_value {}, t_axis_value {} }
     {
         std::cout << "enemy was spawned on position x: " << position.x() << ", y: " << position.y() << ", health points: " << health_points << std::endl;
@@ -141,16 +143,15 @@ struct t_rotation_context
 {
     // Структура для управления углом вращения
 
-    t_floating_value _heading;          // Текущий угол (градусы)
+    t_heading_radians_value                     _heading;          // Текущий угол (градусы)
 
-    t_floating_value _course;           // Целевой угол (градусы)
+    t_course_radians_value                      _course;           // Целевой угол (градусы)
 
-    t_floating_value _angular_speed;    // Скорость поворота (градусы/секунда)
-
+    t_angular_speed_radians_per_second_value    _angular_speed;    // Скорость поворота (градусы/секунда)
 
     t_rotation_context(const t_floating_value heading,
                        const t_floating_value course,
-                       const t_floating_value angular_speed)
+                       const t_angular_speed_radians_per_second_value angular_speed)
         : _heading { heading }
         , _course { course }
         , _angular_speed { angular_speed }
@@ -163,12 +164,10 @@ struct t_rotation_context
     }
 };
 
+/// @brief Данный контест содержит начальную позицию (position) и длинну оружия для
+/// вычисления конечной позиции используя heading для этого.
 struct t_drawable_weapon_context
 {
-    t_position_context position {};
-
-    t_axis_value length { 50.0 }; // Длина линии
-
     t_drawable_weapon_context(const t_position_context& position)
         : position { position }
         , length { 50.0 }
@@ -179,6 +178,13 @@ struct t_drawable_weapon_context
         : t_drawable_weapon_context { {} }
     {
     }
+
+public:
+    t_identifier_value identifier;
+
+    t_position_context position {};
+
+    t_axis_value length { 50.0 }; // Длина линии
 };
 
 inline void set_drawable_weapon_position(t_drawable_weapon_context& drawable_weapon, const t_position_context& position)
@@ -186,14 +192,18 @@ inline void set_drawable_weapon_position(t_drawable_weapon_context& drawable_wea
     drawable_weapon.position = position;
 }
 
+/// @brief As weapon is line and t_drawable_weapon_context contains position and line length, this method calculates end of line position using t_rotation_context 
+/// @param drawable_weapon 
+/// @param rotation 
+/// @return 
 inline t_position_context get_rotated_length_point(const t_drawable_weapon_context& drawable_weapon, const t_rotation_context& rotation)
 {
-    const t_position_context& position = drawable_weapon.position;
-    const t_axis_value& length = drawable_weapon.length;
-    const t_axis_value& heading = rotation._heading;
+    const t_position_context& position              = drawable_weapon.position;
+    const t_axis_value& length                      = drawable_weapon.length;
+    const t_heading_radians_value& rotation_heading = rotation._heading;
 
-    const t_axis_value x = position.x() + length * std::cos(heading * M_PI / 180.);
-    const t_axis_value y = position.y() + length * std::sin(heading * M_PI / 180.);
+    const t_axis_value x = position.x() + length * std::cos(rotation_heading * M_PI / 180.);
+    const t_axis_value y = position.y() + length * std::sin(rotation_heading * M_PI / 180.);
 
     return t_position_context { x, y };
 }
@@ -201,12 +211,11 @@ inline t_position_context get_rotated_length_point(const t_drawable_weapon_conte
 
 struct t_projectile_context
 {
-    t_projectile_identifier_value   _identifier {};
-
-    t_heat_damage                   _heat_damage {};
+    // Снаряд, который имеет радиус поражения
+    // Если дистанция между снарядом и enemy меньше радиуса поражения
 
     //
-    t_collision_radius              _radius {};
+    t_projectile_identifier_value   _identifier {};
 
     //
     t_position_context              _position {};
@@ -214,17 +223,33 @@ struct t_projectile_context
     //
     t_velocity_context              _velocity {};
 
+    //
+    t_collision_radius_value        _collision_radius {};
+
+    //
+    t_heat_damage_value             _heat_damage {};
+
 
     t_projectile_context(const t_projectile_identifier_value identifier,
-                         const t_heat_damage heat_damage,
-                         const t_radians_value radius,
                          const t_position_context position,
-                         const t_velocity_context velocity)
+                         const t_velocity_context velocity,
+                         const t_collision_radius_value collision_radius,
+                         const t_heat_damage_value heat_damage)
         : _identifier { identifier }
-        , _heat_damage { heat_damage }
-        , _radius { radius }
         , _position { position }
         , _velocity { velocity }
+        , _collision_radius { collision_radius }
+        , _heat_damage { heat_damage }
+    {
+        std::cout << "construct progectile with heat damage " << heat_damage << std::endl;
+    }
+
+    t_projectile_context(const t_projectile_identifier_value identifier,
+                         const t_heat_damage_value heat_damage,
+                         const t_collision_radius_value collision_radius,
+                         const t_position_context position,
+                         const t_velocity_context velocity)
+        : t_projectile_context { identifier, position, velocity, collision_radius, heat_damage }
     {
     }
 
@@ -234,29 +259,24 @@ struct t_projectile_context
     }
 };
 
-struct t_cooldown_cache_context
-{
-    t_weapon_identifier_value   identifier {};
-
-    t_floating_value            cooldown_time {};   // Остаток времени до готовности
-};
-
 struct t_weapon_context
 {
-    const t_floating_value      reloading_time { 10. };     // Время перезарядки оружия (миллисекунды (ms))
+    const t_weapon_identifier_value identifier {};
 
-    t_floating_value            cooldown_time {};           // Остаток времени до готовности
+    const t_heat_damage_value       heat_damage { 60 };         // _per_shot
 
-    const t_heat_damage         heat_damage { 60 };         // _per_shot
+    const t_speed_value             projectile_speed { 50 };    //
 
-    const t_speed_value         projectile_speed { 20 };    //
+    const t_floating_value          reloading_time { 10. };     // Время перезарядки оружия (миллисекунды (ms))
+
+    t_floating_value                cooldown_time {};           // Остаток времени до готовности
 
 
     t_weapon_context()
-        : reloading_time { 10. }
+        : heat_damage { 60 }
+        , projectile_speed { 50 }
+        , reloading_time { 10. }
         , cooldown_time {}
-        , heat_damage { 60 }
-        , projectile_speed { 20 }
     {
     }
 
