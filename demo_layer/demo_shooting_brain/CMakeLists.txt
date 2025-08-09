@@ -12,20 +12,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+# TODO: rename to t_{ * }ing_{ component name }_system
 set(PROJECT_SOURCES
         main.cpp
         MainWindow.cpp MainWindow.h
         MainWindow.ui
 
         t_component_contexts_and_systems.hpp    t_component_contexts_and_systems.cpp
+
         t_shooting_game_scene.hpp               t_shooting_game_scene.cpp
         t_shooting_game_scene_creator.hpp       t_shooting_game_scene_creator.cpp
 
         t_remove_projectile_event.hpp           t_remove_projectile_event.cpp
 
         t_shooting_ai_brain_system.hpp          t_shooting_ai_brain_system.cpp
-
-        # TODO: rename to t_{ * }ing_{ component name }_system
 
         t_enemy_spawn_system.hpp                t_enemy_spawn_system.cpp
         t_drawable_weapon_locating_system.hpp   t_drawable_weapon_locating_system.cpp
