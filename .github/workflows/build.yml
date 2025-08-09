@@ -21,7 +21,7 @@ jobs:
     - name: go to build folder
       run: cd build
 
-    - name: Configure CMake
+    - name: configure CMake
       run: |
         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
 
