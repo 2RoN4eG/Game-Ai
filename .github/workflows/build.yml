@@ -15,18 +15,17 @@ jobs:
     - name: install dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
 
-    - name: create build folder
+    - name: Create build folder
       run: mkdir build
 
-    - name: go to build folder
-      run: cd build
-
-    - name: configure CMake
+    - name: Configure CMake
       run: |
+        cd build
         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
 
-    - name: Build project
+    - name: Build Game AI project
       run: |
+        cd build
         cmake --build .
 
     - name: Run tests
