@@ -18,7 +18,7 @@ jobs:
     - name: create build folder
       run: mkdir build
 
-    - name: going to build folder
+    - name: go to build folder
       run: cd build
 
     - name: Configure CMake
