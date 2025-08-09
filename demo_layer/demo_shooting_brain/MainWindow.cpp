@@ -7,6 +7,8 @@
 #include "t_shooting_game_scene.hpp"
 #include "t_removing_projectile_system.hpp"
 
+#include <QDebug>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
