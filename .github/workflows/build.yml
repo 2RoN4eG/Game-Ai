@@ -2,8 +2,7 @@ name: CMake Build & Test
 
 on:
   push:
-    branches:
-      - *
+    branches: [ main ]
 
 jobs:
   build-and-test:
