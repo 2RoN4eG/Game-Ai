@@ -12,7 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+
 # TODO: rename to t_{ * }ing_{ component name }_system
+
 set(PROJECT_SOURCES
         main.cpp
         MainWindow.cpp MainWindow.h

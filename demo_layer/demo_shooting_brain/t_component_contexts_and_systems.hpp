@@ -158,6 +158,14 @@ struct t_rotation_context
     {
     }
 
+    t_rotation_context(const t_degrees_value degrees,
+                       const t_angular_speed_degrees_per_second_value angular_speed)
+        : _heading { degrees }
+        , _course { degrees }
+        , _angular_speed { angular_speed }
+    {
+    }
+
     static t_context_descriptor get_description()
     {
         return "t_rotation_context";

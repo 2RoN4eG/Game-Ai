@@ -23,7 +23,7 @@ t_shooting_game_scene_creator::t_shooting_game_scene_creator(t_shooting_game_sce
 {
     t_shooting_game_scene_create_context<t_player_context>(game_scene);
 
-    t_shooting_game_scene_create_context<t_rotation_context>(game_scene, t_floating_value { 0. }, t_floating_value { 0. }, t_floating_value { 20. });
+    t_shooting_game_scene_create_context<t_rotation_context>(game_scene, t_floating_value { -90. }, t_floating_value { 20. });
 
     t_shooting_game_scene_create_context<t_weapon_context>(game_scene);
 
