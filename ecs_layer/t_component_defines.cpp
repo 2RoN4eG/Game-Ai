@@ -1,5 +1,7 @@
 #include "t_component_defines.hpp"
 
+#include <limits>
+
 
 t_event_interface::~t_event_interface()
 {
