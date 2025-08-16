@@ -66,9 +66,11 @@ void t_detecting_enemy_system::update(const t_frame_delta_time_value delta_time)
 {
     // getting team holder for vehicles on the map
 
-    // getting 
+    // getting
 
     const t_entry_holder<t_vehicle_component>& vehicle_entry_holder = _game_scene.get_entry_holder<t_vehicle_component>();
+
+    // Каждый vehicle смотрит на дистацию видиомости, что бы сформировать массив машин которые видны
 
     for (const t_vehicle_component& vehicle : vehicle_entry_holder)
     {
