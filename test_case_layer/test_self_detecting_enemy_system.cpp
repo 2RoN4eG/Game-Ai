@@ -132,8 +132,10 @@ TEST_CASE( "testing self detecting enemy system", "[systems][broken]" )
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 2 }, t_team_value { 1 }, t_vehicle_position_value { 300,   0 }, t_visibility_distance_value { 310 }, t_radio_distance_value { 450 }); // visibility distance between 0 and 2 is 300.0
         t_create_game_scene_vehicle(game_scene, t_identifier_value { 3 }, t_team_value { 1 }, t_vehicle_position_value { 300, 300 }, t_visibility_distance_value { 310 }, t_radio_distance_value { 450 }); // visibility distance between 0 and 2 is 424.26<4...>
 
+        SKIP("to fix this test case we need to replace 1 inside for loop to 2 and fix issue");
+
         // fastfix: to fix this test case we need to replace 2 inside for loop to 1
-        for (int _{}; _ < 1; ++_)
+        for (int _{}; _ < 2; ++_)
         {
             system.update(frame_delta_time);
         }

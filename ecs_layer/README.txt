@@ -9,4 +9,4 @@
 
 4. Система передачи вражеских объектов по радио.
 
-Input → Physics → Gameplay → Animation → Rendering (output)
+Input → Movement → Physics → Gameplay (esc layer) → Animation → Rendering (output)
