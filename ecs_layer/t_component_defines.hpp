@@ -65,9 +65,11 @@ using t_vehicle_weight_value                    = t_weight_value;
 
 using t_identifier_value                        = std::size_t;
 
-using t_go_identifier_value                     = t_identifier_value;
+using t_game_object_identifier_value            = t_identifier_value;
 
-using t_sound_identifier_value                  = t_go_identifier_value;
+using t_go_identifier_value                     = t_game_object_identifier_value;
+
+using t_sound_identifier_value                  = t_game_object_identifier_value;
 
 using t_degrees_value                           = t_floating_value;
 
@@ -125,7 +127,10 @@ enum t_component_identifier_value : t_unsigned_short
 
 using t_unique_identifier_value = t_identifier_value;
 
+
+// game object part { engine, chassis, sound, effect } | countable part (index part)
 t_identifier_value make_identifier(t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part);
+
 
 template <typename t_value>
 class t_range

@@ -46,9 +46,7 @@ public:
 
     t_entry& get_mutable_component(const t_go_identifier_value identifier)
     {
-        t_entry_holder_container_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
-
-        if (iterator != _container.end())
+        if (t_entry_holder_container_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier }); iterator != _container.end())
         {
             return *iterator;
         }
@@ -60,17 +58,15 @@ public:
     {
         if (_container.size() != 1)
         {
-            throw std::runtime_error { "component_holder contains " + std::to_string(_container.size()) + " components, use t_entry& get_mutable_component(const t_go_identifier_value) instead, " + CLASS_NAME(t_entry) };
+            return _container.front();
         }
 
-        return _container.front();
+        throw std::runtime_error { "component_holder contains " + std::to_string(_container.size()) + " components, use t_entry& get_mutable_component(const t_go_identifier_value) instead, " + CLASS_NAME(t_entry) };
     }
 
     const t_entry& get_component(const t_go_identifier_value identifier) const
     {
-        t_entry_holder_container_constant_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier });
-
-        if (iterator != _container.end())
+        if (t_entry_holder_container_constant_iterator iterator = std::find_if(_container.begin(), _container.end(), t_component_finder { identifier }); iterator != _container.end())
         {
             return *iterator;
         }
@@ -111,12 +107,12 @@ public:
 
     const size_t amount() const
     {
-        return _container.size();
+        return size();
     }
 
-    const size_t size() const
+    inline const size_t size() const
     {
-        return amount();
+        return _container.size();
     }
 
     void print_debug_information() const
@@ -134,7 +130,7 @@ private:
 
         bool operator()(const t_entry& entry) const
         {
-            return entry.get_identifier() == identifier;
+            return identifier == entry.get_identifier();
         }
     };
 
