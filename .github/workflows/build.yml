@@ -2,8 +2,10 @@ name: Build & test game ai
 
 on:
   push:
-      branches:
-        - **
+    branches:
+      - '**'
+    tags:
+      - '**'
 
 jobs:
   build-and-test:
