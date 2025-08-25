@@ -12,26 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: checkouting repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: installing dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
 
-    - name: Create build folder
+    - name: creating build folder
       run: mkdir build
 
-    - name: Configure cmake
+    - name: configuring cmake
       run: |
         cd build
         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
 
-    - name: Build project
+    - name: building project
       run: |
         cd build
         cmake --build . -j$nproc
 
-    - name: Run tests
+    - name: running tests
       run: |
         cd build/test_case_layer/
         ctest --output-on-failure
