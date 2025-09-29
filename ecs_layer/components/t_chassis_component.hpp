@@ -19,7 +19,7 @@ struct t_rotatable_heading_cache
 class t_chassis_component
 {
 public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_chassis };
+    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_chassis };
 
 public:
     t_chassis_component(const t_go_identifier_value identifier,

@@ -51,5 +51,5 @@ protected:
     t_cooldown_time_millis_value    _cooldown_time { 250 };
 
 public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_gun };
+    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_gun };
 };

@@ -35,16 +35,16 @@ bool t_demo_keyboard_event::operator()() const
 }
 
 
-t_identifier_value make_identifier(const t_component_identifier_value vehicle_part, const t_unique_identifier_value unique_part)
+t_identifier_value make_identifier(const t_component_enumenated_value vehicle_part, const t_unique_identifier_value unique_part)
 {
-    // if (!std::is_same_v<t_component_identifier_value, t_unsigned_short>)
+    // if (!std::is_same_v<t_component_enumenated_value, t_unsigned_short>)
     // {
-    //     throw std::runtime_error { "t_component_identifier_value is not the same as t_unsigned_short" };
+    //     throw std::runtime_error { "t_component_enumenated_value is not the same as t_unsigned_short" };
     // }
 
     constexpr size_t t_unique_part_size { sizeof(t_unique_identifier_value) };
 
-    constexpr size_t t_component_part_size { sizeof(t_component_identifier_value) };
+    constexpr size_t t_component_part_size { sizeof(t_component_enumenated_value) };
 
     constexpr size_t shift_to_bits { (t_unique_part_size - t_component_part_size) * 8 };
 

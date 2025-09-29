@@ -8,7 +8,7 @@
 class t_radio_component
 {
 public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_radio };
+    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_radio };
 
 public:
     t_radio_component() = default;

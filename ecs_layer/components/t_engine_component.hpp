@@ -52,5 +52,5 @@ private:
     friend bool operator==(const t_engine_component& lhs, const t_engine_component& rhs);
 
 public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_engine };
+    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_engine };
 };

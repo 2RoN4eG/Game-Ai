@@ -40,7 +40,7 @@ protected:
     t_azimuth_radians_value     _azimuth_radians {};
 
 public:
-    static const t_component_identifier_value t_part { t_component_identifier_value::t_turret };
+    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_turret };
 };
 
 #endif // T_TURRET_COMPONENT_HPP
