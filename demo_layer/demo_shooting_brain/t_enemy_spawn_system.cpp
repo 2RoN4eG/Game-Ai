@@ -37,7 +37,7 @@ namespace
         {
         }
 
-        void update(const t_update_delta_time delta_time)
+        void update(const t_update_delta_time_value delta_time)
         {
             (void) delta_time;
 
@@ -71,7 +71,7 @@ t_enemy_spawn_system::t_enemy_spawn_system(t_shooting_game_scene& game_scene)
 {
 }
 
-void t_enemy_spawn_system::on_game_scene_size_changed(const t_random_area_size width, const t_random_area_size height)
+void t_enemy_spawn_system::on_game_scene_size_changed(const t_random_area_size_value width, const t_random_area_size_value height)
 {
     std::cout << "on_game_scene_size_changed "
               << "width: from " << _width << " to " << width << ", "
@@ -84,17 +84,17 @@ void t_enemy_spawn_system::on_game_scene_size_changed(const t_random_area_size w
 
 }
 
-const t_random_area_size t_enemy_spawn_system::width() const
+const t_random_area_size_value t_enemy_spawn_system::width() const
 {
     return _width;
 }
 
-const t_random_area_size t_enemy_spawn_system::height() const
+const t_random_area_size_value t_enemy_spawn_system::height() const
 {
     return _height;
 }
 
-void t_enemy_spawn_system::update(const t_update_delta_time delta_time)
+void t_enemy_spawn_system::update(const t_update_delta_time_value delta_time)
 {
     t_entry_holder<t_enemy_context>& enemy_holder = _game_scene.get_mutable_entry_holder<t_enemy_context>();
 

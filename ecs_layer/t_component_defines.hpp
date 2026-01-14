@@ -108,7 +108,7 @@ using t_input_device_range_value                = t_floating_value;
 using t_unsigned_short = unsigned short;
 
 
-enum t_component_enumenated_value : t_unsigned_short
+enum t_enumerated_component_value : t_unsigned_short
 {
     t_undefined = 0,
 
@@ -129,7 +129,7 @@ using t_unique_identifier_value = t_identifier_value;
 
 
 // game object part { engine, chassis, sound, effect } | countable part (index part)
-t_identifier_value make_identifier(t_component_enumenated_value vehicle_part, const t_unique_identifier_value unique_part);
+t_identifier_value make_identifier(t_enumerated_component_value vehicle_part, const t_unique_identifier_value unique_part);
 
 
 template <typename t_value>
@@ -240,7 +240,7 @@ private:
     t_identifier _identifier {};
 };
 
-template <typename t_identifier, t_component_enumenated_value vehicle_part>
+template <typename t_identifier, t_enumerated_component_value vehicle_part>
 class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
@@ -259,21 +259,21 @@ public:
 };
 
 
-using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_undefined>;
+using t_undefined_identifier_maker  = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_undefined>;
 
-using t_engine_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_engine>;
+using t_engine_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_engine>;
 
-using t_chassis_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_chassis>;
+using t_chassis_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_chassis>;
 
-using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_gun>;
+using t_gun_identifier_maker        = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_gun>;
 
-using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_turret>;
+using t_turret_identifier_maker     = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_turret>;
 
-using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_radio>;
+using t_radio_identifier_maker      = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_radio>;
 
-using t_visibility_identifier_maker = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_visibility>;
+using t_visibility_identifier_maker = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_visibility>;
 
-using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_component_enumenated_value::t_vehicle>;
+using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_vehicle>;
 
 
 using t_integer_value               = int;

@@ -9,7 +9,7 @@
 
 struct t_input_identifier
 {
-    const t_component_enumenated_value vehicle_part {};
+    const t_enumerated_component_value vehicle_part {};
 
     const t_unique_identifier_value unique_part {};
 };
@@ -30,12 +30,12 @@ TEST_CASE( "testing vehicle entity" )
         using t_record = std::tuple<t_input_identifier, t_identifier_value>;
 
         const t_record record = GENERATE(table<t_input_identifier, t_identifier_value>({
-            t_record { t_input_identifier { static_cast<t_component_enumenated_value>(0),      0                                                     }, 0x0000000000000000 },
-            t_record { t_input_identifier { static_cast<t_component_enumenated_value>(0xFFFF), 0xFFFFFFFFFFFF                                        }, std::numeric_limits<t_identifier_value>::max() },
-            t_record { t_input_identifier { static_cast<t_component_enumenated_value>(0xFFFF), 0                                                     }, 0xFFFF000000000000 },
-            t_record { t_input_identifier { static_cast<t_component_enumenated_value>(0),      0xFFFFFFFFFFFF                                        }, 0x0000FFFFFFFFFFFF },
-            t_record { t_input_identifier { static_cast<t_component_enumenated_value>(0),      std::numeric_limits<t_unique_identifier_value>::max() }, 0x0000FFFFFFFFFFFF },
-            t_record { t_input_identifier { t_component_enumenated_value::t_engine,            0xFF1F                                                }, 0x000100000000FF1F }
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      0                                                     }, 0x0000000000000000 },
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0xFFFF), 0xFFFFFFFFFFFF                                        }, std::numeric_limits<t_identifier_value>::max() },
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0xFFFF), 0                                                     }, 0xFFFF000000000000 },
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      0xFFFFFFFFFFFF                                        }, 0x0000FFFFFFFFFFFF },
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      std::numeric_limits<t_unique_identifier_value>::max() }, 0x0000FFFFFFFFFFFF },
+            t_record { t_input_identifier { t_enumerated_component_value::t_engine,            0xFF1F                                                }, 0x000100000000FF1F }
         }));
 
         const t_input_identifier input = std::get<0>(record);

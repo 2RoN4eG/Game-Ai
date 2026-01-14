@@ -8,7 +8,7 @@ t_colliding_projectile_system::t_colliding_projectile_system(t_shooting_game_sce
 {
 }
 
-void t_colliding_projectile_system::update(const t_update_delta_time delta_time)
+void t_colliding_projectile_system::update(const t_update_delta_time_value  sdelta_time)
 {
     const t_entry_holder<t_projectile_context>& projectile_holder = _game_scene.get_entry_holder<t_projectile_context>();
 

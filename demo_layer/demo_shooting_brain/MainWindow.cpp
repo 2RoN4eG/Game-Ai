@@ -26,11 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    const t_random_area_size width            = MainWindow::width();
-    const t_random_area_size half_of_width    = MainWindow::width() / 2;
+    const t_random_area_size_value width            = MainWindow::width();
+    const t_random_area_size_value half_of_width    = MainWindow::width() / 2;
 
-    const t_random_area_size height           = MainWindow::height();
-    const t_random_area_size half_of_height   = MainWindow::height() / 2;
+    const t_random_area_size_value height           = MainWindow::height();
+    const t_random_area_size_value half_of_height   = MainWindow::height() / 2;
 
     _enemy_spawn_system.on_game_scene_size_changed(width, half_of_height);
 

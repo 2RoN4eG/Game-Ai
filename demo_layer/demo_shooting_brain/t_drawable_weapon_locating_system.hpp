@@ -13,7 +13,7 @@ class t_drawable_weapon_locating_system
 public:
     t_drawable_weapon_locating_system(t_shooting_game_scene& game_scene);
 
-    void on_game_scene_size_changed(const t_random_area_size w, const t_random_area_size h);
+    void on_game_scene_size_changed(const t_random_area_size_value w, const t_random_area_size_value h);
 
 private:
     t_shooting_game_scene& _game_scene;

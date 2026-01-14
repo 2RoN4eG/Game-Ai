@@ -21,9 +21,8 @@ public:
     const t_weight_value get_weight() const;
 
 protected:
-    const t_identifier_value    _identifier {};
+    t_identifier_value          _identifier {};
 
-    //
     t_engine_power_value        _power {};
 
     // По большому счету, данную переменную можно вынести в класс шасси, так
@@ -31,7 +30,6 @@ protected:
     // в силу отсутсвия коробки передач.
     t_engine_speed_value        _speed {};
 
-    //
     t_weight_value              _weight {};
 
 private:
@@ -52,5 +50,5 @@ private:
     friend bool operator==(const t_engine_component& lhs, const t_engine_component& rhs);
 
 public:
-    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_engine };
+    static const t_enumerated_component_value t_part { t_enumerated_component_value::t_engine };
 };

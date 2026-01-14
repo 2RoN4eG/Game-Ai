@@ -24,7 +24,7 @@ private:
     friend void t_set_visibility_distance(t_visibility_component& visibility, t_distance_value distance);
 
 public:
-    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_visibility };
+    static const t_enumerated_component_value t_part { t_enumerated_component_value::t_visibility };
 };
 
 

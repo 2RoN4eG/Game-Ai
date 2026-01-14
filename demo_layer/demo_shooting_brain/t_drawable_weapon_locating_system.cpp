@@ -11,7 +11,7 @@ t_drawable_weapon_locating_system::t_drawable_weapon_locating_system(t_shooting_
 {
 }
 
-void t_drawable_weapon_locating_system::on_game_scene_size_changed(const t_random_area_size x, const t_random_area_size y)
+void t_drawable_weapon_locating_system::on_game_scene_size_changed(const t_random_area_size_value x, const t_random_area_size_value y)
 {
     t_position_context& position = _drawable_weapon.position;
 

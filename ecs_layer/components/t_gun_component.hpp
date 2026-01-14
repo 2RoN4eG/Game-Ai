@@ -3,14 +3,14 @@
 #include "../tools/t_2d_vector.hpp"
 
 
-using t_gun_amount_value            = int;
+using t_gun_amount_value            = t_integer_value;
 
 using t_cooldown_time_millis_value  = int;
 
 using t_shot_damage_value           = int;
 
 // Предпологается что дальше это будет контейнер [minimum ... maximum] с рандомной выборкой значния из него.
-using t_shot_damage_range           = int;
+using t_shot_damage_range_value     = int;
 
 
 class t_gun_component
@@ -51,5 +51,10 @@ protected:
     t_cooldown_time_millis_value    _cooldown_time { 250 };
 
 public:
-    static const t_component_enumenated_value t_part { t_component_enumenated_value::t_gun };
+    static const t_enumerated_component_value t_part { t_enumerated_component_value::t_gun };
 };
+
+inline t_enumerated_component_value get_enumerated_component_value(const t_gun_component&)
+{
+    return t_enumerated_component_value::t_gun;
+}
