@@ -14,7 +14,9 @@ class t_shooting_game_scene : public t_entry_holder_aggregator<t_enemy_context,
                                                                t_drawable_weapon_context,
                                                                t_remove_projectile_event>
 {
+    /// ...
 };
+
 
 template <typename t_context>
 inline t_context& get_shooting_brain_game_scene_mutable_context(t_shooting_game_scene& game_scene)
@@ -23,6 +25,7 @@ inline t_context& get_shooting_brain_game_scene_mutable_context(t_shooting_game_
 
     return entry_holder.get_mutable_component();
 }
+
 
 template <typename t_context>
 inline const t_context& get_shooting_brain_game_scene_context(const t_shooting_game_scene& game_scene)

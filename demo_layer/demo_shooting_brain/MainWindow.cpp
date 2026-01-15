@@ -87,6 +87,7 @@ void MainWindow::paintEvent(QPaintEvent*)
     }
     catch (...)
     {
+
     }
 }
 
