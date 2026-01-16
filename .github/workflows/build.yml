@@ -29,11 +29,10 @@ jobs:
     - name: building project
       run: |
         cd build
-        cmake --build . -j$nproc
+        cmake --build . -j$(nproc)
 
     - name: running tests
       run: |
         cd build/test_case_layer/
         ctest --output-on-failure
         # continue-on-error: true
-
