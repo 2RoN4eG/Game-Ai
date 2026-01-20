@@ -3,7 +3,7 @@ name: Build & test game ai
 on:
   push:
     branches:
-      - '**'
+      - 'main'
     tags:
       - '**'
 
