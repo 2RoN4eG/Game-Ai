@@ -19,7 +19,7 @@ jobs:
       run: echo "The commit hash is ${{ github.sha }}"
 
     - name: Create docker image
-      run: echo "${{ github.head_ref }}.${{ github.sha }}"
+      run: echo "${{ env.branch }}.${{ github.sha }}"
 
     - name: installing dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
