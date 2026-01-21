@@ -32,29 +32,26 @@ jobs:
     - name: installing dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
 
-    - name: creating build folder
+    - name: create build folder
       run: mkdir build
 
-    - name: configuring cmake
+    - name: create built folder
+      run: mkdir built
+           mkdir -R built/binary
+           mkdir -R built/library
+
+    - name: configure cmake
       run: |
         cd build
         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
 
-    - name: building project
+    - name: build project
       run: |
         cd build
         cmake --build . -j$(nproc)
 
-    - name: running tests
+    - name: run tests
       run: |
         cd build/test_case_layer/
         ctest --output-on-failure
         # continue-on-error: true
-
-    - uses: actions/checkout@v4
-    - name: Download Artifact
-      uses: actions/download-artifact@v4 # Use the latest version
-      with:
-        name: my-artifact
-        path: destination-path/
-
