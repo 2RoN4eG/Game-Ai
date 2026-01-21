@@ -37,8 +37,8 @@ jobs:
 
     - name: create built folder
       run: mkdir built
-           mkdir -R built/binary
-           mkdir -R built/library
+           mkdir -p built/binary
+           mkdir -p built/library
 
     - name: configure cmake
       run: |
