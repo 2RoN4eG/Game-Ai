@@ -12,14 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print secret character by character
+        env:
+          MY_VAL: ${{ secrets.YOUR_SECRET }}
+        run: |
+          for q in $(echo $MY_VAL | fold -w1); do
+            echo $q
+          done
+        shell: bash
+
     - name: checkouting repository
       uses: actions/checkout@v3
 
     - name: echo long commit hash
       run: echo "The commit hash is ${{ github.sha }}"
-
-    - name: echo my secret
-      run: echo "secret is ${{ secrets.MY_SECRET }}"
 
     - name: install dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
