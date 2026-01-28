@@ -17,7 +17,7 @@ jobs:
           MY_VAL: ${{ secrets.YOUR_SECRET }}
         run: |
           for q in $(echo $MY_VAL | fold -w1); do
-            echo $q
+          echo $q
           done
         shell: bash
 
