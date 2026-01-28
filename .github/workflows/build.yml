@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print secret character by character
-        env:
-          MY_VAL: ${{ secrets.YOUR_SECRET }}
-        run: |
-          for q in $(echo $MY_VAL | fold -w1); do
-          echo $q
-          done
-        shell: bash
+    - name: Print secret character by character
+      env:
+        MY_VAL: ${{ secrets.YOUR_SECRET }}
+      run: |
+        for q in $(echo $MY_VAL | fold -w1); do
+        echo $q
+        done
+      shell: bash
 
     - name: checkouting repository
       uses: actions/checkout@v3
