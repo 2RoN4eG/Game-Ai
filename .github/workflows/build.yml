@@ -14,7 +14,7 @@ jobs:
     steps:
     - name: Print secret character by character
       env:
-        MY_VAL: ${{ secrets.YOUR_SECRET }}
+        MY_VAL: ${{ secrets.MY_SECRET }}
       run: |
         for q in $(echo $MY_VAL | fold -w1); do
         echo $q
