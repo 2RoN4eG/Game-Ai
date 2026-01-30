@@ -44,5 +44,3 @@ jobs:
         cd build/test_case_layer/
         ctest --output-on-failure
         # continue-on-error: true
-
-
