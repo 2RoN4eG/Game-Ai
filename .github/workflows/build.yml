@@ -8,8 +8,8 @@ on:
       - '**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-test:
+    runs-on: macos-latest
 
     steps:
     - name: checkouting repository
@@ -39,10 +39,6 @@ jobs:
         cd build
         cmake --build . -j$(nproc)
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
     - name: run tests
       run: |
         cd build/test_case_layer/
