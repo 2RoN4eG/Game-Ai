@@ -18,6 +18,9 @@ jobs:
     - name: echo long commit hash
       run: echo "The commit hash is ${{ github.sha }}"
 
+    - name: echo repository
+      run: echo "The repository is ${{ github.repository }}"
+
     - name: install dependencies
       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
 
