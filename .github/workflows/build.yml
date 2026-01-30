@@ -8,7 +8,7 @@ on:
       - '**'
 
 jobs:
-  build-and-test-game-ai-workflow:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,6 +39,10 @@ jobs:
         cd build
         cmake --build . -j$(nproc)
 
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
     - name: run tests
       run: |
         cd build/test_case_layer/
