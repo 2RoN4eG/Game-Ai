@@ -1,103 +1,48 @@
-# name: Build & test game ai
+name: Building and testing game ai
 
-# on:
-#   push:
-#     branches:
-#       - 'main'
-#     tags:
-#       - '**'
-
-# jobs:
-#   build-and-test:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: checkouting repository
-#       uses: actions/checkout@v3
-
-#     - name: echo long commit hash
-#       run: echo "The commit hash is ${{ github.sha }}"
-
-#     - name: install dependencies
-#       run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
-
-#     - name: create build folder
-#       run: mkdir build
-
-#     - name: create built folder
-#       run: mkdir built
-#            mkdir -p built/binary
-#            mkdir -p built/library
-
-#     - name: configure cmake
-#       run: |
-#         cd build
-#         cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
-
-#     - name: build project
-#       run: |
-#         cd build
-#         cmake --build . -j$(nproc)
-
-#     - name: run tests
-#       run: |
-#         cd build/test_case_layer/
-#         ctest --output-on-failure
-#         # continue-on-error: true
-
-
-# 
-# 
-# 
-
-name: Share data between jobs
-
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '**'
 
 jobs:
-  job_1:
-    name: Add 3 and 7
+  build-and-test:
     runs-on: ubuntu-latest
-    steps:
-      - shell: bash
-        run: |
-          expr 3 + 7 > math-homework.txt
-      - name: Upload math result for job 1
-        uses: actions/upload-artifact@v4
-        with:
-          name: homework_pre
-          path: math-homework.txt
 
-  job_2:
-    name: Multiply by 9
-    needs: job_1
-    runs-on: windows-latest
     steps:
-      - name: Download math result for job 1
-        uses: actions/download-artifact@v5
-        with:
-          name: homework_pre
-      - shell: bash
-        run: |
-          value=`cat math-homework.txt`
-          expr $value \* 9 > math-homework.txt
-      - name: Upload math result for job 2
-        uses: actions/upload-artifact@v4
-        with:
-          name: homework_final
-          path: math-homework.txt
+    - name: checkouting repository
+      uses: actions/checkout@v3
 
-  job_3:
-    name: Display results
-    needs: job_2
-    runs-on: macOS-latest
-    steps:
-      - name: Download math result for job 2
-        uses: actions/download-artifact@v5
-        with:
-          name: homework_final
-      - name: Print the final result
-        shell: bash
-        run: |
-          value=`cat math-homework.txt`
-          echo The result is $value
+    - name: echo long commit hash
+      run: echo "The commit hash is ${{ github.sha }}"
+
+    - name: install dependencies
+      run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
+
+    - name: create build folder
+      run: mkdir build
+
+    - name: create built folder
+      run: mkdir built
+           mkdir -p built/binary
+           mkdir -p built/library
+
+    - name: configure cmake
+      run: |
+        cd build
+        cmake .. -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt5
+
+    - name: build project
+      run: |
+        cd build
+        cmake --build . -j$(nproc)
+
+    - name: run tests
+      run: |
+        cd build/test_case_layer/
+        ctest --output-on-failure
+        # continue-on-error: true
+
+
