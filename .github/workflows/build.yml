@@ -22,7 +22,7 @@ jobs:
       run: echo "The repository is ${{ github.repository }}"
 
     - name: install dependencies
-      run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev
+      run: sudo apt update && sudo apt install -y cmake g++ qtbase5-dev catch2
 
     - name: create build folder
       run: mkdir build
