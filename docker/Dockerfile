@@ -14,6 +14,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update \
     && apt install -y \
         build-essential cmake qtbase5-dev catch2 \
+        net-tools iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR work
