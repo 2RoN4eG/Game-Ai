@@ -35,10 +35,10 @@ TEST_CASE( "round" )
         };
 
         std::vector<t_testable> testables {
-            { 0.49, 0.0 },
-            { 0.5, 1.0 },
-            { 1.0, 1.0 },
-            { 1.1, 1.0 }
+            { 0.49f, 0.0f },
+            { 0.5f, 1.0f },
+            { 1.0f, 1.0f },
+            { 1.1f, 1.0f }
         };
 
         for (const t_testable& testable : testables) {
