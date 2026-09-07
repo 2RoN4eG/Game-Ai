@@ -44,6 +44,8 @@ add_executable(test_case_layer
     test_self_detecting_enemy_system.cpp
     test_double_buffering_team_player_lookup_subsystem.cpp
 
+    test_round.cpp
+
     mocks/mock_sound_player.hpp
 )
 
