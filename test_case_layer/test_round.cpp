@@ -12,16 +12,17 @@ TEST_CASE( "round" )
         };
 
         std::vector<t_testable> testables {
-            { 0.49, 0.0 },
+            { 0.4, 0.0 },
             { 0.5, 1.0 },
             { 1.0, 1.0 },
-            { 1.1, 1.0 }
+            { 1.1, 1.0 },
+            { 1.5, 2.0 }
         };
 
         for (const t_testable& testable : testables) {
             const double value = testable.value;
-            const double rounded = round(value);
             const double expected = testable.expected;
+            const double rounded = std::round(value);
 
             REQUIRE(rounded == expected);
         }
@@ -35,16 +36,17 @@ TEST_CASE( "round" )
         };
 
         std::vector<t_testable> testables {
-            { 0.49f, 0.0f },
+            { 0.4f, 0.0f },
             { 0.5f, 1.0f },
             { 1.0f, 1.0f },
-            { 1.1f, 1.0f }
+            { 1.1f, 1.0f },
+            { 1.5f, 2.0f }
         };
 
         for (const t_testable& testable : testables) {
             const float value = testable.value;
-            const float rounded = roundf(value);
             const float expected = testable.expected;
+            const float rounded = std::roundf(value);
 
             REQUIRE(rounded == expected);
         }
