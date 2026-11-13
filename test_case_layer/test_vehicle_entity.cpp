@@ -11,13 +11,13 @@ struct t_input_identifier
 {
     const t_enumerated_component_value vehicle_part {};
 
-    const t_unique_identifier_value unique_part {};
+    const t_unique_identifier_value unique_number {};
 };
 
 
 std::ostream& operator<<(std::ostream& stream, const t_input_identifier& input)
 {
-    stream << " { " << std::to_string(static_cast<uint64_t>(input.vehicle_part)) << ", " << std::to_string(input.unique_part) << " }";
+    stream << " { " << std::to_string(static_cast<uint64_t>(input.vehicle_part)) << ", " << std::to_string(input.unique_number) << " }";
 
     return stream;
 }
@@ -25,6 +25,11 @@ std::ostream& operator<<(std::ostream& stream, const t_input_identifier& input)
 
 TEST_CASE( "testing vehicle entity" )
 {
+    SECTION( "size of enumerated component value" )
+    {
+        REQUIRE(sizeof(t_enumerated_component_value) == sizeof(t_unsigned_16_bits_value));
+    }
+
     SECTION( "generated record from table" )
     {
         using t_record = std::tuple<t_input_identifier, t_identifier_value>;
@@ -40,7 +45,7 @@ TEST_CASE( "testing vehicle entity" )
 
         const t_input_identifier input = std::get<0>(record);
 
-        const t_identifier_value identifier = make_identifier(input.vehicle_part, input.unique_part);
+        const t_identifier_value identifier = make_component_identifier(input.vehicle_part, input.unique_number);
 
         REQUIRE(identifier == std::get<1>(record));
     }

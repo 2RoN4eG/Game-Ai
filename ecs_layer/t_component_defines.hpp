@@ -10,6 +10,20 @@ using t_floating_value                          = float;
 
 using t_double_value                            = double;
 
+
+using t_signed_16_bits_value                    = signed short;
+
+using t_unsigned_16_bits_value                  = unsigned short;
+
+using t_signed_32_bits_value                    = signed int;
+
+using t_unsigned_32_bits_value                  = unsigned int;
+
+using t_signed_64_bits_value                    = signed long long;
+
+using t_unsigned_64_bits_value                  = unsigned long long;
+
+
 using t_1d_position_value                       = t_floating_value;
 
 using t_delta_position_component                = t_floating_value;
@@ -49,7 +63,7 @@ using t_frame_delta_time_value                  = t_floating_value;
 
 using t_range_value                             = t_floating_value;
 
-using t_input_device                            = int;
+using t_input_device                            = t_signed_32_bits_value;
 
 class t_demo_keyboard_event;
 
@@ -63,7 +77,7 @@ using t_chassis_weight_value                    = t_weight_value;
 
 using t_vehicle_weight_value                    = t_weight_value;
 
-using t_identifier_value                        = std::size_t;
+using t_identifier_value                        = t_unsigned_64_bits_value;
 
 using t_game_object_identifier_value            = t_identifier_value;
 
@@ -105,10 +119,8 @@ using t_elevation_radians_value                 = t_radians_value;
 
 using t_input_device_range_value                = t_floating_value;
 
-using t_unsigned_short = unsigned short;
 
-
-enum t_enumerated_component_value : t_unsigned_short
+enum t_enumerated_component_value : t_unsigned_16_bits_value
 {
     t_undefined = 0,
 
@@ -129,7 +141,7 @@ using t_unique_identifier_value = t_identifier_value;
 
 
 // game object part { engine, chassis, sound, effect } | countable part (index part)
-t_identifier_value make_identifier(t_enumerated_component_value vehicle_part, const t_unique_identifier_value unique_part);
+t_identifier_value make_component_identifier(t_enumerated_component_value vehicle_part, const t_unique_identifier_value unique_part);
 
 
 template <typename t_value>
@@ -240,12 +252,13 @@ private:
     t_identifier _identifier {};
 };
 
+
 template <typename t_identifier, t_enumerated_component_value vehicle_part>
 class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
     t_component_identifier_maker()
-        : t_identifier_maker<t_identifier>(make_identifier(vehicle_part, t_unique_identifier_value {}))
+        : t_identifier_maker<t_identifier>(make_component_identifier(vehicle_part, t_unique_identifier_value {}))
     {
         const t_identifier_value identifier = t_identifier_maker<t_identifier>::get_identifier();
 
@@ -276,14 +289,11 @@ using t_visibility_identifier_maker = t_component_identifier_maker<t_go_identifi
 using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_vehicle>;
 
 
-using t_integer_value               = int;
-
-
 using t_acceleration_value          = t_floating_value;
 
 using t_time_floating_value         = t_floating_value;
 
-using t_time_value                  = t_integer_value;
+using t_time_value                  = t_signed_32_bits_value;
 
 using t_time_second_value           = t_time_value;
 
@@ -292,6 +302,6 @@ using t_delta_time_floating_value   = t_floating_value;
 using t_frame_per_second_value      = t_time_second_value;
 
 
-using t_team_value                  = t_integer_value;
+using t_team_value                  = t_signed_32_bits_value;
 
-using t_health_points_value         = t_integer_value;
+using t_health_points_value         = t_signed_32_bits_value;

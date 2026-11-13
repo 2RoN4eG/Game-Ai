@@ -3,7 +3,7 @@
 #include "../tools/t_2d_vector.hpp"
 
 
-using t_gun_amount_value            = t_integer_value;
+using t_gun_amount_value            = t_signed_32_bits_value;
 
 using t_cooldown_time_millis_value  = int;
 
