@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(ecs_layer
     tools/t_2d_vector.hpp                                               tools/t_2d_vector.cpp
 
-    t_component_defines.hpp                                             t_component_defines.cpp
+    t_core_defines.hpp                                             t_core_defines.cpp
     t_entry_holder.hpp                                                  t_entry_holder.cpp
     t_game_database.hpp                                                 t_game_database.cpp
     t_game_scene.hpp                                                    t_game_scene.cpp

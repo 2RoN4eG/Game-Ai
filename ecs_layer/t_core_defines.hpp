@@ -137,11 +137,11 @@ enum t_enumerated_component_value : t_unsigned_16_bits_value
 };
 
 
-using t_unique_identifier_value = t_identifier_value;
+using t_identifier_unique_number_value = t_identifier_value;
 
 
 // game object part { engine, chassis, sound, effect } | countable part (index part)
-t_identifier_value make_component_identifier(t_enumerated_component_value vehicle_part, const t_unique_identifier_value unique_part);
+t_identifier_value make_component_identifier(t_enumerated_component_value vehicle_part, const t_identifier_unique_number_value unique_part);
 
 
 template <typename t_value>
@@ -258,7 +258,7 @@ class t_component_identifier_maker : public t_identifier_maker<t_identifier>
 {
 public:
     t_component_identifier_maker()
-        : t_identifier_maker<t_identifier>(make_component_identifier(vehicle_part, t_unique_identifier_value {}))
+        : t_identifier_maker<t_identifier>(make_component_identifier(vehicle_part, t_identifier_unique_number_value {}))
     {
         const t_identifier_value identifier = t_identifier_maker<t_identifier>::get_identifier();
 

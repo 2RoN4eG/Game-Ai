@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "../ecs_layer/t_component_defines.hpp"
+#include "../ecs_layer/t_core_defines.hpp"
 
 
 using t_ai_floating = t_floating_value;
@@ -20,7 +20,7 @@ namespace ai
     public:
         inline const t_identifier_value operator()()
         {
-            return t_identifier_maker <t_identifier_value>::increase();
+            return t_identifier_maker<t_identifier_value>::increase();
         }
     };
 

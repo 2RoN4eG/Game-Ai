@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../t_component_defines.hpp"
+#include "../t_core_defines.hpp"
 
 
 using t_2d_vector_axis_value = t_floating_value;

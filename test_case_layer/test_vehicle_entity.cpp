@@ -11,7 +11,7 @@ struct t_input_identifier
 {
     const t_enumerated_component_value vehicle_part {};
 
-    const t_unique_identifier_value unique_number {};
+    const t_identifier_unique_number_value unique_number {};
 };
 
 
@@ -39,7 +39,7 @@ TEST_CASE( "testing vehicle entity" )
             t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0xFFFF), 0xFFFFFFFFFFFF                                        }, std::numeric_limits<t_identifier_value>::max() },
             t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0xFFFF), 0                                                     }, 0xFFFF000000000000 },
             t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      0xFFFFFFFFFFFF                                        }, 0x0000FFFFFFFFFFFF },
-            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      std::numeric_limits<t_unique_identifier_value>::max() }, 0x0000FFFFFFFFFFFF },
+            t_record { t_input_identifier { static_cast<t_enumerated_component_value>(0),      std::numeric_limits<t_identifier_unique_number_value>::max() }, 0x0000FFFFFFFFFFFF },
             t_record { t_input_identifier { t_enumerated_component_value::t_engine,            0xFF1F                                                }, 0x000100000000FF1F }
         }));
 

@@ -6,7 +6,7 @@
 #include "components/t_chassis_component.hpp"
 #include "components/t_vehicle_entity.hpp"
 
-#include "t_component_defines.hpp"
+#include "t_core_defines.hpp"
 
 
 const t_identifier_value get_entity_identifier(const t_vehicle_entity& entity, const t_enumerated_component_value component_part)
@@ -16,7 +16,7 @@ const t_identifier_value get_entity_identifier(const t_vehicle_entity& entity, c
         const t_identifier_value _identifier {};
 
         t_identifier_finder(const t_enumerated_component_value component_part)
-            : _identifier { make_component_identifier(component_part, t_unique_identifier_value {}) }
+            : _identifier { make_component_identifier(component_part, t_identifier_unique_number_value {}) }
         {
         }
 
@@ -62,7 +62,7 @@ void make_game_scene_vehicle_entity(t_game_scene& game_scene, const t_game_datab
     copy_component_from_database_to_game_scene<t_visibility_component>(database, entity, game_scene);
 }
 
-const t_vehicle_entity create_vehicle_entity(const t_unique_identifier_value unique)
+const t_vehicle_entity create_vehicle_entity(const t_identifier_unique_number_value unique)
 {
     const t_vehicle_entity entity
     {
@@ -99,7 +99,7 @@ t_game_scene create_vehicles_game_scene(const t_game_database& database, size_t 
 {
     t_game_scene game_scene {};
 
-    for (t_unique_identifier_value unique {}; unique < 2; ++ unique)
+    for (t_identifier_unique_number_value unique {}; unique < 2; ++ unique)
     {
         const t_vehicle_entity entity = create_vehicle_entity(unique);
 

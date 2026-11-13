@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../t_component_defines.hpp"
+#include "../../t_core_defines.hpp"
 
 #include <vector>
 #include <span>

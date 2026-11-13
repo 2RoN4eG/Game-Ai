@@ -1,4 +1,4 @@
-#include "t_component_defines.hpp"
+#include "t_core_defines.hpp"
 
 #include <limits>
 
@@ -35,9 +35,9 @@ bool t_demo_keyboard_event::operator()() const
 }
 
 
-t_identifier_value make_component_identifier(const t_enumerated_component_value component_id, const t_unique_identifier_value unique_number)
+t_identifier_value make_component_identifier(const t_enumerated_component_value component_id, const t_identifier_unique_number_value unique_number)
 {
-    constexpr size_t t_unique_part_size { sizeof(t_unique_identifier_value) };
+    constexpr size_t t_unique_part_size { sizeof(t_identifier_unique_number_value) };
 
     constexpr size_t t_component_part_size { sizeof(t_enumerated_component_value) };
 
