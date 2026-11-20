@@ -53,7 +53,7 @@ namespace
 
             t_rotation_context& rotation = get_shooting_brain_game_scene_mutable_context<t_rotation_context>(_game_scene);
 
-            t_floating_value& rotation_course = rotation._course;
+            t_floating_point_value& rotation_course = rotation._course;
 
             rotation_course = std::atan2(target.y(), target.x()) * 180.0 / M_PI;
         }

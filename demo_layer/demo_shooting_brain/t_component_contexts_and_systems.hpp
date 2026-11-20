@@ -15,7 +15,7 @@ using t_long_value                  = long;
 
 using t_long_long_value             = long long;
 
-using t_floating_value              = float;
+using t_floating_point_value              = float;
 
 using t_axis_value                  = t_2d_vector_axis_value;
 
@@ -25,9 +25,9 @@ using t_position_context            = t_2d_vector_value;
 
 using t_velocity_context            = t_2d_vector_value;
 
-using t_heat_damage_value           = t_floating_value;
+using t_heat_damage_value           = t_floating_point_value;
 
-using t_radius_value                = t_floating_value;
+using t_radius_value                = t_floating_point_value;
 
 using t_collision_radius_value      = t_radius_value;
 
@@ -152,8 +152,8 @@ struct t_rotation_context
 
     t_angular_speed_radians_per_second_value    _angular_speed;    // Скорость поворота (градусы/секунда)
 
-    t_rotation_context(const t_floating_value heading,
-                       const t_floating_value course,
+    t_rotation_context(const t_floating_point_value heading,
+                       const t_floating_point_value course,
                        const t_angular_speed_radians_per_second_value angular_speed)
         : _heading { heading }
         , _course { course }
@@ -278,9 +278,9 @@ struct t_weapon_context
 
     const t_speed_value             projectile_speed { 50 };    //
 
-    const t_floating_value          reloading_time { 10. };     // Время перезарядки оружия (миллисекунды (ms))
+    const t_floating_point_value          reloading_time { 10. };     // Время перезарядки оружия (миллисекунды (ms))
 
-    t_floating_value                cooldown_time {};           // Остаток времени до готовности
+    t_floating_point_value                cooldown_time {};           // Остаток времени до готовности
 
 
     t_weapon_context()

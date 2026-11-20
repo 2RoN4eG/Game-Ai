@@ -3,7 +3,7 @@
 #include "../t_core_defines.hpp"
 
 
-using t_2d_vector_axis_value = t_floating_value;
+using t_2d_vector_axis_value = t_floating_point_value;
 
 
 class t_2d_vector_value

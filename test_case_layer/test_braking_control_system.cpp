@@ -17,7 +17,7 @@ namespace
     {
         const t_acceleration_value acceleration { speed / time };
 
-        const t_floating_value half { 1. / 2 };
+        const t_floating_point_value half { 1. / 2 };
 
         return time * (speed - half * acceleration * time);
     }
@@ -38,7 +38,7 @@ namespace
         return entry_holder.get_component(identifier);
     }
 
-    using t_percent_value = t_floating_value;
+    using t_percent_value = t_floating_point_value;
 
     template <typename t_range_value>
     t_range<t_range_value> create_range(const t_range_value value, const t_percent_value percent)

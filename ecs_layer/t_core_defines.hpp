@@ -6,7 +6,7 @@
 #include <limits>
 
 
-using t_floating_value                          = float;
+using t_floating_point_value                          = float;
 
 using t_double_value                            = double;
 
@@ -24,21 +24,21 @@ using t_signed_64_bits_value                    = signed long long;
 using t_unsigned_64_bits_value                  = unsigned long long;
 
 
-using t_1d_position_value                       = t_floating_value;
+using t_1d_position_value                       = t_floating_point_value;
 
-using t_delta_position_component                = t_floating_value;
+using t_delta_position_component                = t_floating_point_value;
 
 using t_across_component                        = t_delta_position_component;
 
 
-using t_speed_value                             = t_floating_value;
+using t_speed_value                             = t_floating_point_value;
 
-using t_speed_limit_value                       = t_floating_value;
+using t_speed_limit_value                       = t_floating_point_value;
 
 
-using t_power_value                             = t_floating_value;
+using t_power_value                             = t_floating_point_value;
 
-using t_weight_value                            = t_floating_value;
+using t_weight_value                            = t_floating_point_value;
 
 
 using t_engine_speed_value                      = t_speed_value;
@@ -59,9 +59,9 @@ using t_delta_speed_value                       = t_speed_value;
 using t_speed_scale_value                       = t_speed_value;
 
 
-using t_frame_delta_time_value                  = t_floating_value;
+using t_frame_delta_time_value                  = t_floating_point_value;
 
-using t_range_value                             = t_floating_value;
+using t_range_value                             = t_floating_point_value;
 
 using t_input_device                            = t_signed_32_bits_value;
 
@@ -85,9 +85,9 @@ using t_go_identifier_value                     = t_game_object_identifier_value
 
 using t_sound_identifier_value                  = t_game_object_identifier_value;
 
-using t_degrees_value                           = t_floating_value;
+using t_degrees_value                           = t_floating_point_value;
 
-using t_radians_value                           = t_floating_value;
+using t_radians_value                           = t_floating_point_value;
 
 using t_angle_degrees_value                     = t_degrees_value;
 
@@ -117,7 +117,7 @@ using t_elevation_degrees_value                 = t_degrees_value;
 
 using t_elevation_radians_value                 = t_radians_value;
 
-using t_input_device_range_value                = t_floating_value;
+using t_input_device_range_value                = t_floating_point_value;
 
 
 enum t_enumerated_component_value : t_unsigned_16_bits_value
@@ -289,15 +289,15 @@ using t_visibility_identifier_maker = t_component_identifier_maker<t_go_identifi
 using t_vehicle_identifier_maker    = t_component_identifier_maker<t_go_identifier_value, t_enumerated_component_value::t_vehicle>;
 
 
-using t_acceleration_value          = t_floating_value;
+using t_acceleration_value          = t_floating_point_value;
 
-using t_time_floating_value         = t_floating_value;
+using t_time_floating_value         = t_floating_point_value;
 
 using t_time_value                  = t_signed_32_bits_value;
 
 using t_time_second_value           = t_time_value;
 
-using t_delta_time_floating_value   = t_floating_value;
+using t_delta_time_floating_value   = t_floating_point_value;
 
 using t_frame_per_second_value      = t_time_second_value;
 

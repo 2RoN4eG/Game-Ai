@@ -5,7 +5,7 @@
 
 namespace
 {
-    const t_floating_value make_velocity(const t_floating_value direction, const t_floating_value speed)
+    const t_floating_point_value make_velocity(const t_floating_point_value direction, const t_floating_point_value speed)
     {
         return direction * speed;
     }

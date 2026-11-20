@@ -7,9 +7,9 @@
 #include "../ecs_layer/t_core_defines.hpp"
 
 
-using t_ai_floating = t_floating_value;
+using t_ai_floating = t_floating_point_value;
 
-using t_ai_integer_value = int;
+using t_ai_integer_value = t_signed_32_bits_value;
 
 
 namespace ai
@@ -24,9 +24,9 @@ namespace ai
         }
     };
 
-    using t_node_identifier             = std::size_t;
+    using t_node_identifier             = t_unsigned_64_bits_value;
 
-    using t_transition_identifier       = std::size_t;
+    using t_transition_identifier       = t_unsigned_64_bits_value;
 
     using t_node_identifier_maker       = t_ai_identifier_maker <t_node_identifier>;
 
@@ -34,7 +34,7 @@ namespace ai
 
     using t_delta_time                  = t_frame_delta_time_value;
 
-    using t_priority                    = t_ai_floating;
+    using t_priority                    = t_floating_point_value;
 
     using t_description_view            = std::string_view;
 

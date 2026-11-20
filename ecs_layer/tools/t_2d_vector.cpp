@@ -58,7 +58,7 @@ t_2d_vector_value operator*(const t_2d_vector_value& vector, const t_2d_vector_a
 }
 
 
-t_floating_value t_get_vector_length(const t_2d_vector_value& vector)
+t_floating_point_value t_get_vector_length(const t_2d_vector_value& vector)
 {
     return std::sqrt( vector.x() * vector.x() + vector.y() * vector.y() );
 }
